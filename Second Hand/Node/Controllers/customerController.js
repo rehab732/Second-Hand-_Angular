@@ -10,13 +10,13 @@ let AddNewCustomer = async (req,res)=>{
      * 4- Add Customer to DB
      */
     let newCus= req.body;
-    let foundCustomer = await CustomerModel.findOne({email:newCus.email}).exec();//found[true] || notFound[false]
+    let foundCustomer = await CustomerModel.findOne({Email:newCus.Email}).exec();//found[true] || notFound[false]
     if(foundCustomer) return res.status(401).json({message:"Customer Already Exist !!"});
 
     //Hash Password?? [npm i bcrypt]
     let genSalt = await bcrypt.genSalt(10);
-    let hashedPassword = await bcrypt.hash(newCus.password, genSalt);
-    newCus.password = hashedPassword;
+    let hashedPassword = await bcrypt.hash(newCus.Password, genSalt);
+    newCus.Password = hashedPassword;
 
     let newCustomer = new CustomerModel(newCus);
     await newCustomer.save();
@@ -29,12 +29,12 @@ let AddNewCustomer = async (req,res)=>{
 let LoginCustomer = async (req,res)=>{
     //DB
     let logCustomer = req.body;//From Client
-    let foundCustomer = await CustomerModel.findOne({email:logCustomer.email}).exec();//From DB [Encrypted]
+    let foundCustomer = await CustomerModel.findOne({Email:logCustomer.Email}).exec();//From DB [Encrypted]
     if(!foundCustomer) return res.status(401).json({message:"Invalid Email Or Password"});
-
+    console.log(req.body);
     //2)Check Password
-    let checkPass = bcrypt.compareSync(logCustomer.password, foundCustomer.password);//true | false
-    if(!checkPass) return res.status(401).json({message:"Invalid Email Or Password"});
+    let checkPass = bcrypt.compareSync(logCustomer.Password, foundCustomer.Password);//true | false
+    if(!checkPass) return res.status(401).json({message:"Invalid Password"});
 
     res.status(200).json({message:"Logged-In Successfully"})
 
