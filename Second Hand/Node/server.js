@@ -1,4 +1,5 @@
 //#region Requires
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -9,14 +10,17 @@ app.use(bodyParser.json());
 //#endregion
 
 
+mongoose.connect("mongodb+srv://hassanelfalt60:3xdna2RJcCLZ7Vgd@cluster0.sixirhw.mongodb.net/SecondHand");
+
 //#region End Points 
 
-//#region Doctor
+
+//#region Admin
     const AdminRoutes = require("./Routes/AdminRoutes");
     app.use("/api/Admins",AdminRoutes);
 //#endregion
 
-//#region Patient
+//#region Customer
     const CustomerRoutes = require("./Routes/CustomerRoutes");
     app.use("/api/Customers",CustomerRoutes);
 //#endregion
