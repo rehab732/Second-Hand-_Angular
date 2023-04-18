@@ -1,8 +1,16 @@
-<main class="main" id="top">
+<!-- <main class="main" id="top" >
   <app-header></app-header>
   <app-home></app-home>
   <app-footer></app-footer>
-</main>
+</main> -->
+
+
 <!-- <app-register></app-register> -->
 <!-- <app-login></app-login> -->
-<!-- <router-outlet></router-outlet> -->
+
+<!-- <app-home></app-home> -->
+<app-header *ngIf="!(_router.url.includes('login') ||_router.url.includes('signup'))"></app-header>
+<router-outlet></router-outlet>
+<app-footer *ngIf="!(_router.url.includes('login') ||_router.url.includes('signup'))" ></app-footer>
+
+
