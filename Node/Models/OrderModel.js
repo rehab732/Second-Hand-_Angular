@@ -15,23 +15,20 @@ let OrderSchema = new mongoose.Schema({
     //OrderItems
     orderItems: [
        ItemModel
-       //     {
-       //            product: {
-       //                   type: Schema.Types.ObjectId,
-       //                   ref: "Product",
-       //            },
-       //            qty: Number,
-       //     },
     ],
-    //userId
+    //BuyerId
     buyer: {
            type: Schema.Types.ObjectId,
            ref: "Customer",
            required: [true, 'Buyer is required for Order.']
     },
+    Status:{
+       type:String,
+       enum:OrderStatus,
+       default:"Accepted"
+   }
 
-
-
-    //payment
+    //TODO:payment
 });
+const OrderStatus = ["Accepted", "Rejected","Shipped","Delivered"];
 module.exports = mongoose.model("Order",OrderSchema);
