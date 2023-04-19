@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const ItemModel = require("ItemModel");
+const ItemModel = require("./ItemModel");
 const CharitySchema =  mongoose.Schema({
     //_id: Number,
      name: {
@@ -17,6 +17,7 @@ const CharitySchema =  mongoose.Schema({
        match: /^https?:\/\//
      },
      DonatedItems: [ItemModel]
+
 
    });
    

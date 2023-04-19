@@ -61,7 +61,13 @@ customerSchema = mongoose.Schema({
       },
       items: [itemModel]
   },
-  SellerProducts:[productModel],
+  SellerProducts:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+    }
+  
+  ],
   
   DateOfBirth: Date,
   Phone: String,
