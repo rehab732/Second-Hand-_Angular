@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 const emailSchema = require("./EmailSchema");
 const EmailModel = require("./EmailSchema");
-// if(mongoose.connection.readyState==0){
-//     mongoose.connect("mongodb+srv://hassanelfalt60:3xdna2RJcCLZ7Vgd@cluster0.sixirhw.mongodb.net/test/SecondHand");
-// }
 
 //2)Create Schema
 adminSchema = new mongoose.Schema({

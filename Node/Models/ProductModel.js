@@ -1,7 +1,15 @@
 const mongoose = require("mongoose");
-// if(mongoose.connection.readyState==0){
-//     mongoose.connect("mongodb+srv://hassanelfalt60:3xdna2RJcCLZ7Vgd@cluster0.sixirhw.mongodb.net/test/SecondHand");
-// }
+
+
+const imageSchema =  mongoose.Schema({
+    data: Buffer,
+    contentType: String
+});
+function validDate(date) {
+    return date<=Date.now
+}
+
+const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
 
 const productSchema = mongoose.Schema({
     //_id:Number,
@@ -49,7 +57,7 @@ const productSchema = mongoose.Schema({
 
     },
     color: {
-        type: string,
+        type: String,
         required: [true, 'A color is required.']
     },
     Category:{
@@ -78,14 +86,6 @@ const productSchema = mongoose.Schema({
     
 })
 
-const imageSchema =  Schema({
-    data: Buffer,
-    contentType: String
-});
-function validDate(date) {
-    return date<=Date.now
-}
 
-const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
 
 module.exports = mongoose.model("Product",productSchema);
