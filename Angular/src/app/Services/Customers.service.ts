@@ -15,6 +15,13 @@ export class CustomerService {
     console.log(customer);
     return this.myClient.post(this.URL + '/reg', customer);
   }
+
+  Customerlogin(customer: any) {
+    console.log(customer);
+    return this.myClient.post(this.URL + '/login', customer);
+  }
+
+
 }
 
 //   getAllUsers(){

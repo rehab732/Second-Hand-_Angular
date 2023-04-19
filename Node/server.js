@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-const cors = require('cors');
+//const cors = require('cors');
 const path = require("path");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 7010;
@@ -27,28 +27,7 @@ app.use((req, res, next) => {
 });
 
 
-//#region End Points 
-/*
-app.use(cors({
-    origin: true, // "true" will copy the domain of the request back
-                  // to the reply. If you need more control than this
-                  // use a function.
 
-    credentials: true, // This MUST be "true" if your endpoint is
-                       // authenticated via either a session cookie
-                       // or Authorization header. Otherwise the
-                       // browser will block the response.
-
-    methods: 'POST,GET,PUT,OPTIONS,DELETE' // Make sure you're not blocking
-                                           // pre-flight OPTIONS requests
-}));*/
-/*
-app.use(function(req, res, next) {
-    console.log("MiddleWare")
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");    
-    next();
-  });*/
 //#region Admin
 const AdminRoutes = require("./Routes/AdminRoutes");
 app.use("/api/Admins", AdminRoutes);
