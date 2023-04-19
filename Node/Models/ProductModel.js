@@ -53,8 +53,7 @@ const productSchema =new  mongoose.Schema({
               return value.length >=0 && value.length <= 6;
             },
             message: 'Number of images should be between 1 and 6'
-        },
-        
+        },     
     },
     ReleaseDate:{
         type: Date,
@@ -80,6 +79,11 @@ const productSchema =new  mongoose.Schema({
     Donate:{
         type:Boolean,
         default:false
+    },
+    SoldQuantity: {
+        type: Number,
+        default:0,
+         
     },
     Seller:{
         Name:String,

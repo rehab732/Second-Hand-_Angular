@@ -46,7 +46,9 @@ let GetProductById = async (req,res)=>{
 }
 
 //**********TODO
+//get product by category
 
+//get product by name
 // let GetProductByName = async (req,res)=>{
 //     //DB
 //     let getProduct = req.params.name;//From Client
@@ -83,26 +85,17 @@ let DeleteProductByID = async (req,res)=>{
    
 
 }
-//**********TODO
 
-
-// let DeleteProductByName= async (req,res)=>{
-//     //DB
-//     let getProduct = req.params.name;//From Client
-//     let found = await ProductModel.findOneAndRemove({name:getProduct}).exec();//From DB [Encrypted]
-//     if(!found) return res.status(401).json({message:"Invalid name"});
-
-//     res.status(200).json({message:"Product deleted"})
-
-// }
 
 
 //******TODO */
+//update product without seller
+//update product's seller
+
+
 
 // let UpdateProduct = async (req,res)=>{
    
-    
-    
     
 //     let found = await ProductModel.findOne({_id:getProduct}).exec();
 //     if(!found) return res.status(401).json({message:"Invalid id"});
@@ -125,7 +118,6 @@ module.exports = {
     GetProductById,
    // GetProductByName,
     DeleteProductByID,
-    //DeleteProductByName,
     //UpdateProduct,
    
 }

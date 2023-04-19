@@ -54,11 +54,6 @@ customerSchema = mongoose.Schema({
     },
   }],
   Cart:{
-      customer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Customer',
-        
-      },
       items: [itemModel]
   },
   SellerProducts:[

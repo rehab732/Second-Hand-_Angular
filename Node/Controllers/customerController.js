@@ -8,10 +8,10 @@ let AddNewCustomer = async (req,res)=>{
     if(foundCustomer) return res.status(401).json({message:"Customer Already Exist !!"});
 
     //Hash Password?? [npm i bcrypt]
+    
     let genSalt = await bcrypt.genSalt(10);
     let hashedPassword = await bcrypt.hash(newCus.Password, genSalt);
     newCus.Password = hashedPassword;
-
     let newCustomer = new CustomerModel(newCus);
     await newCustomer.save();
 
@@ -34,6 +34,13 @@ let LoginCustomer = async (req,res)=>{
 
 }
 
+//update customer
+//get customer By id
+//add new Address
+//remove Address
+//add item to cart
+//remove item from cart
+//update item quantity in cart
 
 module.exports = {
     AddNewCustomer,

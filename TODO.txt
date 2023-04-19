@@ -1,0 +1,11 @@
+Node->Controllors+ routes
+	
+	//customer (Basma)
+	//Order (yas)
+	//product (hassan)
+
+	//category + charity (sarah)
+
+Angular -> category list (not static) (Clothes + Jewelry + Bags + Shoes)
+	     product list (not static) 
+           remove Best seller /Checkout New Arrivals/All Products
