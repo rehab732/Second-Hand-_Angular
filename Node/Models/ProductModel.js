@@ -10,7 +10,7 @@ const imageSchema = new mongoose.Schema({
 const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
 
 function validDate(date) {
-    return date<=Date.now
+    return date<=Date.now()
 }
 
 const productSchema =new  mongoose.Schema({
@@ -49,7 +49,8 @@ const productSchema =new  mongoose.Schema({
         type: [imageSchema],
         validate: {
             validator: function(value) {
-              return value.length >= 1 && value.length <= 6;
+                //change later to 1
+              return value.length >=0 && value.length <= 6;
             },
             message: 'Number of images should be between 1 and 6'
         },
@@ -57,7 +58,7 @@ const productSchema =new  mongoose.Schema({
     },
     ReleaseDate:{
         type: Date,
-        default:Date.now,
+        default:Date.now()-10000,
         validate: [validDate, 'Date must be must be a valid date']
         
 

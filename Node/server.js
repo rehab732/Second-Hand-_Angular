@@ -43,6 +43,11 @@ const CharityRoutes = require("./Routes/CharityRoutes");
 app.use("/api/Charities", CharityRoutes);
 //#endregion
 
+//#region Product
+const ProductRoutes = require("./Routes/ProductRoutes");
+app.use("/api/Products", ProductRoutes);
+//#endregion
+
 
 
 //#endregion
