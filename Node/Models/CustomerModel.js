@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const itemModel = require("./ItemModel");
 const EmailModel = require("./EmailSchema");
-//const productModel = require("./ProductModel");
+const productModel = require("./ProductModel");
 // if(mongoose.connection.readyState==0){
 //     mongoose.connect("mongodb+srv://hassanelfalt60:3xdna2RJcCLZ7Vgd@cluster0.sixirhw.mongodb.net/test/SecondHand");
 // }
@@ -54,14 +54,15 @@ customerSchema = mongoose.Schema({
     },
   }],
   Cart:{
-      customer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Customer',
-        
-      },
       items: [itemModel]
   },
-  //SellerProducts:[productModel],
+  SellerProducts:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+    }
+  
+  ],
   
   DateOfBirth: Date,
   Phone: String,

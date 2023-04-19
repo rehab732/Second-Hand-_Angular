@@ -1,6 +1,9 @@
 
 const mongoose = require("mongoose");
-const ItemModel = require("ItemModel");
+const ItemModel = require("./ItemModel");
+
+const OrderStatus = ["Accepted", "Rejected","Shipped","Delivered"];
+
 let OrderSchema = new mongoose.Schema({
 
    // _id:Number,
@@ -15,23 +18,20 @@ let OrderSchema = new mongoose.Schema({
     //OrderItems
     orderItems: [
        ItemModel
-       //     {
-       //            product: {
-       //                   type: Schema.Types.ObjectId,
-       //                   ref: "Product",
-       //            },
-       //            qty: Number,
-       //     },
     ],
-    //userId
+    //BuyerId
     buyer: {
-           type: Schema.Types.ObjectId,
+           type: mongoose.Schema.Types.ObjectId,
            ref: "Customer",
            required: [true, 'Buyer is required for Order.']
     },
+    Status:{
+       type:String,
+       enum:OrderStatus,
+       default:"Accepted"
+   }
 
-
-
-    //payment
+    //TODO:payment
 });
+
 module.exports = mongoose.model("Order",OrderSchema);

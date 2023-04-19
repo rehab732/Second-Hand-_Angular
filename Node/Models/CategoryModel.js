@@ -7,10 +7,7 @@ const CategorySchema =  mongoose.Schema({
        minlength: 2,
        maxlength: 50
      }
-    //  description: {
-    //    type: String,
-    //    maxlength: 500
-    //  }
+    
 });
 
 module.exports = mongoose.model("Category",CategorySchema);
