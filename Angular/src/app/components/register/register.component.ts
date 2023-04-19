@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from './Services/Customers.service';
+import { CustomerService } from '../../Services/Customers.service';
 
 
 @Component({
@@ -9,22 +9,24 @@ import { CustomerService } from './Services/Customers.service';
 })
 export class RegisterComponent {
 
-  constructor(private myService:CustomerService){}
-  
+  constructor(public myService:CustomerService){}
+
   Add(Name:any, Email:any, Phone:any,Password:any,DateOfBirth:any){
-    
+
     let newCustomer = {Name, Email, Phone,Password,DateOfBirth};
     console.log(newCustomer);
     this.myService.AddNewCustomer(newCustomer).subscribe(
       {
         next:(data)=>{
           // this.route.navigate(['../'])
-          // console.log(data);
+           console.log(data);
         },
-        error:(err)=>{console.error(err)}
+        error:(err)=>{
+          console.error("errrrrrrrrrrrrror");
+          console.error(err)}
       }
     );
   }
 
- 
+
 }

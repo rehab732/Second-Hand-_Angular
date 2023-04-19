@@ -1,35 +1,21 @@
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 //HttpClient [Get-Post-Delete-Put-Patch]
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomerService {
+  constructor(private readonly myClient: HttpClient, private router: Router) {}
 
-  constructor(private readonly myClient:HttpClient) {  }
+  private readonly URL = 'http://localhost:7010/api/Customers'; //API
 
-  private readonly URL = "http://localhost:7010/api/Customers";//API
-
-  AddNewCustomer(customer:any){
-    
-        console.log(customer);
-        return this.myClient.post(this.URL+"/reg", customer);
-      }
-
-    }
-
-
-
-
-
-
-
-
-
-
+  AddNewCustomer(customer: any) {
+    console.log(customer);
+    return this.myClient.post(this.URL + '/reg', customer);
+  }
+}
 
 //   getAllUsers(){
 //     return this.myClient.get(this.URL);
@@ -50,8 +36,6 @@ export class CustomerService {
 //   }
 // }
 
-
-
 /**
  * Service Root
  * UsersService
@@ -59,7 +43,5 @@ export class CustomerService {
  * InstService
  * CoursesService
  */
-
-
 
 //fetch(url,{method:'post', body:[{},{}]})
