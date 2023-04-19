@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 // if(mongoose.connection.readyState==0){
 //     mongoose.connect("mongodb+srv://hassanelfalt60:3xdna2RJcCLZ7Vgd@cluster0.sixirhw.mongodb.net/test/SecondHand");
 // }
-
+// const imageSchema = new Schema({
+//     data: Buffer,
+//     contentType: String
+// });
+const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
 const productSchema = mongoose.Schema({
     //_id:Number,
     Name: {
@@ -32,16 +36,16 @@ const productSchema = mongoose.Schema({
         type: Boolean,
         required: [true, 'An IsDeleted is required.'], 
     },
-    Images:{
-        type: [imageSchema],
-        validate: {
-            validator: function(value) {
-              return value.length >= 1 && value.length <= 6;
-            },
-            message: 'Number of images should be between 1 and 6'
-        },
+    // Images:{
+    //     type: [imageSchema],
+    //     validate: {
+    //         validator: function(value) {
+    //           return value.length >= 1 && value.length <= 6;
+    //         },
+    //         message: 'Number of images should be between 1 and 6'
+    //     },
         
-    },
+    // },
     ReleaseDate:{
         type: Date,
         validate: [validDate, 'Date must be must be a valid date']
@@ -49,7 +53,7 @@ const productSchema = mongoose.Schema({
 
     },
     color: {
-        type: string,
+        type: String,
         required: [true, 'A color is required.']
     },
     Category:{
@@ -78,14 +82,11 @@ const productSchema = mongoose.Schema({
     
 })
 
-const imageSchema =  Schema({
-    data: Buffer,
-    contentType: String
-});
+
 function validDate(date) {
     return date<=Date.now
 }
 
-const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
+
 
 module.exports = mongoose.model("Product",productSchema);
