@@ -15,37 +15,34 @@
 					<img src="/assets/img/logo-color.png" alt="">
 					<h1 style="color:#64113F" class="fw-bold text-center">Second Hand <span class="heart" style="color:#64113F">&hearts;</span></h1>
 				</div>
-				<form action="">
+				<form>
 					<h3 style="color:#64113F" class="fw-bold">Sign Up</h3>
-					<div class="form-group">
-						<input type="text" placeholder="First Name" class="form-control">
-						<input type="text" placeholder="Last Name" class="form-control">
-					</div>
+					
 					<div class="form-wrapper">
-						<input type="number" placeholder="Phone" class="form-control">
+						<input type="text" placeholder="Name" #name class="form-control">
 						<i class="zmdi zmdi-account"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="text" placeholder="Email Address" class="form-control">
+						<input type="text" placeholder="Phone" #phone class="form-control">
+						<i class="zmdi zmdi-phone"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="text" placeholder="Email Address" #email class="form-control">
 						<i class="zmdi zmdi-email"></i>
 					</div>
+				
 					<div class="form-wrapper">
-						<select name="" id="" class="form-control">
-							<option value="" disabled selected>Gender</option>
-							<option value="male">Male</option>
-							<option value="femal">Female</option>
-						</select>
-						<i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+						<input type="date" placeholder="Date Of Birth" #date class="form-control">
 					</div>
 					<div class="form-wrapper">
-						<input type="password" placeholder="Password" class="form-control">
+						<input type="password" placeholder="Password" #pass class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="password" placeholder="Confirm Password" class="form-control">
+						<input type="password" placeholder="Confirm Password"  class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
-					<button style="color: white; background-color: #64113F;">Register
+					<button (click)="Add(name.value,email.value,phone.value,pass.value,date.value)" style="color: white; background-color: #64113F;">Register
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>
 					<div class="w-full text-center p-t-55 mb-2">
