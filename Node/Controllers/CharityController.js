@@ -93,7 +93,7 @@ let DeleteCharityByName= async (req,res)=>{
     //DB
     
     let getCharity = req.params.name;//From Client
-    let found = await CharityModel.findOneAndRemove({name:getCharity}).exec();//From DB [Encrypted]
+    let found = await CharityModel.findOneAndRemove({name:getCharity}).exec();
     if(!found)
         return res.status(401).json({message:"Invalid name"})
     res.status(200).json({message:"Charity deleted"})
