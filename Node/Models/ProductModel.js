@@ -87,8 +87,6 @@ const productSchema =new  mongoose.Schema({
          
     },
     Seller:{
-        // Name:String,
-        // Rating: Number,
         SellerID:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Customer",
