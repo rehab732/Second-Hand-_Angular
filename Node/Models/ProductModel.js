@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 // if(mongoose.connection.readyState==0){
 //     mongoose.connect("mongodb+srv://hassanelfalt60:3xdna2RJcCLZ7Vgd@cluster0.sixirhw.mongodb.net/test/SecondHand");
 // }
+/*
 const imageSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
-});
+});*/
 const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
 
 function validDate(date) {
@@ -46,7 +47,7 @@ const productSchema =new  mongoose.Schema({
         required: [true, 'An IsDeleted is required.'], 
     },
     Images:{
-        type: [imageSchema],
+        type: [String],
         validate: {
             validator: function(value) {
                 //change later to 1
@@ -86,8 +87,6 @@ const productSchema =new  mongoose.Schema({
          
     },
     Seller:{
-        //Name:String,
-        //Rating: Number,
         SellerID:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Customer",
