@@ -48,6 +48,11 @@ const ProductRoutes = require("./Routes/ProductRoutes");
 app.use("/api/Products", ProductRoutes);
 //#endregion
 
+//#region Order
+const OrderRoutes = require("./Routes/OrderRoutes");
+app.use("/api/Orders", OrderRoutes);
+//#endregion
+
 
 
 //#endregion

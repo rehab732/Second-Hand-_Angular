@@ -10,7 +10,7 @@ let OrderSchema = new mongoose.Schema({
     RegistrationDate: {
            type: Date,
            default: Date.now,
-           required: [true, 'A Registration Date is required.']
+       //     required: [true, 'A Registration Date is required.']
     },
     ShippingDate: {
            type: Date,
