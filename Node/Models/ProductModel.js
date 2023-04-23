@@ -3,11 +3,12 @@ const mongoose = require("mongoose");
 // if(mongoose.connection.readyState==0){
 //     mongoose.connect("mongodb+srv://hassanelfalt60:3xdna2RJcCLZ7Vgd@cluster0.sixirhw.mongodb.net/test/SecondHand");
 // }
+/*
 const imageSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
-});
-const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
+});*/
+const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved", "Rejected"];
 
 function validDate(date) {
     return date<=Date.now()
@@ -46,7 +47,7 @@ const productSchema =new  mongoose.Schema({
         required: [true, 'An IsDeleted is required.'], 
     },
     Images:{
-        type: [imageSchema],
+        type: [String],
         validate: {
             validator: function(value) {
                 //change later to 1
@@ -62,7 +63,7 @@ const productSchema =new  mongoose.Schema({
         
 
     },
-    color: {
+    Color: {
         type: String,
         default:"Black",
         required: [true, 'A color is required.']
@@ -78,29 +79,20 @@ const productSchema =new  mongoose.Schema({
     },
     Donate:{
         type:Boolean,
-        default:false
+        default:false,
+        required: [true, 'choose donation status.']
     },
     SoldQuantity: {
         type: Number,
-        default:0,
-         
+        default:0,    
     },
     Seller:{
-        // Name:String,
-        // Rating: Number,
         SellerID:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Customer",
             required: [true, 'Product must have a seller.']
         }
-    }
-
-    
+    }    
 })
-
-
-
-
-
 
 module.exports = mongoose.model("Product",productSchema);

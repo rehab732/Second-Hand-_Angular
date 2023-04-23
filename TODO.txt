@@ -6,6 +6,6 @@ Node->Controllors+ routes
 
 	//category + charity (sarah)
 
-Angular -> category list (not static) (Clothes + Jewelry + Bags + Shoes)
+Angular -> category list (not static) (Clothes + Jewelery + Bags + Shoes)
 	     product list (not static) 
            remove Best seller /Checkout New Arrivals/All Products

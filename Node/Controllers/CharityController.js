@@ -22,11 +22,10 @@ let AddNewCharity = async (req,res)=>{
             //check if product exists
             let find=await ProductModel.findOne({_id:productID}).exec();
             if(find){
-            let item= ItemModel;
-            item.product=productID;
-            item.quantity=newCharity.DonatedItems[i].quantity;
-            console.log(item);
-            items.push(item)
+                let item= ItemModel;
+                item.product=productID;
+                item.quantity=newCharity.DonatedItems[i].quantity;
+                items.push(item)
             }
             else 
                 return res.status(401).json({message:"Invalid product id",data:newCharity.DonatedItems[i].product});
@@ -93,7 +92,7 @@ let DeleteCharityByName= async (req,res)=>{
     //DB
     
     let getCharity = req.params.name;//From Client
-    let found = await CharityModel.findOneAndRemove({name:getCharity}).exec();//From DB [Encrypted]
+    let found = await CharityModel.findOneAndRemove({name:getCharity}).exec();
     if(!found)
         return res.status(401).json({message:"Invalid name"})
     res.status(200).json({message:"Charity deleted"})
@@ -104,59 +103,73 @@ let DeleteCharityByName= async (req,res)=>{
 }
 //->>>>>Done but not tested
 
-// let UpdateCharity = async (req,res)=>{
-//     //DB
-//     let getCharity = req.params.id;//From Client
-//     let found = await CharityModel.findOne({_id:getCharity}).exec();//From DB [Encrypted]
-//     if(!found) return res.status(401).json({message:"Invalid id"});
+let UpdateCharityByName = async (req,res)=>{
+    
+    try{
+        let oldName= req.params.name;//From Client
+        let newBody=req.body;
+        //find old data
+        let found = await CharityModel.findOne({name:oldName}).exec();//From DB [Encrypted]
+        if(!found)
+             return res.status(401).json({message:"Invalid name"});
 
-//     found.name=getCharity.name;
-//     found.description=getCharity.description;
-//     found.website=getCharity.website;
+    
+        found.name=newBody.name;
+        found.description=newBody.description;
+        found.website=newBody.website;
+    
+        await found.save();
+        return res.status(201).json({message:"Charity Updated Successfully",data:found});
 
-//     await found.save();
-//     return res.status(201).json({message:"Charity Updated Successfully",data:found});
 
-// }
+    }
+    catch(ex){
+        return res.status(401).json({message:"Error",data:ex.message});
+
+    }
+   
+
+}
 
 
 //->>>>>Done but not tested
 
 
-// let UpdateCharityDonatedItems = async (req,res)=>{
-//     //DB
-//     let getCharity = req.params.id;//From Client
-//     let found = await CharityModel.findOne({_id:getCharity}).exec();//From DB [Encrypted]
-//     if(!found) return res.status(401).json({message:"Invalid id"});
+let UpdateCharityDonatedItems = async (req,res)=>{
+    //DB
+    let name = req.params.name;//From Client
+    let DonatedItems=req.body.DonatedItems;
 
-//     let items=[];
-//     for(var i in getCharity.DonatedItems){
-//         try{
-//             //check format
-//             let productID=new mongoose.Types.ObjectId(getCharity.DonatedItems[i].product);
-//             //check if product exists
-//             let find=await ProductModel.findOne({_id:productID}).exec();
-//             if(find){
-//             let item= ItemModel;
-//             item.product=productID;
-//             item.quantity=getCharity.DonatedItems[i].quantity;
-//             console.log(item);
-//             items.push(item)
-//             }
-//             else 
-//                 return res.status(401).json({message:"Invalid product id",data:getCharity.DonatedItems[i].product});
-//         }
-//         catch{
-//             return res.status(401).json({message:"Invalid ID Format",data:getCharity.DonatedItems[i].product});
-//         }
+    let found = await CharityModel.findOne({name:name}).exec();
+    if(!found) return res.status(401).json({message:"Invalid name"});
+
+    let items=[];
+    for(var i in DonatedItems){
+        try{
+            //check format
+            let productID=new mongoose.Types.ObjectId(DonatedItems[i].product);
+            //check if product exists
+            let find=await ProductModel.findOne({_id:productID}).exec();
+            if(find){
+                let item= ItemModel;
+                item.product=productID;
+                item.quantity=DonatedItems[i].quantity;
+                items.push(item)
+            }
+            else 
+                return res.status(401).json({message:"Invalid product id",data:DonatedItems[i].product});
+        }
+        catch(err){
+            return res.status(401).json({message:"Error",data:err.message});
+        }
         
-//     }
-//     found.DonatedItems=items;
-//     await found.save();
+    }
+    found.DonatedItems=items;
+    await found.save();
     
-//     return res.status(201).json({message:"Charity Updated Successfully",data:found});
+    return res.status(201).json({message:"Charity Updated Successfully",data:found});
 
-// }
+}
 
 
 module.exports = {
@@ -166,7 +179,7 @@ module.exports = {
     GetCharityByName,
     DeleteCharityByID,
     DeleteCharityByName,
-    //UpdateCharity,
-    //UpdateCharityDonatedItems
+    UpdateCharityByName,
+    UpdateCharityDonatedItems
 }
 
