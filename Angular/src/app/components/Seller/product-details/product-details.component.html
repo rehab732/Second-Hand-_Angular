@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="container">
+  <div *ngIf="Product" class="row my-5">
+    <div class="col-6">
+      <div id="carousel1" class="carousel carousel-dark slide">
+        <!-- <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div> -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/img/{{Product.data.Images[0]}}" class="d-block w-100" alt="...">
+          </div>
+          <div *ngFor="let it of Product.data.Images.slice(1)" class="carousel-item">
+            <img src="assets/img/{{it}}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel1"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel1"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-6">
+      <h1>{{Product.data.Name}}</h1>
+      <p><B>Category: </B>{{Product.data.Category}}</p>
+      <p><B>Price: </B>{{Product.data.Price}}</p>
+      <p><B>Available Quantity: </B>{{Product.data.AvailableQuantity}}</p>
+      <p><B>Description: </B>{{Product.data.Description}}</p>
+      <p><B>Color: </B>{{Product.data.Color}}</p>
+      <p><B>Release Date: </B>{{Product.data.ReleaseDate}}</p>
+      <p><B>Status: </B>{{Product.data.Status}}</p>
+
+
+      <button class="btn btn-danger" (click)="deleteProduct()">Delete</button>
+
+    </div>
+  </div>
+</body>
+
+</html>
