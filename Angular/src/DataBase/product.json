@@ -1,0 +1,43 @@
+{
+  "products":[
+    {
+      "id":1,
+      "name": "Product 1",
+      "price": 9.99,
+      "category": "Electronics",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "sellerName": "Seller 1",
+      "color": "Red"
+    },
+    {
+      "id":2,
+      "name": "Product 2",
+      "price": 19.99,
+      "category": "Clothing",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "sellerName": "Seller 2",
+      "color": "Blue"
+    },
+    {
+      "id":3,
+      "name": "Product 3",
+      "price": 29.99,
+      "category": "Home & Kitchen",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "sellerName": "Seller 3",
+      "color": "Green"
+    },
+    {
+      "id":4,
+      "name": "Product 4",
+      "price": 39.99,
+      "category": "Sports & Outdoors",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "sellerName": "Seller 4",
+      "color": "Yellow"
+    }
+
+  ]
+}
+
+

@@ -10,6 +10,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -19,14 +21,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
