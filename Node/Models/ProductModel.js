@@ -8,7 +8,7 @@ const imageSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
 });*/
-const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved"];
+const ProdStatus = ["PendingAddApproval", "PendingEditApproval","Approved", "Rejected"];
 
 function validDate(date) {
     return date<=Date.now()
@@ -63,7 +63,7 @@ const productSchema =new  mongoose.Schema({
         
 
     },
-    color: {
+    Color: {
         type: String,
         default:"Black",
         required: [true, 'A color is required.']
@@ -79,12 +79,12 @@ const productSchema =new  mongoose.Schema({
     },
     Donate:{
         type:Boolean,
-        default:false
+        default:false,
+        required: [true, 'choose donation status.']
     },
     SoldQuantity: {
         type: Number,
-        default:0,
-         
+        default:0,    
     },
     Seller:{
         SellerID:{
@@ -92,14 +92,7 @@ const productSchema =new  mongoose.Schema({
             ref: "Customer",
             required: [true, 'Product must have a seller.']
         }
-    }
-
-    
+    }    
 })
-
-
-
-
-
 
 module.exports = mongoose.model("Product",productSchema);

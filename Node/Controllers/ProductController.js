@@ -7,6 +7,10 @@ const mongoose = require("mongoose");
 let AddNewProduct = async (req,res)=>{
    
     let newProduct = req.body;
+    newProduct.SoldQuantity = 0;
+    newProduct.ReleaseDate = Date.now() - 10000;
+    newProduct.Status = "PendingAddApproval";
+
     let found = await ProductModel.findOne({_id:newProduct._id}).exec();//found[true] || notFound[false]
     if(found) return res.status(401).json({message:"Product Already Exist !!"});
     else{
@@ -92,8 +96,16 @@ let DeleteProductByID = async (req,res)=>{
     try{
         let getProductId = new mongoose.Types.ObjectId(req.params.id);
 
-        let found = await ProductModel.findOneAndRemove({_id:getProductId}).exec();
+        let found = await ProductModel.findOne({_id:getProductId}).exec();
         if(!found) return res.status(401).json({message:"Invalid id"});
+        
+        if(found.SoldQuantity == 0){
+            await ProductModel.findByIdAndRemove({_id:getProductId}).exec();        
+        }else{
+            found.IsDeleted = true;
+            found.save();
+        }
+        
     
         res.status(200).json({message:"Product deleted"})
 
@@ -122,8 +134,7 @@ let UpdateProduct = async (req,res)=>{
     found.Description=UpdatedProduct.Description;
     found.Price=UpdatedProduct.Price;
     found.AvailableQuantity=UpdatedProduct.AvailableQuantity;
-    found.ReleaseDate=UpdatedProduct.ReleaseDate;
-    found.color=UpdatedProduct.color;
+    found.Color=UpdatedProduct.Color;
     found.Category=UpdatedProduct.Category;
 
     await found.save();
