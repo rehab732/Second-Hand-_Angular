@@ -50,6 +50,20 @@ let GetProductById = async (req,res)=>{
     }
 }
 
+let GetProductBySellerId = async (req,res)=>{
+    //DB
+    try{
+        let getProduct = new mongoose.Types.ObjectId(req.params.id);
+        let found = await ProductModel.find({["Seller.SellerID"]:getProduct}).exec();
+        if(!found) return res.status(401).json({message:"Invalid id"});
+
+        res.status(200).json({message:"Products found",data:found})
+    }
+    catch(err){
+        return res.status(401).json({message:"Error",data:err.message});
+    }
+}
+
 //**********TODO
 //get product by category--Done
 let GetProductByCategory = async (req,res)=>{
@@ -197,6 +211,7 @@ module.exports = {
     GetProductById,
     GetProductByName,
     GetProductByCategory,
+    GetProductBySellerId,
     DeleteProductByID,
     UpdateProduct,
     GetPendingProducts

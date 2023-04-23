@@ -21,5 +21,9 @@ export class ProductService {
     return this.myClient.delete(this.URL + id);
   }
 
+  GetSellerProducts(id:any){
+    return this.myClient.get(this.URL+'/Seller/'+id);
+  }
+
 }
 
