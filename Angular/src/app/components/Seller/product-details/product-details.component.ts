@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/Services/Product.service';
 
 
@@ -12,7 +12,7 @@ export class ProductDetailsComponent implements OnInit {
   Id:any;
   Product: any;
 
-  constructor(activeRoute: ActivatedRoute, private prdService:ProductService) {
+  constructor(activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
     this.Id = activeRoute.snapshot.params["id"];
   }
 
@@ -26,6 +26,19 @@ export class ProductDetailsComponent implements OnInit {
         error:(err)=>{
           console.error(err)}
       })
+  }
+
+  deleteProduct(){
+    if(confirm("Are you sure you want to delete this product?")){
+      this.prdService.DeleteProduct(this.Id).subscribe({
+        next:(data)=>{
+          console.log(data);
+          this.router.navigate(["../../"]);
+        },
+        error:(err)=>{
+          console.error(err)}
+      })
+    }
   }
 
 }
