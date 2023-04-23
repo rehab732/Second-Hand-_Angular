@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const CategoryController = require("../Controllers/CategoryController");
 
-router.get("",CategoryController.GetAllCharities);
+router.get("",CategoryController.GetAllCategories);
 router.get("/:name",CategoryController.GetCategoryByName);
 
 router.post("",CategoryController.AddNewCategory);
