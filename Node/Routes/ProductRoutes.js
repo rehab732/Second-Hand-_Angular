@@ -6,6 +6,7 @@ router.get("",ProductController.GetAllProducts);
 router.get("/getById/:id",ProductController.GetProductById);
 router.get("/getByName/:name",ProductController.GetProductByName);
 router.get("/getByCategory/:category",ProductController.GetProductByCategory);
+router.get("/pending",ProductController.GetPendingProducts);
 
 router.post("",ProductController.AddNewProduct);
 router.post("/:id",ProductController.UpdateProduct);
