@@ -34,7 +34,7 @@ let GetCategoryByName = async (req,res)=>{
     
 }
 
-let GetAllCharities = async (req,res)=>{
+let GetAllCategories = async (req,res)=>{
     try{
         let allCategorys= await CategoryModel.find().exec();//From DB
         if(!allCategorys||allCategorys.length==0) return res.status(401).json({message:"No Categories found"});
@@ -97,7 +97,7 @@ let UpdateCategoryByName = async (req,res)=>{
 module.exports = {
     AddNewCategory,
     GetCategoryByName,
-    GetAllCharities,
+    GetAllCategories,
     DeleteCategoryByName,
     UpdateCategoryByName
 
