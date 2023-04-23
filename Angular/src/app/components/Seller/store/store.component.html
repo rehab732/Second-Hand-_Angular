@@ -1,186 +1,37 @@
 <section class="py-0" id="All">
   <div class="container">
 
-    <div class="dropdown">
+    <div class="dropdown row h-100 col-12">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         All Products
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item"  (click)="FilterAll()">All Products</a>
+        <a class="dropdown-item"  (click)="FilterSold()">Sold Out</a>
+        <a class="dropdown-item"  (click)="FilterInStock()">In Stock</a>
       </div>
     </div>
-    <div class="row h-100">
-      <div class="col-lg-7 mx-auto text-center mt-7 mb-5">
 
-      </div>
-      <div class="col-12">
-        <div class="carousel slide" id="carouselBestDeals" data-bs-touch="false" data-bs-interval="false">
-          <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-              <div class="row h-100 align-items-center g-2">
 
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/flat-hill.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/blue-ring.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wallet.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wrist-watch.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-              </div>
+       <!--All Products-->
+       <div class="row h-100 col-12">
+
+        <div class="row h-100 align-items-center g-2">
+
+          <div *ngFor="let product of CurrProducts" class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
+            <div class="card-body ps-0 rounded-4" style="background-color:#ced4da;">
+
+              <img class="img-fluid h-100" src='assets/img/{{product.Images[0]}}' alt="..."  (click)="ProductClick(product)"/>
+              <h5 class="fw-bold  text-truncate text-center" style="color: #64113F;">{{product.Name}}</h5>
+              <div class="fw-bold text-center"><span class=" text-uppercase  fw-bold  me-2" style="color: #64113F;">Price : </span><span style="color: black;">{{product.Price}}</span></div>
+              <div class="fw-bold text-center"><span class=" text-uppercase  fw-bold  me-2" style="color: #64113F;">Category : </span><span   style="color: black;">{{product.Category}}</span></div>
+
             </div>
-            <div class="carousel-item" data-bs-interval="5000">
-              <div class="row h-100 align-items-center g-2">
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/flat-hill.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/blue-ring.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wallet.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wrist-watch.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-              <div class="row h-100 align-items-center g-2">
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/flat-hill.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/blue-ring.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wallet.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wrist-watch.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="row h-100 align-items-center g-2">
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/flat-hill.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Flat Hill Slingback</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/blue-ring.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Ocean Blue Ring</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wallet.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Brown Leathered Wallet</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-                  <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/wrist-watch.png" alt="..." />
-                    <div class="card-img-overlay ps-0"> </div>
-                    <div class="card-body ps-0 bg-200">
-                      <h5 class="fw-bold text-1000 text-truncate">Silverside Wristwatch</h5>
-                      <div class="fw-bold"><span class="text-600 me-2 text-decoration-line-through">$200</span><span class="text-primary">$175</span></div>
-                    </div><a class="stretched-link" href="#"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row"><button class="carousel-control-prev" type="button" data-bs-target="#carouselBestDeals" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button><button class="carousel-control-next" type="button" data-bs-target="#carouselBestDeals" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next </span></button></div>
+
           </div>
+
         </div>
-      </div>
-      <div class="col-12 d-flex justify-content-center mt-5"> <a class="btn btn-lg btn-dark" href="#!">View All </a></div>
+
     </div>
   </div><!-- end of .container-->
 </section><!-- <section> close ============================-->
