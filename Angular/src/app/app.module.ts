@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
+import { StoreComponent } from './components/store/store.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ProductDetailsComponent } from './components/Seller/product-details/pro
     RegisterComponent,
     LoginComponent,
     ProductDetailsComponent
+    StoreComponent
   ],
   imports: [
     BrowserModule,
