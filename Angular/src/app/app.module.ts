@@ -14,7 +14,6 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { RouterModule } from '@angular/router';
 
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
-import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { StoreComponent } from './components/Seller/store/store.component';
 
 
