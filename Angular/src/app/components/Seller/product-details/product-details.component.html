@@ -47,8 +47,8 @@
       <p><B>Release Date: </B>{{Product.data.ReleaseDate}}</p>
       <p><B>Status: </B>{{Product.data.Status}}</p>
 
-
-      <button class="btn btn-danger" (click)="deleteProduct()">Delete</button>
+      <button *ngIf="userId == Product.data.Seller.SellerID" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
+      <button *ngIf="userId == Product.data.Seller.SellerID" class="btn btn-info" >Edit</button>
 
     </div>
   </div>
