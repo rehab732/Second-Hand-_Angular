@@ -10,6 +10,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { RouterModule } from '@angular/router';
 
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
@@ -24,10 +26,13 @@ import { StoreComponent } from './components/Seller/store/store.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
+
+
     AdminComponentComponent,
 
     ProductDetailsComponent,
     StoreComponent
+
 
   ],
   imports: [
@@ -35,7 +40,8 @@ import { StoreComponent } from './components/Seller/store/store.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
