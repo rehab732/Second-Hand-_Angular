@@ -1,11 +1,16 @@
 const ProductModel = require("../Models/ProductModel");
 const ItemModel = require("../Models/ItemModel");
 const CustomerModel = require("../Models/CustomerModel");
+const ProductValidate = require("../utils/ProductSchema");
 const mongoose = require("mongoose");
 
 let AddNewProduct = async (req,res)=>{
    
     let newProduct = req.body;
+    newProduct.SoldQuantity = 0;
+    newProduct.ReleaseDate = Date.now() - 10000;
+    newProduct.Status = "PendingAddApproval";
+
     let found = await ProductModel.findOne({_id:newProduct._id}).exec();//found[true] || notFound[false]
     if(found) return res.status(401).json({message:"Product Already Exist !!"});
     else{
@@ -45,18 +50,50 @@ let GetProductById = async (req,res)=>{
     }
 }
 
+let GetProductBySellerId = async (req,res)=>{
+    //DB
+    try{
+        let getProduct = new mongoose.Types.ObjectId(req.params.id);
+        let found = await ProductModel.find({["Seller.SellerID"]:getProduct}).exec();
+        if(!found) return res.status(401).json({message:"Invalid id"});
+
+        res.status(200).json({message:"Products found",data:found})
+    }
+    catch(err){
+        return res.status(401).json({message:"Error",data:err.message});
+    }
+}
+
 //**********TODO
-//get product by category
+//get product by category--Done
+let GetProductByCategory = async (req,res)=>{
+    //DB
+    try{
+        //console.log("GetProductByCategory " + req.params.category);
+        let getProductCategory = req.params.category;//From Client
+        let found = await ProductModel.find({Category:getProductCategory}).exec();
+        if(found.length==0) return res.status(401).json({message:"Invalid Category"});
+        res.status(200).json({message:"Products of specified category found",data:found})
+    }catch(err){
+        return res.status(401).json({message:"Invalid Name Format",error:err.message});
+    }
 
-//get product by name
-// let GetProductByName = async (req,res)=>{
-//     //DB
-//     let getProduct = req.params.name;//From Client
-//     let found = await ProductModel.findOne({name:getProduct}).exec();
-//     if(!found) return res.status(401).json({message:"Invalid name"});
+}
 
-//     res.status(200).json({message:"Product found",data:found})
-// }
+//get product by name--Done
+let GetProductByName = async (req,res)=>{
+    //DB
+    try{
+        console.log("GetProductByName " + req.params.name);
+        let getProductName = req.params.name;//From Client
+        let found = await ProductModel.find({Name:getProductName}).exec();
+        if(!found) return res.status(401).json({message:"Invalid name"});
+        res.status(200).json({message:"Product found",data:found})
+    }catch(err){
+        return res.status(401).json({message:"Invalid Name Format", error:err.message});
+    }
+
+}
 
 
 let GetAllProducts = async (req,res)=>{
@@ -71,10 +108,18 @@ let GetAllProducts = async (req,res)=>{
 let DeleteProductByID = async (req,res)=>{
     //DB
     try{
-        let getProduct = new mongoose.Types.ObjectId(req.params.id);
+        let getProductId = new mongoose.Types.ObjectId(req.params.id);
 
-        let found = await ProductModel.findOneAndRemove({_id:getProduct}).exec();
+        let found = await ProductModel.findOne({_id:getProductId}).exec();
         if(!found) return res.status(401).json({message:"Invalid id"});
+        
+        if(found.SoldQuantity == 0){
+            await ProductModel.findByIdAndRemove({_id:getProductId}).exec();        
+        }else{
+            found.IsDeleted = true;
+            found.save();
+        }
+        
     
         res.status(200).json({message:"Product deleted"})
 
@@ -89,36 +134,86 @@ let DeleteProductByID = async (req,res)=>{
 
 
 //******TODO */
-//update product without seller
+//update product without seller--Done
+let UpdateProduct = async (req,res)=>{
+   console.log("UpdateProduct --> controller" , req.body)
+    try{
+        let getProductId = new mongoose.Types.ObjectId(req.params.id);
+        let UpdatedProduct = req.body;
+
+        // if(ProductValidate(UpdatedProduct) == false)
+        // UpdatedProduct = req.body.product
+        console.log(ProductValidate(UpdatedProduct));
+
+        let found = await ProductModel.findOne({_id:getProductId}).exec();
+        if(!found) return res.status(401).json({message:"Invalid id"});
+
+        found.Name=UpdatedProduct.Name;
+        found.Description=UpdatedProduct.Description;
+        found.Price=UpdatedProduct.Price;
+        found.AvailableQuantity=UpdatedProduct.AvailableQuantity;
+        found.Color=UpdatedProduct.Color;
+        found.Category=UpdatedProduct.Category;
+        found.Status = UpdatedProduct.Status;
+
+        await found.save();
+        console.log("saved")
+        return res.status(201).json({message:"Product Updated Successfully",data:found});
+    }catch(err){
+        console.log(err.message)
+    }
+
+}
+
+let GetPendingProducts = async (req,res)=>{
+    try{
+        //console.log("GetProductByCategory " + req.params.category);
+        let getProductCategory = req.params.category;//From Client
+        let found = await ProductModel.find(
+            {$or:[{"Status":"PendingAddApproval" } , {"Status":"PendingEditApproval" }]}
+            ).exec();
+        if(found.length==0) return res.status(401).json({message:"Invalid Category"});
+        res.status(200).json({message:"Pending Products found",data:found})
+    }catch(err){
+        return res.status(401).json({message:"Invalid Name Format",error:err.message});
+    }
+
+}
+
 //update product's seller
-
-
-
-// let UpdateProduct = async (req,res)=>{
-   
+// let UpdateSeller = async (req,res)=>{
     
-//     let found = await ProductModel.findOne({_id:getProduct}).exec();
-//     if(!found) return res.status(401).json({message:"Invalid id"});
+//     try{
+//         let getSellerId = new mongoose.Types.ObjectId(req.params.id);
+//         let UpdatedProductSeller = req.body;
+        
+//         let allProducts= await ProductModel.find().exec();//From DB
+        
+//         for(let prod of allProducts){
+//             if(prod.Seller.SellerID.toString() == getSellerId.toString()){
+//                 console.log(prod.Seller["Name"]);
+//                 prod.Seller.Name = UpdatedProductSeller.Name;
+//                 prod.Seller.Rating = UpdatedProductSeller.Rating;
+//             }
+//         }
+        
+//         await allProducts.save();
+//         return res.status(201).json({message:"Product Seller Updated Successfully",data:allSellers});
+//     }catch{
 
-//     found.name=getProduct.name;
-//     found.description=getProduct.description;
-//     found.website=getProduct.website;
-
-//     await found.save();
-//     return res.status(201).json({message:"Product Updated Successfully",data:found});
-
-// }
-
-
-
+//         return res.status(401).json({message:"Invalid "});
+//     }
+//}
 
 module.exports = {
     AddNewProduct,
     GetAllProducts,
     GetProductById,
-   // GetProductByName,
+    GetProductByName,
+    GetProductByCategory,
+    GetProductBySellerId,
     DeleteProductByID,
-    //UpdateProduct,
-   
+    UpdateProduct,
+    GetPendingProducts
 }
 

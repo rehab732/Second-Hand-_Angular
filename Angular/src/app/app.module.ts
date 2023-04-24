@@ -13,6 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { RouterModule } from '@angular/router';
 
+import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
+import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
+import { StoreComponent } from './components/Seller/store/store.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +26,14 @@ import { RouterModule } from '@angular/router';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    ProductDetailsComponent
+
+
+    AdminComponentComponent,
+
+    ProductDetailsComponent,
+    StoreComponent
+
+
   ],
   imports: [
     BrowserModule,

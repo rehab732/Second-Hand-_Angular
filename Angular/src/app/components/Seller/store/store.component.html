@@ -1,0 +1,39 @@
+<section class="py-0" id="All">
+  <div class="container">
+
+    <div class="dropdown row h-100 col-12">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        All Products
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item"  (click)="FilterAll()">All Products</a>
+        <a class="dropdown-item"  (click)="FilterSold()">Sold Out</a>
+        <a class="dropdown-item"  (click)="FilterInStock()">In Stock</a>
+      </div>
+    </div>
+
+
+       <!--All Products-->
+       <div class="row h-100 col-12">
+
+        <div class="row h-100 align-items-center g-2">
+
+          <div *ngFor="let product of CurrProducts" class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
+            <div class="card-body ps-0 rounded-4" style="background-color:#ced4da;">
+
+              <img class="img-fluid h-100" src='assets/img/{{product.Images[0]}}' alt="..."  (click)="ProductClick(product)"/>
+              <h5 class="fw-bold  text-truncate text-center" style="color: #64113F;">{{product.Name}}</h5>
+              <div class="fw-bold text-center"><span class=" text-uppercase  fw-bold  me-2" style="color: #64113F;">Price : </span><span style="color: black;">{{product.Price}}</span></div>
+              <div class="fw-bold text-center"><span class=" text-uppercase  fw-bold  me-2" style="color: #64113F;">Category : </span><span   style="color: black;">{{product.Category}}</span></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+    </div>
+  </div><!-- end of .container-->
+</section><!-- <section> close ============================-->
+<!-- ============================================-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
