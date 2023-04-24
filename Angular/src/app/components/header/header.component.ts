@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  userToken: string | null = null;
   constructor() { }
 
   ngOnInit(): void {
+    this.userToken = localStorage.getItem("UserToken");
+  }
+
+  logOut(){
+    localStorage.removeItem("UserToken");
+    location.reload();
   }
 
 }

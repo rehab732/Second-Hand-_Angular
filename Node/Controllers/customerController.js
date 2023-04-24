@@ -1,5 +1,6 @@
 const CustomerModel = require("../Models/CustomerModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 let AddNewCustomer = async (req,res)=>{
   
@@ -15,7 +16,10 @@ let AddNewCustomer = async (req,res)=>{
     let newCustomer = new CustomerModel(newCus);
     await newCustomer.save();
 
-    return res.status(201).json({message:"Customer Added Successfully",data:newCustomer});
+    var token = jwt.sign({customerId: newCustomer._id}, process.env.JWTSecret)
+    //res.header("x-auth-token",token);
+
+    return res.status(201).json({message:"Customer Added Successfully",data:{newCustomer, token:token}});
 
 }
 
@@ -30,7 +34,10 @@ let LoginCustomer = async (req,res)=>{
     let checkPass = bcrypt.compareSync(logCustomer.Password, foundCustomer.Password);//true | false
     if(!checkPass) return res.status(401).json({message:"Invalid Password"});
 
-    res.status(200).json({message:"Logged-In Successfully"})
+    var token = jwt.sign({customerId: foundCustomer._id}, process.env.JWTSecret);
+    //res.header("x-auth-token",token);
+
+    res.status(200).json({message:"Logged-In Successfully", data:{token:token}})
 
 }
 

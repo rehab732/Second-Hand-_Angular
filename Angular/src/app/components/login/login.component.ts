@@ -16,9 +16,11 @@ export class LoginComponent {
     // console.log(newCustomer);
     this.myService.Customerlogin(newCustomer).subscribe(
       {
-        next:(data)=>{
+        next:(data:any)=>{
           this.router.navigate(['../'])
-           console.log(data);
+          console.log(data);
+
+          localStorage.setItem("UserToken", data.data.token);
         },
         error:(err)=>{
           console.error("errrrrrrrrrrrrror");
@@ -28,5 +30,5 @@ export class LoginComponent {
 
   }
 
-  
+
 }
