@@ -13,25 +13,26 @@ export class HomeComponent implements OnInit {
   products:any=[];
 
   ngOnInit(): void {
-    this.myService.getAllProducts().subscribe(
+    // this.myService.getAllProducts().subscribe(
+    //   {
+    //     next:(data)=>{
+    //       this.products=data;
+    //       console.log(data);
+    //     },
+    //     error:(data)=>{}
+    //   }
+    // );
+
+    this.myService.GetAllProducts().subscribe(
       {
-        next:(data)=>{
-          this.products=data;
+        next:(data:any)=>{
           console.log(data);
+          this.products=data;
         },
-        error:(data)=>{}
+        error:(data)=>{ console.log(data);}
       }
-    );
+    )
 
-
-
-  }
-
-
-
-  GetDetails()
-  {
-   this.router.navigate(["/products/1"]);
   }
 
 }
