@@ -1,0 +1,29 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped text-center">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Approve Product</th>
+            <th>Reject Product</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of Products">
+            <td>{{p.Name}}</td>
+            <td>{{p.Price}}</td>
+            <td>{{p.Status}}</td>
+            <td><input type="button" (click)="approveProduct(this.p)" value="Approve" class="btn btn-outline-success"></td>
+            <td><input type="button" (click)="rejectProduct(this.p)" value="Reject" class="btn btn-outline-danger"></td>
+            <td><input type="button" (click)="detailsProduct(this.p)" value="Details" class="btn btn-outline-info"></td>
+            <!-- <td><a value="s.id" (click)="acceptProduct()" >Accept</a></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
