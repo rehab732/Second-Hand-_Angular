@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/Services/Product.service';
+import jwt from 'jwt-decode';
 
 
 @Component({
@@ -9,15 +10,22 @@ import { ProductService } from 'src/app/Services/Product.service';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  Id:any;
+  prdId:any;
   Product: any;
+  userId:any;
+  userToken: string | null = null;
 
   constructor(activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
-    this.Id = activeRoute.snapshot.params["id"];
+    this.prdId = activeRoute.snapshot.params["id"];
   }
 
   ngOnInit(): void {
-    this.prdService.GetProductsDetails(this.Id).subscribe(
+    this.userToken = localStorage.getItem("UserToken");
+    if(this.userToken){
+
+      this.userId = (jwt(this.userToken) as any).customerId;
+    }
+    this.prdService.GetProductsDetails(this.prdId).subscribe(
       {
         next:(data)=>{
           this.Product = data ;
@@ -30,7 +38,7 @@ export class ProductDetailsComponent implements OnInit {
 
   deleteProduct(){
     if(confirm("Are you sure you want to delete this product?")){
-      this.prdService.DeleteProduct(this.Id).subscribe({
+      this.prdService.DeleteProduct(this.prdId).subscribe({
         next:(data)=>{
           console.log(data);
           this.router.navigate(["../../"]);
