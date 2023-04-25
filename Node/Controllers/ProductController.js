@@ -51,6 +51,20 @@ let GetProductById = async (req,res)=>{
     }
 }
 
+let GetProductBySellerId = async (req,res)=>{
+    //DB
+    try{
+        let getProduct = new mongoose.Types.ObjectId(req.params.id);
+        let found = await ProductModel.find({["Seller.SellerID"]:getProduct}).exec();
+        if(!found) return res.status(401).json({message:"Invalid id"});
+
+        res.status(200).json({message:"Products found",data:found})
+    }
+    catch(err){
+        return res.status(401).json({message:"Error",data:err.message});
+    }
+}
+
 //**********TODO
 //get product by category--Done
 let GetProductByCategory = async (req,res)=>{
@@ -123,23 +137,47 @@ let DeleteProductByID = async (req,res)=>{
 //******TODO */
 //update product without seller--Done
 let UpdateProduct = async (req,res)=>{
-   
-    let getProductId = new mongoose.Types.ObjectId(req.params.id);
-    let UpdatedProduct = req.body;
-    console.log(ProductValidate(UpdatedProduct));
+   console.log("UpdateProduct --> controller" , req.body)
+    try{
+        let getProductId = new mongoose.Types.ObjectId(req.params.id);
+        let UpdatedProduct = req.body;
 
-    let found = await ProductModel.findOne({_id:getProductId}).exec();
-    if(!found) return res.status(401).json({message:"Invalid id"});
+        // if(ProductValidate(UpdatedProduct) == false)
+        // UpdatedProduct = req.body.product
+        console.log(ProductValidate(UpdatedProduct));
 
-    found.Name=UpdatedProduct.Name;
-    found.Description=UpdatedProduct.Description;
-    found.Price=UpdatedProduct.Price;
-    found.AvailableQuantity=UpdatedProduct.AvailableQuantity;
-    found.Color=UpdatedProduct.Color;
-    found.Category=UpdatedProduct.Category;
+        let found = await ProductModel.findOne({_id:getProductId}).exec();
+        if(!found) return res.status(401).json({message:"Invalid id"});
 
-    await found.save();
-    return res.status(201).json({message:"Product Updated Successfully",data:found});
+        found.Name=UpdatedProduct.Name;
+        found.Description=UpdatedProduct.Description;
+        found.Price=UpdatedProduct.Price;
+        found.AvailableQuantity=UpdatedProduct.AvailableQuantity;
+        found.Color=UpdatedProduct.Color;
+        found.Category=UpdatedProduct.Category;
+        found.Status = UpdatedProduct.Status;
+
+        await found.save();
+        console.log("saved")
+        return res.status(201).json({message:"Product Updated Successfully",data:found});
+    }catch(err){
+        console.log(err.message)
+    }
+
+}
+
+let GetPendingProducts = async (req,res)=>{
+    try{
+        //console.log("GetProductByCategory " + req.params.category);
+        let getProductCategory = req.params.category;//From Client
+        let found = await ProductModel.find(
+            {$or:[{"Status":"PendingAddApproval" } , {"Status":"PendingEditApproval" }]}
+            ).exec();
+        if(found.length==0) return res.status(401).json({message:"Invalid Category"});
+        res.status(200).json({message:"Pending Products found",data:found})
+    }catch(err){
+        return res.status(401).json({message:"Invalid Name Format",error:err.message});
+    }
 
 }
 
@@ -174,7 +212,9 @@ module.exports = {
     GetProductById,
     GetProductByName,
     GetProductByCategory,
+    GetProductBySellerId,
     DeleteProductByID,
-    UpdateProduct
+    UpdateProduct,
+    GetPendingProducts
 }
 

@@ -1,4 +1,5 @@
 //#region Requires
+require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
@@ -48,9 +49,15 @@ const ProductRoutes = require("./Routes/ProductRoutes");
 app.use("/api/Products", ProductRoutes);
 //#endregion
 
+
+//#region Order
+const OrderRoutes = require("./Routes/OrderRoutes");
+app.use("/api/Orders", OrderRoutes);
+
 //#region Category
 const CategoryRoutes = require("./Routes/CategoryRoutes");
 app.use("/api/Catigories", CategoryRoutes);
+
 //#endregion
 
 

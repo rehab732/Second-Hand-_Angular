@@ -1,11 +1,7 @@
-Node->Controllors+ routes
-	
-	//customer (Basma)
-	//Order (yas)
-	//product (hassan)
+* card images size
 
-	//category + charity (sarah)
+* Make request schema to give reason for reject
 
-Angular -> category list (not static) (Clothes + Jewelery + Bags + Shoes)
-	     product list (not static) 
-           remove Best seller /Checkout New Arrivals/All Products
+* ajv 
+
+* Remove delete and edit button of product details from admin
