@@ -20,6 +20,19 @@ export class CustomerService {
     console.log(customer);
     return this.myClient.post(this.URL + '/login', customer);
   }
+  AddItemToCart(customer_id: any,cartItem:any){
+    console.log(customer_id,cartItem);
+    return this.myClient.post(this.URL + '/AddItemToCart/'+ customer_id,cartItem);
+  }
+  RemoveItemFromCart(customer_id: any,cartItemId:any){
+    console.log(customer_id);
+    var obj={product:cartItemId}
+    return this.myClient.post(this.URL + '/RemoveItemFromCart/'+ customer_id,obj);
+  }
+  GetCartItems(customer_id: any){
+    console.log(customer_id);
+    return this.myClient.get(this.URL + '/GetCartItems/'+ customer_id);
+  }
 
 
 }

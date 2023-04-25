@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/Services/Product.service';
 
@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/Services/Product.service';
 export class ProductDetailsComponent implements OnInit {
   Id:any;
   Product: any;
+  // @Input() DataFromParent:any;
 
   constructor(activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
     this.Id = activeRoute.snapshot.params["id"];
