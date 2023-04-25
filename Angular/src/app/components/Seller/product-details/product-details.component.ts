@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/Services/Product.service';
 import jwt from 'jwt-decode';
@@ -12,8 +12,10 @@ import jwt from 'jwt-decode';
 export class ProductDetailsComponent implements OnInit {
   prdId:any;
   Product: any;
+  // @Input() DataFromParent:any;
   userId:any;
   userToken: string | null = null;
+
 
   constructor(activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
     this.prdId = activeRoute.snapshot.params["id"];
