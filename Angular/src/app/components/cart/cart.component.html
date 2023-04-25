@@ -35,10 +35,28 @@
               </div>
 
               <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <div class="d-flex mb-4" style="max-width: 300px">
+                  <button class="btn btn-primary px-3 me-2"
+                  (click)="ClickDecQuantity(item)">
+                    <i class="fas fa-minus">-</i>
+                  </button>
+
+                  <div class="form-outline">
+                    <label #quan id="form1" min="1" name="quantity"  type="number" class="form-control">{{item.quantity}}</label>
+                    <label class="form-label" for="form1">Quantity</label>
+                  </div>
+                  <button  class="btn btn-primary px-3 ms-2"
+                    (click)="ClickIncQuantity(item)">
+                    <i class="fas fa-plus">+</i>
+                  </button>
+
+                </div>
+                <strong>Price: {{item.product.Price}} * {{item.quantity}} = {{item.product.Price*item.quantity}} EGP</strong>
                 <!-- Quantity -->
-                    <label class="form-label" for="form1">Quantity: {{item.quantity}}</label>
+                    <!-- <label class="form-label" for="form1">Quantity: {{item.quantity}}</label>
                     <div></div>
-                    <strong>Price: {{item.product.Price}} * {{item.quantity}} = {{item.product.Price*item.quantity}} EGP</strong>
+                    <strong>Price: {{item.product.Price}} * {{item.quantity}} = {{item.product.Price*item.quantity}} EGP</strong> -->
+
                 <!-- Quantity -->
 
 

@@ -125,13 +125,21 @@ let AddItemToCart = async (req,res)=>{
     try{
         let body= req.body;
         let customerID = new mongoose.Types.ObjectId(req.params.id);
-        let found = await CustomerModel.findOne({_id:customerID}).exec();
+        let found = await CustomerModel.findOne({_id:customerID}).populate({
+            path:"Cart.items.product",
+            strictPopulate: false 
+        
+        }).exec();
         if(!found) return res.status(401).json({message:"Invalid Customer id"});
         
         let productID = new mongoose.Types.ObjectId(body.product);
         let foundProduct =await ProductModel.findOne({_id:productID}).exec();
         if(!foundProduct) return res.status(401).json({message:"product not found"});
         
+        let cartProduct =await CustomerModel.findOne({["Cart.items.product"]:productID}).exec();
+        console.log(cartProduct);
+        if(cartProduct) return res.status(401).json({message:"product already in cart"});
+
         found.Cart.items.push(body);
         await found.save();
         return res.status(201).json({message:"Item  Added To Cart Successfully",data:found});
@@ -181,7 +189,7 @@ let RemoveItemFromCart = async (req,res)=>{
 let UpdateItemQuantityInCart = async (req,res)=>{
    
     // {
-    //     "itemModel":{
+    //     "{
     //         "product": "529590520"
     //         "quantity": "5"           
     //     }
@@ -194,14 +202,14 @@ let UpdateItemQuantityInCart = async (req,res)=>{
     if(!found) return res.status(401).json({message:"Invalid Customer id"});
 
     let isItemFound = false;
-          for(var i in found.Cart.items){
-            if(body.product== found.Cart.items[i].product)
-            {
-                found.Cart.items[i].quantity = body.quantity;
-                isItemFound=true;
-                break;
-            }
-          }
+    for(var i in found.Cart.items){
+        if(body.product== found.Cart.items[i].product.toString())
+        {
+            found.Cart.items[i].quantity = body.quantity;
+            isItemFound=true;
+            break;
+        }
+    }
     
     if(!isItemFound)
         return res.status(401).json({message:"Item Not Found",data:found});
@@ -249,6 +257,8 @@ let UpdateCustomer = async (req,res)=>{
         return res.status(500).json({message:"Server Error",Error:err.message});
     }
 }
+
+
 
 
 
