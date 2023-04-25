@@ -1,6 +1,7 @@
 const AdminModel = require("../Models/AdminModel");
 
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 let AddNewAdmin = async (req,res)=>{
 
@@ -18,7 +19,10 @@ let AddNewAdmin = async (req,res)=>{
     let newAdmin = new AdminModel(newAd);
     await newAdmin.save();
 
-    return res.status(201).json({message:"Admin Added Successfully",data:newAdmin});
+    var token = jwt.sign({adminId: newAdmin._id}, process.env.JWTSecret);
+
+
+    return res.status(201).json({message:"Admin Added Successfully",data:{newAdmin, token:token}});
 
 }
 
@@ -33,7 +37,9 @@ let LoginAdmin = async (req,res)=>{
     let checkPass = bcrypt.compareSync(logAdmin.Password, foundAdmin.Password);//true | false
     if(!checkPass) return res.status(401).json({message:"Invalid  Password"});
 
-    res.status(200).json({message:"Logged-In Successfully"})
+    var token = jwt.sign({adminId: foundAdmin._id}, process.env.JWTSecret);
+
+    res.status(200).json({message:"Logged-In Successfully", data:{token:token}})
 
 }
 
