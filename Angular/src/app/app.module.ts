@@ -14,6 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { StoreComponent } from './components/Seller/store/store.component';
+import { CharityComponent } from './components/charity/charity.component';
+import { UpdateCharityComponent } from './components/charity/update-charity/update-charity.component';
+import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
+import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
 
 
 @NgModule({
@@ -27,7 +31,11 @@ import { StoreComponent } from './components/Seller/store/store.component';
     AdminComponentComponent,
 
     ProductDetailsComponent,
-    StoreComponent
+    StoreComponent,
+    CharityComponent,
+    UpdateCharityComponent,
+    AddCharityComponent,
+    CharityDetailsComponent
 
   ],
   imports: [

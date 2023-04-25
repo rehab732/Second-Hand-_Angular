@@ -1,0 +1,18 @@
+<div class="container form">
+  <div class="row form-group">
+    <label class="col-2">Name : </label>
+    <input #name class="col-5">
+  </div>
+  <div class="row form-group">
+    <label class="col-2">Website : </label>
+    <input #website class="col-5">
+  </div>
+  <div class="row form-group">
+    <label class="col-2">Description : </label>
+    <input #description class="col-5">
+  </div>
+  <div class="form-group">
+    <input type="button" value="Add"
+    (click)="add(name.value , website.value , description.value)" class="btn btn-outline-success"/>
+  </div>
+</div>

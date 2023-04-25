@@ -1,0 +1,10 @@
+<div *ngIf="Charity; else loadingBlock" class="alert alert-info">
+  <h5>Name: {{Charity.name}}</h5>
+  <h5>Description: {{Charity.description}}</h5>
+  <h5>Website: <a href="{{Charity.website}}">{{Charity.website}}</a></h5>
+  <input type="button" value="Back to List" (click)="backToList()" class="btn btn-outline-primary">
+  <input type="button" value="Delete" (click)="delete()" class="btn btn-danger">
+</div>
+<ng-template #loadingBlock>
+  <h1 style="color: red;">Loading...</h1>
+</ng-template>

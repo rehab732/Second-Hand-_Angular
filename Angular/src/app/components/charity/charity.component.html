@@ -1,0 +1,40 @@
+
+<div class="container">
+  <div class="row">
+    <input type="button" (click)="add()" value="Add" class="btn btn-outline-success">
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped text-center">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Website</th>
+            <th>donated items no.</th>
+            <th>Actions</th>
+            <!-- <th>Approve Product</th>
+            <th>Reject Product</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of Charities">
+            <td>{{c.name}}</td>
+            <td>{{c.description}}</td>
+            <td><a href="{{c.website}}">{{c.website}}</a></td>
+            <td>{{c.DonatedItems.length}}</td>
+            <td>
+              <input type="button" (click)="updateCharity(this.c)" value="Update" class="btn btn-outline-primary">
+              <input id="delete" type="button" (click)="deleteCharity(this.c,this)" value="Delete" class="btn btn-outline-danger">
+              <input type="button" (click)="details(this.c)" value="Details" class="btn btn-outline-info">
+            </td>
+            <!-- <td><input type="button" (click)="approveProduct(this.p)" value="Approve" class="btn btn-outline-success"></td>
+            <td><input type="button" (click)="rejectProduct(this.p)" value="Reject" class="btn btn-outline-danger"></td>
+            <td><input type="button" (click)="detailsProduct(this.p)" value="Details" class="btn btn-outline-info"></td> -->
+            <!-- <td><a value="s.id" (click)="acceptProduct()" >Accept</a></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
