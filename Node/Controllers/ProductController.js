@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 let AddNewProduct = async (req,res)=>{
    
     let newProduct = req.body;
+    console.log(req.body);
     newProduct.SoldQuantity = 0;
     newProduct.ReleaseDate = Date.now() - 10000;
     newProduct.Status = "PendingAddApproval";
@@ -28,8 +29,8 @@ let AddNewProduct = async (req,res)=>{
             return res.status(401).json({message:"Invalid Seller ID",data:newProduct.Seller.SellerID});
             
         }
-        catch {
-            return res.status(401).json({message:"Invalid ID Format",data:newProduct.Seller.SellerID});
+        catch(err) {
+            return res.status(401).json({message:"Invalid ID Format",Error:err.message,data:newProduct.Seller.SellerID});
         }
         
     }
