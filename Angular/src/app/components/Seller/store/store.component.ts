@@ -16,6 +16,7 @@ export class StoreComponent implements OnInit {
   CurrProducts:any=[];
   constructor(public catService:CategoryService,public proService:ProductService,private router:Router){
   }
+
   ProductClick(Product:any){
     this.router.navigateByUrl('ProductDetails/'+Product._id);
 
