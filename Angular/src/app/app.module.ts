@@ -11,7 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
 import { StoreComponent } from './components/Seller/store/store.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -25,10 +25,7 @@ import { CartComponent } from './components/cart/cart.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-
-
     AdminComponentComponent,
-
     ProductDetailsComponent,
     StoreComponent,
     CartComponent
