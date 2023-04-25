@@ -4,10 +4,10 @@ const ProductModel = require("../Models/ProductModel");
 const mongoose = require("mongoose");
 
 let AddNewCharity = async (req,res)=>{
-   
     
     let newCharity = req.body;
-    newCharity=new mongoose.Types.ObjectId(req.body);
+    newCharity=(req.body);
+    // newCharity=new mongoose.Types.ObjectId(req.body);
     let found = await CharityModel.findOne({name:newCharity.name}).exec();//found[true] || notFound[false]
     if(found) return res.status(401).json({message:"Charity Already Exist !!"});
 
@@ -43,6 +43,7 @@ let AddNewCharity = async (req,res)=>{
 
 }
 let GetCharityById = async (req,res)=>{
+    
     try{
         let getCharity = new mongoose.Types.ObjectId(req.params.id);//From Client
         let found = await CharityModel.findOne({_id:getCharity}).exec();//From DB [Encrypted]
