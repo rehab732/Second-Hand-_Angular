@@ -1,4 +1,7 @@
 const CustomerModel = require("../Models/CustomerModel");
+const ItemModel = require("../Models/ItemModel");
+const ProductModel = require("../Models/ProductModel");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const ItemModel = require("../Models/ItemModel");
@@ -6,6 +9,7 @@ const ProductModel = require("../Models/ProductModel");
 const jwt = require("jsonwebtoken");
 
 
+// tested
 let AddNewCustomer = async (req,res)=>{
   
     let newCus= req.body;
@@ -27,7 +31,7 @@ let AddNewCustomer = async (req,res)=>{
 
 }
 
-
+// tested
 let LoginCustomer = async (req,res)=>{
     //DB
     let logCustomer = req.body;//From Client
@@ -123,6 +127,18 @@ let AddItemToCart = async (req,res)=>{
     // }
 
     try{
+    let body= req.body;
+    let customerID = new mongoose.Types.ObjectId(req.params.id);
+    let found = await CustomerModel.findOne({_id:customerID}).exec();
+    if(!found) return res.status(401).json({message:"Invalid Customer id"});
+    
+    let productID = new mongoose.Types.ObjectId(body.product);
+    let foundProduct =await ProductModel.findOne({_id:productID}).exec();
+    if(!foundProduct) return res.status(401).json({message:"product not found"});
+    
+    found.Cart.items.push(body);
+    await found.save();
+    return res.status(201).json({message:"Item  Added To Cart Successfully",data:found});
         let body= req.body;
         let customerID = new mongoose.Types.ObjectId(req.params.id);
         let found = await CustomerModel.findOne({_id:customerID}).exec();

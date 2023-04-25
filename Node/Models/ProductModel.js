@@ -82,6 +82,10 @@ const productSchema =new  mongoose.Schema({
         default:false,
         required: [true, 'choose donation status.']
     },
+    Charity:{
+        type:String,
+        
+    },
     SoldQuantity: {
         type: Number,
         default:0,    
