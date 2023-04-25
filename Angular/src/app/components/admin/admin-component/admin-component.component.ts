@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminServiceService } from 'src/app/Services/admin-service.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class AdminComponentComponent implements OnInit {
 
   Products: any;
 
-  constructor(private adminSevice:AdminServiceService) { }
+  constructor(private adminSevice:AdminServiceService, private router:Router) { }
 
   ngOnInit(): void {
 
@@ -56,5 +57,9 @@ export class AdminComponentComponent implements OnInit {
       });
     //console.log(product)
     //call update function
+  }
+
+  detailsProduct(product:any){
+    this.router.navigateByUrl("ProductDetails/"+product._id);
   }
 }

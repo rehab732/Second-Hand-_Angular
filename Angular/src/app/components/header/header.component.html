@@ -16,9 +16,9 @@
           <li class="nav-item px-2"><a class="nav-link fw-medium" routerLink="cart" style="color:  #FE5000;">Cart</a></li>
         </ul>
         <form class="d-flex">
-          <a class=" feather feather-phone me-3 fs-0 fw-bold" routerLink="login" style="color: #64113F;">Login</a>
-          <a class=" feather feather-phone me-3 fs-0 fw-bold" routerLink="signup" style="color: #64113F;">Register</a>
-          <a class=" feather feather-phone me-3 fs-0 fw-bold" routerLink="login" style="color: #64113F;">LogOut</a>
+          <a *ngIf="!userToken" class=" feather feather-phone me-3 fs-0 fw-bold" routerLink="login" style="color: #64113F;">Login</a>
+          <a *ngIf="!userToken" class=" feather feather-phone me-3 fs-0 fw-bold" routerLink="signup" style="color: #64113F;">Register</a>
+          <a href="#" *ngIf="userToken" class=" feather feather-phone me-3 fs-0 fw-bold"  style="color: #64113F;" (click)="logOut()">LogOut</a>
         </form>
       </div>
     </div>

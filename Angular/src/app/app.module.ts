@@ -10,9 +10,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { RouterModule } from '@angular/router';
 
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
-import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { StoreComponent } from './components/Seller/store/store.component';
 import { CartComponent } from './components/cart/cart.component';
 
@@ -25,11 +26,14 @@ import { CartComponent } from './components/cart/cart.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
+
+
     AdminComponentComponent,
 
     ProductDetailsComponent,
     StoreComponent,
     CartComponent
+
 
   ],
   imports: [
@@ -37,7 +41,8 @@ import { CartComponent } from './components/cart/cart.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
