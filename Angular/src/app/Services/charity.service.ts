@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharityService {
+
 
   constructor(private readonly myClient: HttpClient) {}
 
@@ -33,5 +34,9 @@ export class CharityService {
   deleteCharity(Id:any){
     console.log("Charity add services");
     return this.myClient.delete(this.URL + "/By/Id/" +Id);
+
+  GetAllCharities() {
+    return this.httpclient.get<any> (this.URL);
+
   }
 }
