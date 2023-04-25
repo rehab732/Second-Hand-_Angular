@@ -14,7 +14,7 @@ export class CharityComponent implements OnInit {
   constructor(private charityService:CharityService, private router:Router) { }
 
   ngOnInit(): void {
-    this.charityService.GetCharities().subscribe(
+    this.charityService.GetAllCharities().subscribe(
       {
         next:(data:any)=>{
           this.Charities = data.data;

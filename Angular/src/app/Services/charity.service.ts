@@ -11,11 +11,7 @@ export class CharityService {
 
   private readonly URL = 'http://localhost:7010/api/Charities'; //API
 
-  GetCharities() {
-    console.log("all Charities --> charity service");
 
-    return this.myClient.get(this.URL);
-  }
 
   GetCharityById(id:any) {
     console.log("Charity details services");
@@ -34,9 +30,9 @@ export class CharityService {
   deleteCharity(Id:any){
     console.log("Charity add services");
     return this.myClient.delete(this.URL + "/By/Id/" +Id);
-
+  }
   GetAllCharities() {
-    return this.httpclient.get<any> (this.URL);
+    return this.myClient.get<any> (this.URL);
 
   }
 }
