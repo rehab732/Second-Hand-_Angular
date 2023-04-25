@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/Services/products.service';
 import { Router, RouterLink } from '@angular/router';
+import { CategoryService } from 'src/app/Services/category.service';
 
 @Component({
   selector: 'app-home',
@@ -9,29 +10,56 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private myService:ProductsService,private router:Router) {}
+  constructor(private catservice:CategoryService,private myService:ProductsService,private router:Router) {}
   products:any=[];
+  Categories:any=[];
+  CurrProducts:any=[];
+  SellerID:string="643f45fcbe67bc74a0ec1b44";
 
-  ngOnInit(): void {
-    this.myService.getAllProducts().subscribe(
-      {
-        next:(data)=>{
-          this.products=data;
-          console.log(data);
-        },
-        error:(data)=>{}
-      }
-    );
+  ClickCat(catname:any)
+  {
+    console.log(catname);
+    this.CurrProducts=this.products.filter((pro:any) =>
+    pro.Category==catname
+  );
 
-
-
+  }
+  ClickAll()
+  {
+    this.CurrProducts=this.products
   }
 
 
+  ngOnInit(): void {
 
-  GetDetails()
-  {
-   this.router.navigate(["/products/1"]);
+    this.catservice.GetAllCategories().subscribe(
+      {
+        next:(data:any)=>{
+          this.Categories=data["data"];
+           console.log(this.Categories);
+
+        },
+        error:(err)=>{
+          console.error(err)}
+      }
+    );
+
+    this.myService.GetAllProducts().subscribe(
+      {
+        next:(data:any)=>{
+          console.log(data);
+
+          this.products=data['data'];
+          this.products=this.products.filter((pro:any) =>
+          pro.Seller.SellerID!=this.SellerID);
+          this.CurrProducts=this.products;
+
+          console.log(this.products)
+        },
+        error:(data)=>{ console.log(data);}
+      }
+    )
+
   }
 
 }

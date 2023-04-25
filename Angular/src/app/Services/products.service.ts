@@ -8,17 +8,21 @@ export class ProductsService {
 
   constructor(private readonly myClient:HttpClient) { }
 
- private readonly URL="http://localhost:3000/products";
-  getAllProducts()
-  {
-    return this.myClient.get(this.URL);
-  }
+//  private readonly URL="http://localhost:3000/products";
 
-  getProductById(id:any)
+private readonly URL = 'http://localhost:7010/api/Products'; //API
+  // getAllProducts()
+  // {
+  //   return this.myClient.get(this.URL);
+  // }
+
+  GetProductById(id:any)
   {
     return this.myClient.get(this.URL+'/'+id);
 
   }
-
+  GetAllProducts() {
+    return this.myClient.get(this.URL);
+  }
 
 }

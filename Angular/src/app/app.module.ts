@@ -10,7 +10,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { RouterModule } from '@angular/router';
 
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
