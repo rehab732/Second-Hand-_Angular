@@ -1,11 +1,12 @@
 const CustomerModel = require("../Models/CustomerModel");
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
-const ItemModel = require("../Models/ItemModel");
 const ProductModel = require("../Models/ProductModel");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const ItemModel = require("../Models/ItemModel");
 const jwt = require("jsonwebtoken");
 
 
+// tested
 let AddNewCustomer = async (req,res)=>{
   
     let newCus= req.body;
@@ -27,7 +28,7 @@ let AddNewCustomer = async (req,res)=>{
 
 }
 
-
+// tested
 let LoginCustomer = async (req,res)=>{
     //DB
     let logCustomer = req.body;//From Client
