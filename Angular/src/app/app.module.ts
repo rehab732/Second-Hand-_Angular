@@ -21,6 +21,8 @@ import { AddCharityComponent } from './components/charity/add-charity/add-charit
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
 
 import { CartComponent } from './components/cart/cart.component';
+import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
+import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 
 
 
@@ -41,6 +43,8 @@ import { CartComponent } from './components/cart/cart.component';
     AddCharityComponent,
     CharityDetailsComponent,
     CartComponent,
+    UsersListComponentComponent,
+    UserDetailsComponent,
 
   ],
   imports: [
