@@ -14,6 +14,8 @@ import { CharityComponent } from './components/charity/charity.component';
 import { UpdateCharityComponent } from './components/charity/update-charity/update-charity.component';
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
+import { EditprofileComponent } from './components/Seller/editprofile/editprofile.component';
+import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
 
 
 
@@ -26,7 +28,6 @@ const routes: Routes = [
   {path:"products",component:HomeComponent},
   {path:"signup",component:RegisterComponent},
   {path:"login",component:LoginComponent},
-  {path:"",component:HomeComponent},
 
   {path:"Seller/AddProduct",component:SellerAddProductComponent},
 
@@ -35,12 +36,12 @@ const routes: Routes = [
 
 
   {path:"admin/pending", component:AdminComponentComponent},
-
+  {path:"admindashboard",component:AdmindashboardComponent},
   {path:"charity" , component:CharityComponent},
   {path:"charity-update/:id" , component:UpdateCharityComponent},
   {path:"charity-add" , component:AddCharityComponent},
   {path:"charity-details/:id" , component:CharityDetailsComponent},
-
+  {path:"editprofile",component:EditprofileComponent},
   {path:"cart",component:CartComponent},
 
 ];

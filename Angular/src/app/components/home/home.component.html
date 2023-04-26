@@ -30,13 +30,10 @@
                     data-bs-toggle="pill" data-bs-target="#products" type="button" role="tab"
                     aria-controls="pills-wtshirt" aria-selected="false" style="background-color: #64113F;"
                     (click)="ClickAll()">All Products</button></li>
-
                 <li *ngFor="let cat of Categories" class="nav-item" role="presentation"><button
                     (click)="ClickCat(cat.name)" class="nav-link" id="pills-wtshirt-tab" data-bs-toggle="pill"
                     data-bs-target="#products" type="button" role="tab" aria-controls="pills-wsunglasses"
                     aria-selected="false" style="color: #64113F;">{{cat.name}} </button></li>
-
-
               </ul>
             </nav>
 
