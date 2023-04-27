@@ -14,6 +14,8 @@ import { CharityComponent } from './components/charity/charity.component';
 import { UpdateCharityComponent } from './components/charity/update-charity/update-charity.component';
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
+import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
+import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 
 
 
@@ -35,6 +37,8 @@ const routes: Routes = [
 
 
   {path:"admin/pending", component:AdminComponentComponent},
+  {path:"admin/users", component:UsersListComponentComponent},
+  {path:"admin/users/:id", component:UserDetailsComponent},
 
   {path:"charity" , component:CharityComponent},
   {path:"charity-update/:id" , component:UpdateCharityComponent},

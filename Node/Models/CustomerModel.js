@@ -68,7 +68,10 @@ customerSchema = mongoose.Schema({
   Phone: String,
   Rating: Number,
   NuOfRatings: Number,
-  CanSellStatus: Boolean,
+  CanSellStatus: {
+    type:Boolean,
+    default:true
+  },
 });
 
 //3)Connect Schema With Collection
