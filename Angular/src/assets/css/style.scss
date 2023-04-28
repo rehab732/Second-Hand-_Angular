@@ -95,22 +95,22 @@ a:hover {
 	height: 30px;
 	padding: 0;
 	margin-bottom: 25px;
-	&::-webkit-input-placeholder { 
+	&::-webkit-input-placeholder {
 		font-size: 13px;
 		color: #333;
 		font-family: "Poppins-Regular";
 	}
-	&::-moz-placeholder { 
+	&::-moz-placeholder {
 		font-size: 13px;
 		color: #333;
 		font-family: "Poppins-Regular";
 	}
-	&:-ms-input-placeholder { 
+	&:-ms-input-placeholder {
 		font-size: 13px;
 		color: #333;
 		font-family: "Poppins-Regular";
 	}
-	&:-moz-placeholder { 
+	&:-moz-placeholder {
 		font-size: 13px;
 		color: #333;
 		font-family: "Poppins-Regular";
@@ -214,7 +214,7 @@ button {
     transform: translateX(0);
   }
 }
-@media (max-width: 1199px) { 
+@media (max-width: 1199px) {
 	.wrapper {
 		background-position: right center;
 	}
@@ -241,3 +241,8 @@ button {
 		margin-top: 60px;
 	}
 }
+
+
+
+
+

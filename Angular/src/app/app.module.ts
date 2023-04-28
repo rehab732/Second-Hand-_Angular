@@ -14,15 +14,16 @@ import { RouterModule } from '@angular/router';
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
 import { StoreComponent } from './components/Seller/store/store.component';
-
 import { CharityComponent } from './components/charity/charity.component';
 import { UpdateCharityComponent } from './components/charity/update-charity/update-charity.component';
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
-
 import { CartComponent } from './components/cart/cart.component';
+import { EditprofileComponent } from './components/Seller/editprofile/editprofile.component';
+import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
+
 
 
 
@@ -43,8 +44,11 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
     AddCharityComponent,
     CharityDetailsComponent,
     CartComponent,
+    EditprofileComponent,
+    AdmindashboardComponent,
     UsersListComponentComponent,
     UserDetailsComponent,
+
 
   ],
   imports: [
