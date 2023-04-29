@@ -23,6 +23,7 @@ import { CharityDetailsComponent } from './components/charity/charity-details/ch
 import { CartComponent } from './components/cart/cart.component';
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
+import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
 
 
 
@@ -45,6 +46,7 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
     CartComponent,
     UsersListComponentComponent,
     UserDetailsComponent,
+    OrderTrackingComponent,
 
   ],
   imports: [

@@ -16,6 +16,7 @@ import { AddCharityComponent } from './components/charity/add-charity/add-charit
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
+import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
 
 
 
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path:"charity-details/:id" , component:CharityDetailsComponent},
 
   {path:"cart",component:CartComponent},
+  {path:"buyer/orders",component:OrderTrackingComponent},
 
 ];
 
