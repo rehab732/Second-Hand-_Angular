@@ -1,0 +1,50 @@
+<!-- <p>order-tracking works!</p> -->
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Info</th>
+            <th>Status</th>
+            <th>Products</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of Orders">
+            <td>
+              <div>Ordered in: {{formatDate(o.RegistrationDate)}}</div>
+              <div *ngIf="o.Status == 'Shipped' || o.Status == 'Delivered'">Shipped in: {{formatDate(o.ShippingDate)}}</div>
+              <div *ngIf="o.Status == 'Delivered'">Arrival Date: {{formatDate(o.ArrivalDate)}}</div>
+              <div>Payment Method: {{o.PaymentMethod}}</div>
+              <div>Total Price: {{getOrderTotalPrice(o)}}</div>
+            </td>
+            <td>{{o.Status}}</td>
+            <td>
+              <table class="table text-center table-bordered table-info">
+                <tbody>
+                  <tr *ngFor="let item of o.orderItems">
+                    <div class="b border border-0">
+                      Name: {{(item.product.Name)}}
+                    </div>
+                    <div class="b border border-dark border-0">
+                      quantity: {{item.quantity}}
+                    </div>
+                    <div class="b border border-dark border-0">
+                      price: {{item.product.Price}}
+                    </div>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <!-- <td>
+             </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

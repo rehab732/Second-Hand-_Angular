@@ -15,7 +15,10 @@ export class CustomerService {
     console.log(customer);
     return this.myClient.post(this.URL + '/reg', customer);
   }
-
+  AddnewAddress(customer: any,customer_id:any) {
+    console.log(customer);
+    return this.myClient.post(this.URL + '/AddAddress/'+customer_id, customer);
+  }
   Customerlogin(customer: any) {
     console.log(customer);
     return this.myClient.post(this.URL + '/login', customer);
@@ -46,8 +49,8 @@ export class CustomerService {
   getAllUsers(){
     return this.myClient.get(this.URL);
   }
-  updateCustomer(user:any){
-    return this.myClient.post(this.URL + "/UpdateCustomer/" + user._id , user);
+  updateCustomer(customer:any,customer_id:any){
+    return this.myClient.post(this.URL + "/UpdateCustomer/" + customer_id , customer);
   }
   getCustumerById(_id:any){
     return this.myClient.get(this.URL + "/GetCustomerByID/" + _id);

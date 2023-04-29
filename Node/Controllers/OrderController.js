@@ -41,6 +41,47 @@ let GetAllOrders = async (req,res)=>{
      if(!allOrders||allOrders.length==0) 
         return res.status(401).json({message:"No Orders found"});
      res.status(200).json({message:"Orders found",data:allOrders})
+}
+
+// //get all orders of certain user
+// let GetBuyerOrders = async (req,res)=>{
+//     let buyerId = new mongoose.Types.ObjectId(req.params.id);//From Client
+//         //console.log(getOrder)
+//     let allOrders = await OrderModel.find({buyer:buyerId}).populate({
+//         path:"orderItems.product",
+//         strictPopulate: false 
+    
+//     }).exec();//From DB [Encrypted]
+//      if(!allOrders)//||allOrders.length==0) 
+//         return res.status(401).json({message:"No Orders found"});
+//      res.status(200).json({message:"Orders found",data:allOrders})
+ 
+ 
+// }
+
+//get all orders of certain user
+let GetBuyerOrders = async (req,res)=>{
+    let buyerId = new mongoose.Types.ObjectId(req.params.id);//From Client
+        //console.log(getOrder)
+    let find ={ $and:[
+        {buyer:buyerId},
+        {$or: [
+             {ShippingDate:{$gt:Date('2022-04-29T10:37:41.356+00:00')}} ,
+             {ShippingDate:{ $exists: false }},
+            //  {RegistrationDate:{ $exists: true }},
+            ],
+        },],
+    };
+    let allOrders = await OrderModel.find({
+         buyer:buyerId
+    }).populate({
+        path:"orderItems.product",
+        strictPopulate: false 
+    
+    }).exec();//From DB [Encrypted]
+     if(!allOrders)//||allOrders.length==0) 
+        return res.status(401).json({message:"No Orders found"});
+     res.status(200).json({message:"Orders found",data:allOrders})
  
  
 }
@@ -69,5 +110,6 @@ module.exports = {
     AddNewOrder,
     GetOrderById,
     GetAllOrders,
-    // updateOrderStatus
+    // updateOrderStatus,
+    GetBuyerOrders,
 }
