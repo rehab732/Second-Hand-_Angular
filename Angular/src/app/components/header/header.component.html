@@ -4,12 +4,16 @@
         <img class="d-inline-block logoimg" src="assets/img/logo2.png"  alt="logo" />
         <span class=" fs-0 fw-bold ms-2 mt-3 align-items-baseline" style="color: #64113F;">Second Hand</span>
       </a>
-      <div class=" navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-        <ul class=" me-auto mb-2 mb-lg-0">
-          <li class="nav-item px-2" ><a *ngIf="!userToken" routerLink="signup">Register</a></li>
-          <li class="nav-item px-2" ><a *ngIf="!userToken" routerLink="login">Login</a></li>
-          <li  class="nav-item px-2" ><a *ngIf="userToken" routerLink="cart">MyCart</a></li>
-          <li  class="nav-item px-2" ><a *ngIf="userToken" routerLink="store">My Store</a></li>
+
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#All"style="color: #64113F;">All Products</a></li>
+          <li *ngIf="userToken"  class="nav-item px-2"><a class="nav-link fw-medium" routerLink="store/{{userId}}" style="color: #64113F;">My Store!</a></li>
+          <li class="nav-item px-2"><a class="nav-link fw-medium" routerLink="cart" style="color:  #FE5000;">Cart</a></li>
+
         </ul>
         <div  class="dropdown nav-item" *ngIf="userToken">
           <img src="assets/img/user.png" class="user-pic dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
