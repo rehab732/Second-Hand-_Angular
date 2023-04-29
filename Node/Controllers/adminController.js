@@ -19,7 +19,7 @@ let AddNewAdmin = async (req,res)=>{
     let newAdmin = new AdminModel(newAd);
     await newAdmin.save();
 
-    var token = jwt.sign({adminId: newAdmin._id}, process.env.JWTSecret);
+    var token = jwt.sign({adminId: newAdmin._id, isAdmin:true}, process.env.JWTSecret);
 
 
     return res.status(201).json({message:"Admin Added Successfully",data:{newAdmin, token:token}});
@@ -37,7 +37,7 @@ let LoginAdmin = async (req,res)=>{
     let checkPass = bcrypt.compareSync(logAdmin.Password, foundAdmin.Password);//true | false
     if(!checkPass) return res.status(401).json({message:"Invalid  Password"});
 
-    var token = jwt.sign({adminId: foundAdmin._id}, process.env.JWTSecret);
+    var token = jwt.sign({adminId: foundAdmin._id, isAdmin:true}, process.env.JWTSecret);
 
     res.status(200).json({message:"Logged-In Successfully", data:{token:token}})
 

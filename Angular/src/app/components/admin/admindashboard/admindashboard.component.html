@@ -37,13 +37,13 @@
         </a>
         <span class="tooltip">Charites</span>
       </li>
-      <li>
+      <!-- <li>
         <a (click)="currentpage=4">
           <i class="bx bx-cart-alt"></i>
           <span class="link_name">Order</span>
         </a>
         <span class="tooltip">Order</span>
-      </li>
+      </li> -->
       <li>
         <a>
           <i class="bx bx-log-out"></i>
@@ -55,10 +55,9 @@
   </div>
 
   <section class="home-section" style="background-color: #e4e9f7;">
-    <app-admin-component *ngIf="currentpage==1"></app-admin-component>
+    <app-admin-component *ngIf="currentpage == 1"></app-admin-component>
     <app-users-list-component *ngIf="currentpage==2"></app-users-list-component>
     <app-charity *ngIf="currentpage==3"></app-charity>
-
   </section>
 
 </body>
