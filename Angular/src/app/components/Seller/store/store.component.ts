@@ -1,7 +1,9 @@
-import { Component,EventEmitter, OnInit,Output } from '@angular/core';
+import { Component,EventEmitter, OnInit,Output,Input } from '@angular/core';
 import { CategoryService } from '../../../Services/category.service';
 import { ProductService } from '../../../Services/Product.service';
-import { Router, RouterLink,RouterModule } from '@angular/router';
+import { Router,ActivatedRoute,RouterModule } from '@angular/router';
+import jwt from 'jwt-decode';
+
 
 
 @Component({
@@ -14,9 +16,15 @@ export class StoreComponent implements OnInit {
   Categories:[]=[];
   Products:any=[];
   CurrProducts:any=[];
+  userId:any;
+  userToken: string | null = null;
+  //"643f45fcbe67bc74a0ec1b44"
+  Sellerid:any;
   // @Output("ProdDetails") myEvent = new EventEmitter();
+  //@Input('master') masterName = '';
 
-  constructor(public catService:CategoryService,public proService:ProductService,private router:Router){
+
+  constructor(public catService:CategoryService,public proService:ProductService,private router:Router,private route: ActivatedRoute){
   }
 
   ProductClick(Product:any){
@@ -24,6 +32,8 @@ export class StoreComponent implements OnInit {
     this.router.navigateByUrl('ProductDetails/'+Product._id);
 
   }
+
+  //#region Filters
   FilterAllProducts(){
     this.CurrProducts=this.Products;
   }
@@ -46,7 +56,33 @@ export class StoreComponent implements OnInit {
 
   );
  }
-  ngOnInit(): void {
+ //#endregion
+
+
+ ngOnInit(): void {
+    //get current user id
+    this.userToken = localStorage.getItem("UserToken");
+    if(this.userToken){
+
+      this.userId = (jwt(this.userToken) as any).customerId;
+    }
+    //get seller id
+    this.route.queryParams.subscribe(params => {
+      let data=this.route.snapshot.paramMap.get('id');
+      if(data != null){
+        this.Sellerid=data;
+
+      }
+      else{
+        this.Sellerid="643f45fcbe67bc74a0ec1b44";
+      }
+
+      console.log("Seller",this.Sellerid,"User",this.userId);
+
+    });
+
+
+
     this.catService.GetAllCategories().subscribe(
       {
         next:(data:any)=>{
@@ -58,20 +94,27 @@ export class StoreComponent implements OnInit {
           console.error(err)}
       }
     );
-    this.proService.GetAllProducts().subscribe(
-      {
-        next:(data:any)=>{
-          console.log(data);
-        },
-        error:(data)=>{ console.log(data);}
-      }
-    )
+    // this.proService.GetAllProducts().subscribe(
+    //   {
+    //     next:(data:any)=>{
+    //       console.log(data);
+    //     },
+    //     error:(data)=>{ console.log(data);}
+    //   }
+    // )
 
-    this.proService.GetSellerProducts("643f45fcbe67bc74a0ec1b44").subscribe(
+    this.proService.GetSellerProducts(this.Sellerid).subscribe(
       {
         next:(data:any)=>{
+
           this.Products=data['data'];
-          this.CurrProducts=data['data'];
+
+          if(this.Sellerid !=this.userId){
+            this.Products= this.Products.filter((pro:any) =>
+            pro.Status=="Approved"
+
+            );}
+          this.CurrProducts=this.Products;
           console.log(this.Products);
         },
         error:(data)=>{ console.log(data);}
