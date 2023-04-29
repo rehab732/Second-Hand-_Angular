@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../Services/Customers.service';
 import { OrderService } from 'src/app/Services/order.service';
+import { Router } from '@angular/router';
 import jwt from 'jwt-decode';
 @Component({
   selector: 'app-cart',
@@ -12,14 +13,14 @@ export class CartComponent implements OnInit {
   CartProducts:any=[];
   ItemsPrice:number=0;
   ShippingPrice:number=40;
-  CustomerId:string="643f45fcbe67bc74a0ec1b44";
   customer:any;
   currentAddress:any;
-  constructor(private customerService:CustomerService,
-    private orderService:OrderService) { }
-  //CustomerId:string="643f45fcbe67bc74a0ec1b44";
+  SelectedAddress:any;
   userToken: string | null = null;
   userId:any;
+
+  constructor(private customerService:CustomerService,
+    private orderService:OrderService,private router:Router) { }
 
   CalculatePrice(){
     this.ItemsPrice=0;
@@ -103,7 +104,7 @@ export class CartComponent implements OnInit {
 
   GetCustomer()
   {
-    this.customerService.GetCustomerDetails(this.CustomerId).subscribe(
+    this.customerService.GetCustomerDetails(this.userId).subscribe(
       {
         next:(data:any)=>{
          this.customer=data.data;
@@ -119,8 +120,9 @@ export class CartComponent implements OnInit {
   ////order
   ShowOrderDetails()
   {
-     this.checkout = true;
-     this.GetCustomer();
+    this.router.navigate(['payment']);
+    //  this.checkout = true;
+    //  this.GetCustomer();
   }
 
 
@@ -129,14 +131,23 @@ export class CartComponent implements OnInit {
     this.currentAddress=value;
   }
 
-  OrderNow()
+  OrderNow(payMethod:any)
   {
-    let order = {
-      "ShippingDate":"12.10.2020 - 14.10.2020" ,
-      "orderItems": this.CartProducts,
-      "buyer": this.CustomerId
+    if(payMethod=="Stripe"){
+
     }
-    this.AddNewOrder(order);
+    else{
+      let order = {
+        //"ShippingDate":"12.10.2020 - 14.10.2020" ,
+        "orderItems": this.CartProducts,
+        "buyer": this.userId,
+        "TotalPrice": this.ItemsPrice+this.ShippingPrice,
+        "Address":this.SelectedAddress,
+        "PaymentMethod":"Cash"
+      }
+      this.AddNewOrder(order);
+    }
+
   }
   AddNewOrder(order:any)
   {

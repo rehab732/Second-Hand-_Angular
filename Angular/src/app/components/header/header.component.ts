@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     if(this.userToken){
 
       this.userId = (jwt(this.userToken) as any).customerId;
-      console.log( (jwt(this.userToken) as any).customerId);
+      console.log( this.userId);
     }
   }
 
