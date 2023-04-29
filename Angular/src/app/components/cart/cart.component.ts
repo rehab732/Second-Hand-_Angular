@@ -20,7 +20,6 @@ export class CartComponent implements OnInit {
   //CustomerId:string="643f45fcbe67bc74a0ec1b44";
   userToken: string | null = null;
   userId:any;
-  constructor(private customerService:CustomerService) { }
 
   CalculatePrice(){
     this.ItemsPrice=0;
