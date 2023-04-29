@@ -16,6 +16,11 @@ export class CartComponent implements OnInit {
   CustomerId:string="643f45fcbe67bc74a0ec1b44";
   customer:any;
   currentAddress:any;
+  //CustomerId:string="643f45fcbe67bc74a0ec1b44";
+  userToken: string | null = null;
+  userId:any;
+
+
   constructor(private customerService:CustomerService,
     private orderService:OrderService) { }
 
@@ -61,7 +66,7 @@ export class CartComponent implements OnInit {
 
   GetCustomer()
   {
-    this.customerService.GetCustomerDetails(this.CustomerId).subscribe(
+    this.customerService.GetCustomerDetails(this.userId).subscribe(
       {
         next:(data:any)=>{
          this.customer=data.data;
@@ -92,7 +97,7 @@ export class CartComponent implements OnInit {
     let order = {
       "ShippingDate":"12.10.2020 - 14.10.2020" ,
       "orderItems": this.CartProducts,
-      "buyer": this.CustomerId
+      "buyer": this.userId
     }
     this.AddNewOrder(order);
   }

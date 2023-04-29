@@ -173,13 +173,17 @@
 
               </div>
 
+              <div style="color: red;">{{maxLengthWarn}}</div>
 
+
+              <div *ngIf="!validData" style="color: red;">You Should Enter All Data and at Least One Image </div>
 
 
           <div class="col-12">
             <!-- <button type="button" class="btn btn-primary btn-block text-uppercase">Add Product Now</button> -->
             <input type="button" value="Edit Product" (click)="EditProduct()" class="btn btn-primary btn-block text-uppercase"/>
           </div>
+          <div style="color: red">{{productAdded}}</div>
         </form>
         </div>
       </div>

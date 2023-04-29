@@ -3,9 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-
 import { SellerAddProductComponent } from './components/Seller/seller-add-product/seller-add-product.component';
-
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { StoreComponent } from './components/Seller/store/store.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -23,32 +21,22 @@ import { MakeOrderComponent } from './components/Order/make-order/make-order.com
 
 
 const routes: Routes = [
-
-  {path:"",component:HomeComponent},
   {path:"products",component:HomeComponent},
   {path:"signup",component:RegisterComponent},
   {path:"login",component:LoginComponent},
   {path:"",component:HomeComponent},
-
   {path:"Seller/AddProduct",component:SellerAddProductComponent},
   {path:"Seller/EditProduct/:id",component:SellerEditProductComponent},
-
   {path:"ProductDetails/:id", component:ProductDetailsComponent},
   {path:"store",component:StoreComponent},
-
-
   {path:"admin/pending", component:AdminComponentComponent},
-
   {path:"charity" , component:CharityComponent},
   {path:"charity-update/:id" , component:UpdateCharityComponent},
   {path:"charity-add" , component:AddCharityComponent},
   {path:"charity-details/:id" , component:CharityDetailsComponent},
-
   {path:"cart",component:CartComponent},
-
+  {path:"payment", component: PaymentComponent},
   {path:"cart/order",component:MakeOrderComponent}
-
-
 ];
 
 @NgModule({

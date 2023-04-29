@@ -25,6 +25,11 @@ export class SellerAddProductComponent implements OnInit {
 
   images=new Array<string>(6);
   imageIndx=0;
+  validData = true;
+
+  maxLengthWarn = "";
+  productAdded = "";
+
 
   constructor(private sellerService: SellerService , private categoryService:CategoryServiceService,
     private charityService:CharityService)
@@ -77,6 +82,10 @@ export class SellerAddProductComponent implements OnInit {
     this.images[this.imageIndx]=file.target.files[0].name; //= file.target.files[0].name;
     this.imageIndx++;
     }
+    else
+    {
+      this.maxLengthWarn = "Max Number of photos Allowed Are 6 only";
+    }
   }
 
   // RemoveImage(i:any)
@@ -112,20 +121,28 @@ export class SellerAddProductComponent implements OnInit {
        "Charity":this.productCharity,
        "Seller":{"SellerID":"643f45fcbe67bc74a0ec1b44"}
   }
-    console.log(product);
-    // this.sellerService.AddProduct(product).subscribe(data => console.log('success', data), error => console.log('error', error));
-    // console.log("Product Added");
+   // console.log(product);
+    if(this.productName == "" || this.productColor == "" || this.productDescription ==""||
+    this.productQuantity == "" || this.productPrice==""|| this.imageIndx==0)
+    {
+        this.validData=false;
+    }
+    else
+    {
+      this.validData = true;
 
     this.sellerService.AddProduct(product).subscribe(
       {
         next:(data)=>{
-          console.log('success', data);
+          this.productAdded = "Product Added";
+
         },
         error:(err)=>{
           console.error("errrrrrrrrrrrrror");
           console.error(err)}
       }
     );
+    }
   }
 
 }
