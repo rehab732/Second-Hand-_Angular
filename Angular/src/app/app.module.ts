@@ -22,6 +22,10 @@ import { CartComponent } from './components/cart/cart.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
+import { EditprofileComponent } from './components/Seller/editprofile/editprofile.component';
+import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
+import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
+import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 
 
 @NgModule({
@@ -42,6 +46,11 @@ import { environment } from '../environments/environment';
     CharityDetailsComponent,
     CartComponent,
     PaymentComponent,
+    EditprofileComponent,
+    AdmindashboardComponent,
+    UsersListComponentComponent,
+    UserDetailsComponent,
+
   ],
   imports: [
     BrowserModule,

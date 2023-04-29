@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import jwt from 'jwt-decode';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   userToken: string | null = null;
+  userId:any;
   constructor() { }
 
   ngOnInit(): void {
     this.userToken = localStorage.getItem("UserToken");
+    if(this.userToken){
+
+      this.userId = (jwt(this.userToken) as any).customerId;
+      console.log( (jwt(this.userToken) as any).customerId);
+    }
   }
 
   logOut(){
