@@ -29,7 +29,7 @@ export class UserDetailsComponent implements OnInit {
   ban(user:any){
     console.log("Banned!")
     user.CanSellStatus = false;
-    this.customerService.updateCustomer(user).subscribe({
+    this.customerService.updateCustomer(user,this.Id).subscribe({
       next:(data)=>{
         console.log(data)
       },
@@ -41,7 +41,7 @@ export class UserDetailsComponent implements OnInit {
   removeBan(user:any){
     console.log("ban removede!")
     user.CanSellStatus = true;
-    this.customerService.updateCustomer(user).subscribe({
+    this.customerService.updateCustomer(user,this.Id).subscribe({
       next:(data)=>{
         console.log(data)
       },
