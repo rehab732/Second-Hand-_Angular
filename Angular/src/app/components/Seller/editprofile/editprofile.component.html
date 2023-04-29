@@ -1,42 +1,81 @@
 <div class="container rounded bg-white mt-5 mb-5">
   <div class="row">
-      <div class="col-md-3 border-right">
-          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
-      </div>
-      <div class="col-md-5 border-right">
-          <div class="p-3 py-5">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4 class="text-right">Profile Settings</h4>
-              </div>
-              <div class="row mt-2">
-                  <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                  <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
-              </div>
-              <div class="row mt-3">
-                  <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                  <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
-                  <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                  <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                  <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                  <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                  <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                  <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div>
-              </div>
-              <div class="row mt-3">
-                  <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                  <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-              </div>
-              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+          width="150px" src="https://thumbs.dreamstime.com/b/cat-avatar-illustration-cartoon-45383590.jpg"><span
+          class="font-weight-bold">{{customerdetails.Name}}</span><span> </span></div>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Edit Profile</h4>
+        </div>
+        <div class="row mt-3" *ngIf="customerdetails">
+          <div class="col-md-12"><label class="labels">User Name</label><input #name type="text" class="form-control"
+              placeholder="enter User Name" value="{{customerdetails.Name}}"></div>
+          <div class="col-md-12"><label class="labels">Mobile Number</label><input #phone type="text"
+              class="form-control" placeholder="enter phone number" value="{{customerdetails.Phone}}"></div>
+          <div class="col-md-12"><label class="labels">Email</label><input #email type="email" class="form-control"
+              placeholder="enter email Address" value="{{customerdetails.Email}}"></div>
+          <!-- <div class="col-md-12"><label class="labels">Passowrd</label><input #pass type="password" class="form-control"
+              placeholder="enter your Passowrd" value=""></div> -->
+          <div class="col-md-12"><label class="labels">Date Of Birth</label><input #dofb type="date"
+              class="form-control" placeholder="enter date of birth" value="{{customerdetails.DateOfBirth}}"></div>
+          <hr class="col-md-12">
+          <h4 class="text-right">Adress Details</h4>
+
+          <div *ngFor="let item of customerdetails.Addresses" >
+          <div class="row mt-3">
+            <div class="col-md-6"><label class="labels">Apartment Number</label><input type="text" class="form-control"
+                placeholder="Apartment Number" value="{{item.ApartmentNumber}}"></div>
+            <div class="col-md-6"><label class="labels">Floor Number</label><input type="text" class="form-control"
+                value="{{item.FloorNumber}}" placeholder="Floor Number"></div>
           </div>
-      </div>
-      <div class="col-md-4">
-          <div class="p-3 py-5">
-              <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
-              <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
-              <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+          <div class="row mt-3">
+            <div class="col-md-6"><label class="labels">Street</label><input type="text" class="form-control"
+                placeholder="Street" value="{{item.Street}}"></div>
+            <div class="col-md-6"><label class="labels">Zone</label><input type="text" class="form-control" value="{{item.Zone}}"
+                placeholder="Zone"></div>
           </div>
+          <div class="row mt-3">
+            <div class="col-md-6"><label class="labels">City</label><input type="text" class="form-control"
+                placeholder="City" value="{{item.City}}"></div>
+            <div class="col-md-6"><label class="labels">Government</label><input type="text" class="form-control"
+                value="{{item.Governorate}}" placeholder="Government"></div>
+          </div>
+          <hr>
+        </div>
+        <div class="mt-5 text-center"><button (click)="showDetails()" class="btn btn-primary profile-button" type="button">Add Address</button>
+
+          <div *ngIf="showDetailsFlag">
+            <div class="row mt-3">
+              <div class="col-md-6"><label class="labels">Apartment Number</label><input #Apart type="text" class="form-control"
+                  placeholder="Apartment Number" value=""></div>
+              <div class="col-md-6"><label class="labels">Floor Number</label><input #Floor type="text" class="form-control"
+                  value="" placeholder="Floor Number"></div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-6"><label class="labels">Street</label><input #Street type="text" class="form-control"
+                  placeholder="Street" value=""></div>
+              <div class="col-md-6"><label class="labels">Zone</label><input #Zone type="text" class="form-control" value=""
+                  placeholder="Zone"></div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-6"><label class="labels">City</label><input #City type="text" class="form-control"
+                  placeholder="City" value=""></div>
+              <div class="col-md-6"><label class="labels">Government</label><input #Gover type="text" class="form-control"
+                  value="" placeholder="Government"></div>
+                  <div class="mt-5 text-center">
+
+                    <button (click)="Add(Apart.value,Floor.value,Street.value,Zone.value,City.value,Gover.value)"  class="btn btn-primary profile-button" type="button">Add </button>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 text-center"><button  (click)="Edit(name.value,phone.value,email.value,dofb.value)" class="btn btn-primary profile-button" type="button">Edit Profile</button>
+        </div>
       </div>
+    </div>
   </div>
 </div>
-<!-- </div> -->
-<!-- </div> -->
