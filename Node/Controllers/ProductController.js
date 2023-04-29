@@ -160,6 +160,7 @@ let UpdateProduct = async (req,res)=>{
         found.Color=UpdatedProduct.Color;
         found.Category=UpdatedProduct.Category;
         found.Status = UpdatedProduct.Status;
+        found.Images = UpdatedProduct.Images;
 
         await found.save();
         console.log("saved")

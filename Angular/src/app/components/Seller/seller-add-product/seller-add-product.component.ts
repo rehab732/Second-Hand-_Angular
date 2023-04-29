@@ -17,12 +17,14 @@ export class SellerAddProductComponent implements OnInit {
   productDescription="";
   productQuantity="";
   productColor="";
-  productImage="";
+
   productCharity="";
   categories :any;
   charities :any;
   isDonated = false;
 
+  images=new Array<string>(6);
+  imageIndx=0;
 
   constructor(private sellerService: SellerService , private categoryService:CategoryServiceService,
     private charityService:CharityService)
@@ -65,12 +67,22 @@ export class SellerAddProductComponent implements OnInit {
   ngOnInit(): void {
     this.GetAllCategories();
     this.GetAllCharities();
+    //this.images[this.imageIndx] = "cat.jpg";
   }
 
   onFileSelected(file:any)
   {
-    this.productImage= file.target.files[0].name;
+    if(this.imageIndx< 6)
+    {
+    this.images[this.imageIndx]=file.target.files[0].name; //= file.target.files[0].name;
+    this.imageIndx++;
+    }
   }
+
+  // RemoveImage(i:any)
+  // {
+  //   this.images[i] ="";
+  // }
 
   onSelectionCategoryChange(value:string){
     this.productCategory=value;
@@ -93,7 +105,7 @@ export class SellerAddProductComponent implements OnInit {
        "Description": this.productDescription,
        "Price":+this.productPrice,
        "AvailableQuantity":+this.productQuantity,
-       "Images": this.productImage,
+       "Images": this.images,
        "Color": this.productColor,
        "Category":this.productCategory,
        "Donate":this.isDonated,
