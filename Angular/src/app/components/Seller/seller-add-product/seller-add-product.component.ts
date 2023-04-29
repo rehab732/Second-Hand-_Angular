@@ -18,7 +18,7 @@ export class SellerAddProductComponent implements OnInit {
   productDescription="";
   productQuantity="";
   productColor="";
-  productImage="";
+
   productCharity="";
   categories :any;
   charities :any;
@@ -26,6 +26,8 @@ export class SellerAddProductComponent implements OnInit {
   userId:any;
   userToken: string | null = null;
 
+  images=new Array<string>(6);
+  imageIndx=0;
 
   constructor(private sellerService: SellerService , private categoryService:CategoryServiceService,
     private charityService:CharityService)
@@ -67,6 +69,7 @@ export class SellerAddProductComponent implements OnInit {
     this.GetSeller();
     this.GetAllCategories();
     this.GetAllCharities();
+    //this.images[this.imageIndx] = "cat.jpg";
   }
   GetSeller(){
     this.userToken = localStorage.getItem("UserToken");
@@ -77,8 +80,17 @@ export class SellerAddProductComponent implements OnInit {
 
   onFileSelected(file:any)
   {
-    this.productImage= file.target.files[0].name;
+    if(this.imageIndx< 6)
+    {
+    this.images[this.imageIndx]=file.target.files[0].name; //= file.target.files[0].name;
+    this.imageIndx++;
+    }
   }
+
+  // RemoveImage(i:any)
+  // {
+  //   this.images[i] ="";
+  // }
 
   onSelectionCategoryChange(value:string){
     this.productCategory=value;
@@ -101,7 +113,7 @@ export class SellerAddProductComponent implements OnInit {
        "Description": this.productDescription,
        "Price":+this.productPrice,
        "AvailableQuantity":+this.productQuantity,
-       "Images": this.productImage,
+       "Images": this.images,
        "Color": this.productColor,
        "Category":this.productCategory,
        "Donate":this.isDonated,

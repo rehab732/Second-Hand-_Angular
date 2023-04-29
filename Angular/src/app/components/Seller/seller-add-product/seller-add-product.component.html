@@ -10,7 +10,7 @@
               </div>
             </div>
             <div class="row tm-edit-product-row">
-              <div class="col-xl-6 col-lg-6 col-md-12">
+              <div class="col-xl-12 col-lg-12 col-md-12">
                 <form action="" class="tm-edit-product-form">
                   <div class="form-group mb-3">
                     <label
@@ -60,20 +60,20 @@
                   </div>
 
                   <div class="row">
-                      <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="publish-Date"
-                            >Publish Date
-                          </label>
-                          <input
-                            id="expire_date"
-                            name="expire_date"
-                            type="text"
-                            class="form-control validate"
-                            data-large-mode="true"
-
-                          />
-                        </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label
+                        for="color"
+                        >Color
+                      </label>
+                      <input
+                        id="color"
+                        name="color"
+                        type="text"
+                        class="form-control validate"
+                        data-large-mode="true"
+                        [(ngModel)]= "productColor"
+                      />
+                    </div>
                         <div class="form-group mb-3 col-xs-12 col-sm-6">
                           <label
                             for="stock"
@@ -107,20 +107,7 @@
                       </div>
 
 
-                      <div class="form-group mb-3 col-xs-12 col-sm-6">
-                        <label
-                          for="color"
-                          >Color
-                        </label>
-                        <input
-                          id="color"
-                          name="color"
-                          type="text"
-                          class="form-control validate"
-                          data-large-mode="true"
-                          [(ngModel)]= "productColor"
-                        />
-                      </div>
+
                 </div>
 
                 <div>
@@ -151,7 +138,7 @@
                   </div>
 
 
-              <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+              <!-- <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                 <div class="tm-product-img-dummy mx-auto">
                   <i
                     class="fas fa-cloud-upload-alt tm-upload-icon"
@@ -167,6 +154,42 @@
                     onclick="document.getElementById('fileInput').click();"
                   />
                 </div>
+              </div> -->
+
+
+              <div class="row p-5">
+
+
+                <div class="col-lg-4 col-sm-4 p-3"
+
+                 *ngFor="let i of images"
+                 >
+
+                 <div *ngIf="i">
+                  <img  class="productImage" src="assets/img/{{i}}" />
+                 </div>
+
+                 <!-- <div *ngIf="i" class="text-center">
+                  <input id="fileInput" type="file" style="display:none;" (change)="onFileSelected($event)"/>
+                  <input
+                  type="button"
+                  class="btn btn-primary btn-block mx-auto"
+                  value="REMOVE IMAGE"
+                  (click)="RemoveImage(i)"
+                />
+                  </div> -->
+                </div>
+
+                <div class="text-center">
+                  <input id="fileInput" type="file" style="display:none;" (change)="onFileSelected($event)"/>
+                  <input
+                  type="button"
+                  class="btn btn-primary btn-block mx-auto"
+                  value="UPLOAD IMAGE"
+                  onclick="document.getElementById('fileInput').click();"
+                />
+                  </div>
+
               </div>
 
 

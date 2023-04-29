@@ -19,12 +19,15 @@ import { UpdateCharityComponent } from './components/charity/update-charity/upda
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
 import { CartComponent } from './components/cart/cart.component';
+import { SellerEditProductComponent } from './components/Seller/seller-edit-product/seller-edit-product.component';
+import { MakeOrderComponent } from './components/Order/make-order/make-order.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from '../environments/environment';
 import { EditprofileComponent } from './components/Seller/editprofile/editprofile.component';
 import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
-
-
 
 
 @NgModule({
@@ -44,12 +47,13 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
     AddCharityComponent,
     CharityDetailsComponent,
     CartComponent,
+    SellerEditProductComponent,
+    MakeOrderComponent,
+    PaymentComponent,
     EditprofileComponent,
     AdmindashboardComponent,
     UsersListComponentComponent,
     UserDetailsComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,8 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    NgxStripeModule.forRoot(environment.stripe.publicKey)
   ],
   providers: [],
   bootstrap: [AppComponent]
