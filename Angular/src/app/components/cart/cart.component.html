@@ -72,8 +72,8 @@
           <div class="card-body">
             <p><strong>We accept</strong></p>
             <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-              alt="Visa" />
+              src="assets/img/icons/stripe.jpeg"
+              alt="Stripe" />
           </div>
         </div>
       </div>
@@ -123,9 +123,8 @@
         <div class="form-group mb-3"  >
           <label
             for="address"
-            >Address</label
+            >Address &nbsp; </label >
 
-          >
           <select #address *ngIf="customer"
             class="custom-select tm-select-accounts"
             id="address"
@@ -139,24 +138,17 @@
         </div>
 
         <div class="form-group mb-3"  >
-          <label
-            for="method"
-            >Payment Method</label
-
-          >
-          <select #method
-            class="custom-select tm-select-accounts"
-            id="method"
-
-          >
-          <option default>Pick a payement method</option>
-          <option>Cash</option>
-          <option>Visa</option>
-          </select>
+          <label for="method">Payment Method   &nbsp; </label>
+            <select #method
+              class="custom-select tm-select-accounts"
+              id="method">
+              <option value="Cash">Cash</option>
+              <option value="Stripe">Stripe</option>
+            </select>
         </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block" (click)="OrderNow()">
-          Order Now
-         </button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="OrderNow(method.value)">
+            Order Now
+          </button>
         </div>
 
     </div>
