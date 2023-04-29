@@ -41,7 +41,7 @@ let LoginCustomer = async (req,res)=>{
 
     var token = jwt.sign({customerId: foundCustomer._id}, process.env.JWTSecret);
     //res.header("x-auth-token",token);
-
+    
     res.status(200).json({message:"Logged-In Successfully", data:{token:token}})
 
 }

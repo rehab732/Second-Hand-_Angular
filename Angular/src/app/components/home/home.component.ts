@@ -3,6 +3,7 @@ import { ProductsService } from 'src/app/Services/products.service';
 import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from 'src/app/Services/category.service';
 import { CustomerService } from 'src/app/Services/Customers.service';
+import jwt from 'jwt-decode';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,13 @@ export class HomeComponent implements OnInit {
   products:any=[];
   Categories:any=[];
   CurrProducts:any=[];
-  CustomerID:string="643f45fcbe67bc74a0ec1b44";
+  //CustomerID:string="643f45fcbe67bc74a0ec1b44";
+  userToken: string | null = null;
+  userId:any;
 
+  ClickDetails(Product:any){
+    this.router.navigate(['Seller/ProductDetails/'+Product._id]);
+  }
   ClickCat(catname:any)
   {
     console.log(catname);
@@ -34,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   AddItemToCart(id:any){
     var item={product:id, quantity:1};
-    this.CustService.AddItemToCart(this.CustomerID,item).subscribe({
+    this.CustService.AddItemToCart(this.userId,item).subscribe({
       next:(data:any)=>{
         console.log(data);
       },
@@ -45,6 +51,12 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
 
+    this.userToken = localStorage.getItem("UserToken");
+    if(this.userToken){
+
+      this.userId = (jwt(this.userToken) as any).customerId;
+
+    }
     this.catservice.GetAllCategories().subscribe(
       {
         next:(data:any)=>{
@@ -64,7 +76,7 @@ export class HomeComponent implements OnInit {
 
           this.products=data['data'];
           this.products=this.products.filter((pro:any) =>
-          pro.Seller.SellerID!=this.CustomerID);
+          pro.Seller.SellerID!=this.userId && pro.Status=="Approved");
           this.CurrProducts=this.products;
 
           console.log(this.products)
