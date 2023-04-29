@@ -91,12 +91,60 @@
               </li>
             </ul>
 
-            <button type="button" class="btn btn-primary btn-lg btn-block">
-              Go to checkout
+            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="ShowOrderDetails()">
+             Go To checkout
             </button>
+            <!-- <a routerLink="order" class="btn btn-primary btn-lg btn-block">Go to checkout</a> -->
+
           </div>
         </div>
       </div>
+    </div>
+
+    <div *ngIf="checkout" class="row d-flex justify-content-center my-4 card">
+      <div class="card-header py-3">
+        <h5 class="mb-0">Order</h5>
+      </div>
+      <div class="card-body">
+        <div class="form-group mb-3"  >
+          <label
+            for="address"
+            >Address</label
+
+          >
+          <select #address *ngIf="customer"
+            class="custom-select tm-select-accounts"
+            id="address"
+            (change)="onSelectionAddressChange(address.value)"
+          >
+          <option  default>Pick an address</option>
+            <option *ngFor="let add of customer.Addresses" [value]="add.City">
+              {{add.ApartmentNumber+" | "+add.Street+" | "+add.Zone+" | "+add.City}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3"  >
+          <label
+            for="method"
+            >Payment Method</label
+
+          >
+          <select #method
+            class="custom-select tm-select-accounts"
+            id="method"
+
+          >
+          <option default>Pick a payement method</option>
+          <option>Cash</option>
+          <option>Visa</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg btn-block" (click)="OrderNow()">
+          Order Now
+         </button>
+        </div>
+
     </div>
   </div>
 </section>

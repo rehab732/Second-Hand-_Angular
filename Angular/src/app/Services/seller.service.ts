@@ -13,5 +13,10 @@ export class SellerService {
   constructor(private httpclient: HttpClient) { }
   AddProduct(product: any) {
     return this.httpclient.post < any > (this.URL, product)
-}
+  }
+  UpdateProduct(product: any ,id:any)
+  {
+    return this.httpclient.put < any > (this.URL+'/'+id, product)
+  }
+
 }

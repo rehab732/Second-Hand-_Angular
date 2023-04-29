@@ -1,0 +1,191 @@
+<div class="container tm-mt-big tm-mb-big">
+  <div class="row">
+    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="tm-block-title d-inline-block">Add Product</h2>
+          </div>
+        </div>
+        <div class="row tm-edit-product-row">
+          <div class="col-xl-12 col-lg-12 col-md-12">
+            <form action="" class="tm-edit-product-form">
+              <div class="form-group mb-3">
+                <label
+                  for="name"
+                  >Product Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  [(ngModel)]= "productName"
+                  class="form-control validate"
+                  required
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label
+                  for="description"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control validate"
+                  name="message"
+                  rows="3"
+                  [(ngModel)]= "productDescription"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group mb-3"  >
+                <label
+                  for="category"
+                  >Category</label
+
+                >
+                <select #category
+                  class="custom-select tm-select-accounts"
+                  id="category"
+                  (change)="onSelectionCategoryChange(category.value)"
+                >
+                <option default>Pick a category</option>
+                  <option *ngFor="let c of categories" [value]="c.name">
+                    {{c.name}}
+
+                  </option>
+                </select>
+              </div>
+
+              <div class="row">
+
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label
+                        for="stock"
+                        >Units In Stock
+                      </label>
+                      <input
+                        id="stock"
+                        name="stock"
+                        type="text"
+                        class="form-control validate"
+                        required
+                        [(ngModel)]= "productQuantity"
+                      />
+                    </div>
+
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label
+                        for="color"
+                        >Color
+                      </label>
+                      <input
+                        id="color"
+                        name="color"
+                        type="text"
+                        class="form-control validate"
+                        data-large-mode="true"
+                        [(ngModel)]= "productColor"
+                      />
+                    </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label
+                      for="price"
+                      >Price
+                    </label>
+                    <input
+                      id="price"
+                      name="price"
+                      type="text"
+                      class="form-control validate"
+                      data-large-mode="true"
+                      [(ngModel)]= "productPrice"
+                    />
+                  </div>
+
+
+
+            </div>
+
+            <div>
+              <label>
+              <input type="checkbox" class="form-check-input filled-in"
+              (change)="OnChecked($event)"/>
+              Donate
+              </label>
+            </div>
+
+            <div class="form-group mb-3" *ngIf="isDonated"  >
+                <label
+                  for="category"
+                  >Charity</label
+
+                >
+                <select #charity
+                  class="custom-select tm-select-accounts"
+                  id="charity"
+                  (change)="onSelectionCharityChange(charity.value)"
+                >
+                <option default>Pick a charity</option>
+                  <option *ngFor="let c of charities" [value]="c.name">
+                    {{c.name}}
+
+                  </option>
+                </select>
+              </div>
+
+
+              <div class="row p-5">
+
+
+                <div class="col-lg-4 col-sm-4 p-3"
+
+                 *ngFor="let i of images"
+                 >
+
+                 <div *ngIf="i">
+                  <img  class="productImage" src="assets/img/{{i}}" />
+                 </div>
+
+                 <!-- <div *ngIf="i" class="text-center">
+                  <input id="fileInput" type="file" style="display:none;" (change)="onFileSelected($event)"/>
+                  <input
+                  type="button"
+                  class="btn btn-primary btn-block mx-auto"
+                  value="REMOVE IMAGE"
+                  (click)="RemoveImage(i)"
+                />
+                  </div> -->
+                </div>
+
+                <div class="text-center">
+                  <input id="fileInput" type="file" style="display:none;" (change)="onFileSelected($event)"/>
+                  <input
+                  type="button"
+                  class="btn btn-primary btn-block mx-auto"
+                  value="UPLOAD IMAGE"
+                  onclick="document.getElementById('fileInput').click();"
+                />
+                  </div>
+
+              </div>
+
+
+
+
+          <div class="col-12">
+            <!-- <button type="button" class="btn btn-primary btn-block text-uppercase">Add Product Now</button> -->
+            <input type="button" value="Edit Product" (click)="EditProduct()" class="btn btn-primary btn-block text-uppercase"/>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+

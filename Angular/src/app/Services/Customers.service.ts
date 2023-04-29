@@ -34,6 +34,10 @@ export class CustomerService {
     return this.myClient.get(this.URL + '/GetCartItems/'+ customer_id);
   }
 
+  GetCustomerDetails(customer_id: any){
+    return this.myClient.get(this.URL + '/GetCustomerByID/'+ customer_id);
+  }
+
 
 }
 

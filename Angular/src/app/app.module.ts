@@ -21,6 +21,8 @@ import { AddCharityComponent } from './components/charity/add-charity/add-charit
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
 
 import { CartComponent } from './components/cart/cart.component';
+import { SellerEditProductComponent } from './components/Seller/seller-edit-product/seller-edit-product.component';
+import { MakeOrderComponent } from './components/Order/make-order/make-order.component';
 
 
 
@@ -41,6 +43,8 @@ import { CartComponent } from './components/cart/cart.component';
     AddCharityComponent,
     CharityDetailsComponent,
     CartComponent,
+    SellerEditProductComponent,
+    MakeOrderComponent,
 
   ],
   imports: [
