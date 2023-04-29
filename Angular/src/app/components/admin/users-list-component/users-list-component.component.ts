@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class UsersListComponentComponent implements OnInit {
 
   Users:any;
+  ID:any;
 
   constructor(private cutomerService:CustomerService , private router:Router) { }
 
@@ -27,7 +28,7 @@ export class UsersListComponentComponent implements OnInit {
   ban(user:any){
     console.log("Banned!")
     user.CanSellStatus = false;
-    this.cutomerService.updateCustomer(user).subscribe({
+    this.cutomerService.updateCustomer(user,this.ID).subscribe({
       next:(data)=>{
         console.log(data)
       },
@@ -39,7 +40,7 @@ export class UsersListComponentComponent implements OnInit {
   removeBan(user:any){
     console.log("ban removede!")
     user.CanSellStatus = true;
-    this.cutomerService.updateCustomer(user).subscribe({
+    this.cutomerService.updateCustomer(user,this.ID).subscribe({
       next:(data)=>{
         console.log(data)
       },
