@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-enum Admincomponents {
+
+export enum Admincomponents {
   AllProducts = 1,
   AllCustomers,
   AllCharites,
   Orders,
 };
+
 @Component({
   selector: 'app-admindashboard',
   templateUrl: './admindashboard.component.html',
@@ -16,7 +18,7 @@ export class AdmindashboardComponent implements OnInit {
 
    }
 
-   currentpage : any=Admincomponents.AllProducts;
+  public currentpage : any=0;
 
 
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class AdmindashboardComponent implements OnInit {
     const closeBtn = document.querySelector("#btn")!;
     const searchBtn = document.querySelector(".bx-search")!
 
+    this.currentpage = Admincomponents.AllProducts;
 
     closeBtn.addEventListener("click",function(){
         sidebar.classList.toggle("open")
@@ -41,7 +44,7 @@ export class AdmindashboardComponent implements OnInit {
       }else{
           closeBtn.classList.replace("bx-menu-alt-right","bx-menu")
       }
-  }
+    }
 
 }
 }

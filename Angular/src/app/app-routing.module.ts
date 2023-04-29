@@ -19,6 +19,7 @@ import { EditprofileComponent } from './components/Seller/editprofile/editprofil
 import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
+import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
 
 
 
@@ -45,8 +46,8 @@ const routes: Routes = [
   {path:"charity-details/:id" , component:CharityDetailsComponent},
   {path:"editprofile",component:EditprofileComponent},
   {path:"cart",component:CartComponent},
+  {path:"buyer/orders",component:OrderTrackingComponent},
   {path:"payment", component: PaymentComponent},
-
   {path:"cart/order",component:MakeOrderComponent}
 
 

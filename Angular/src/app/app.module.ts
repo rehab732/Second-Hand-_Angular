@@ -28,6 +28,7 @@ import { EditprofileComponent } from './components/Seller/editprofile/editprofil
 import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
+import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
     AdmindashboardComponent,
     UsersListComponentComponent,
     UserDetailsComponent,
+    OrderTrackingComponent,
   ],
   imports: [
     BrowserModule,
