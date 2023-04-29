@@ -12,20 +12,15 @@ export class CartComponent implements OnInit {
   CartProducts:any=[];
   ItemsPrice:number=0;
   ShippingPrice:number=40;
-  CustomerId:string="643f45fcbe67bc74a0ec1b44";
+  //CustomerId:string="643f45fcbe67bc74a0ec1b44";
   customer:any;
   currentAddress:any;
   //CustomerId:string="643f45fcbe67bc74a0ec1b44";
   userToken: string | null = null;
   userId:any;
 
-
   constructor(private customerService:CustomerService,
     private orderService:OrderService) { }
-  //CustomerId:string="643f45fcbe67bc74a0ec1b44";
-  userToken: string | null = null;
-  userId:any;
-  constructor(private customerService:CustomerService) { }
 
   CalculatePrice(){
     this.ItemsPrice=0;
