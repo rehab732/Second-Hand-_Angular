@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const ItemModel = require("./ItemModel");
 
 const OrderStatus = ["Accepted", "Rejected","Shipped","Delivered"];
+const PaymentMethod = ["Cash", "Stripe"];
 
 let OrderSchema = new mongoose.Schema({
 
@@ -15,10 +16,14 @@ let OrderSchema = new mongoose.Schema({
     ShippingDate: {
            type: Date,
     },
+    ArrivalDate: {
+      type: Date,
+    },
     //OrderItems
     orderItems: [
        ItemModel
     ],
+    TotalPrice:Number,
     //BuyerId
     buyer: {
            type: mongoose.Schema.Types.ObjectId,
@@ -29,6 +34,13 @@ let OrderSchema = new mongoose.Schema({
        type:String,
        enum:OrderStatus,
        default:"Accepted"
+   },
+   Address:String,
+
+   PaymentMethod:{
+      type:String,
+      enum:PaymentMethod,
+      default:"Cash"
    }
 
     //TODO:payment

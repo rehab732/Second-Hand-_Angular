@@ -2,6 +2,7 @@ import { CategoryServiceService } from 'src/app/Services/category-service.servic
 import { Component, OnInit } from '@angular/core';
 import { SellerService } from 'src/app/Services/seller.service';
 import { CharityService } from 'src/app/Services/charity.service';
+import jwt from 'jwt-decode';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class SellerAddProductComponent implements OnInit {
   categories :any;
   charities :any;
   isDonated = false;
+  userId:any;
+  userToken: string | null = null;
 
 
   constructor(private sellerService: SellerService , private categoryService:CategoryServiceService,
@@ -39,7 +42,6 @@ export class SellerAddProductComponent implements OnInit {
           this.categories = data.data;
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
           console.error(err)}
       }
     );
@@ -55,7 +57,6 @@ export class SellerAddProductComponent implements OnInit {
           this.charities = data.data;
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
           console.error(err)}
       }
     );
@@ -63,8 +64,15 @@ export class SellerAddProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.GetSeller();
     this.GetAllCategories();
     this.GetAllCharities();
+  }
+  GetSeller(){
+    this.userToken = localStorage.getItem("UserToken");
+    if(this.userToken){
+      this.userId = (jwt(this.userToken) as any).customerId;
+    }
   }
 
   onFileSelected(file:any)
@@ -98,7 +106,7 @@ export class SellerAddProductComponent implements OnInit {
        "Category":this.productCategory,
        "Donate":this.isDonated,
        "Charity":this.productCharity,
-       "Seller":{"SellerID":"643f45fcbe67bc74a0ec1b44"}
+       "Seller":{"SellerID":this.userId}
   }
     console.log(product);
     // this.sellerService.AddProduct(product).subscribe(data => console.log('success', data), error => console.log('error', error));
@@ -110,7 +118,6 @@ export class SellerAddProductComponent implements OnInit {
           console.log('success', data);
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
           console.error(err)}
       }
     );

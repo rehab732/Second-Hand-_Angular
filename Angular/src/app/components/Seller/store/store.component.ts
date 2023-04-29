@@ -74,7 +74,7 @@ export class StoreComponent implements OnInit {
 
       }
       else{
-        this.Sellerid="643f45fcbe67bc74a0ec1b44";
+       console.log("Cant find seller :",data);
       }
 
       console.log("Seller",this.Sellerid,"User",this.userId);
@@ -94,14 +94,6 @@ export class StoreComponent implements OnInit {
           console.error(err)}
       }
     );
-    // this.proService.GetAllProducts().subscribe(
-    //   {
-    //     next:(data:any)=>{
-    //       console.log(data);
-    //     },
-    //     error:(data)=>{ console.log(data);}
-    //   }
-    // )
 
     this.proService.GetSellerProducts(this.Sellerid).subscribe(
       {
@@ -113,7 +105,7 @@ export class StoreComponent implements OnInit {
             this.Products= this.Products.filter((pro:any) =>
             pro.Status=="Approved"
 
-            );}
+          );}
           this.CurrProducts=this.Products;
           console.log(this.Products);
         },
