@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../Services/Customers.service';
+import { OrderService } from 'src/app/Services/order.service';
 import jwt from 'jwt-decode';
 @Component({
   selector: 'app-cart',
@@ -11,6 +12,11 @@ export class CartComponent implements OnInit {
   CartProducts:any=[];
   ItemsPrice:number=0;
   ShippingPrice:number=40;
+  CustomerId:string="643f45fcbe67bc74a0ec1b44";
+  customer:any;
+  currentAddress:any;
+  constructor(private customerService:CustomerService,
+    private orderService:OrderService) { }
   //CustomerId:string="643f45fcbe67bc74a0ec1b44";
   userToken: string | null = null;
   userId:any;
@@ -95,5 +101,56 @@ export class CartComponent implements OnInit {
       }
     );
   }
+
+  GetCustomer()
+  {
+    this.customerService.GetCustomerDetails(this.CustomerId).subscribe(
+      {
+        next:(data:any)=>{
+         this.customer=data.data;
+        console.log(this.customer);
+        },
+        error:(err)=>{
+          console.error(err)}
+      }
+    );
+  }
+
+  checkout = false;
+  ////order
+  ShowOrderDetails()
+  {
+     this.checkout = true;
+     this.GetCustomer();
+  }
+
+
+  onSelectionAddressChange(value:any)
+  {
+    this.currentAddress=value;
+  }
+
+  OrderNow()
+  {
+    let order = {
+      "ShippingDate":"12.10.2020 - 14.10.2020" ,
+      "orderItems": this.CartProducts,
+      "buyer": this.CustomerId
+    }
+    this.AddNewOrder(order);
+  }
+  AddNewOrder(order:any)
+  {
+    this.orderService.AddOrder(order).subscribe(
+      {
+        next:()=>{
+        console.log("Order Created");
+        },
+        error:(err)=>{
+          console.error(err)}
+      }
+    );
+  }
+
 
 }

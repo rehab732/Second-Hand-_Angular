@@ -12,7 +12,7 @@ router.get("/pending",ProductController.GetPendingProducts);
 
 
 router.post("",ProductController.AddNewProduct);
-router.post("/:id",ProductController.UpdateProduct);
+router.put("/:id",ProductController.UpdateProduct);
 //router.post("/Seller/:id",ProductController.UpdateSeller);
 
 router.delete("/:id",ProductController.DeleteProductByID);

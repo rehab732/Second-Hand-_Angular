@@ -38,6 +38,11 @@ export class CustomerService {
     return this.myClient.post(this.URL + '/UpdateItemQuantity/'+ customer_id,cartItem);
   }
 
+  GetCustomerDetails(customer_id: any){
+    return this.myClient.get(this.URL + '/GetCustomerByID/'+ customer_id);
+  }
+
+
   getAllUsers(){
     return this.myClient.get(this.URL);
   }

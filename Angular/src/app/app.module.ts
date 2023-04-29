@@ -19,6 +19,8 @@ import { UpdateCharityComponent } from './components/charity/update-charity/upda
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
 import { CartComponent } from './components/cart/cart.component';
+import { SellerEditProductComponent } from './components/Seller/seller-edit-product/seller-edit-product.component';
+import { MakeOrderComponent } from './components/Order/make-order/make-order.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
@@ -45,12 +47,13 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
     AddCharityComponent,
     CharityDetailsComponent,
     CartComponent,
+    SellerEditProductComponent,
+    MakeOrderComponent,
     PaymentComponent,
     EditprofileComponent,
     AdmindashboardComponent,
     UsersListComponentComponent,
     UserDetailsComponent,
-
   ],
   imports: [
     BrowserModule,
