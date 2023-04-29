@@ -14,14 +14,14 @@ import { RouterModule } from '@angular/router';
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
 import { StoreComponent } from './components/Seller/store/store.component';
-
 import { CharityComponent } from './components/charity/charity.component';
 import { UpdateCharityComponent } from './components/charity/update-charity/update-charity.component';
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
-
 import { CartComponent } from './components/cart/cart.component';
-
+import { PaymentComponent } from './components/payment/payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -41,7 +41,7 @@ import { CartComponent } from './components/cart/cart.component';
     AddCharityComponent,
     CharityDetailsComponent,
     CartComponent,
-
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +49,8 @@ import { CartComponent } from './components/cart/cart.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    NgxStripeModule.forRoot(environment.stripe.publicKey)
   ],
   providers: [],
   bootstrap: [AppComponent]
