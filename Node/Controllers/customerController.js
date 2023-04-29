@@ -247,6 +247,7 @@ let UpdateCustomer = async (req,res)=>{
     
     found.DateOfBirth = body.DateOfBirth;
     found.Phone = body.Phone;
+    found.CanSellStatus = body.CanSellStatus;
     
     // found.NuOfRatings = body.NuOfRatings;
     // found.CanSellStatus = body.CanSellStatus;
@@ -261,7 +262,19 @@ let UpdateCustomer = async (req,res)=>{
 }
 
 
-
+let getAllCustomers = async (req,res)=>{
+    try
+    {
+        let allCustomers= await CustomerModel.find().exec();//From DB
+        if(!allCustomers||allCustomers.length==0) 
+            return res.status(401).json({message:"No Customers found"});
+        res.status(200).json({message:"Customers found",data:allCustomers})
+    }
+    catch(err){
+        return res.status(500).json({message:"Server Error",Error:err.message});
+    }
+    
+}
 
 
 
@@ -281,7 +294,8 @@ module.exports = {
     AddItemToCart,
     UpdateItemQuantityInCart,
     RemoveItemFromCart,
-    GetCartItems
+    GetCartItems,
+    getAllCustomers
 }
 
 

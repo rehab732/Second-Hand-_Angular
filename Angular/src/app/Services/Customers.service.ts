@@ -38,12 +38,17 @@ export class CustomerService {
     return this.myClient.post(this.URL + '/UpdateItemQuantity/'+ customer_id,cartItem);
   }
 
-
+  getAllUsers(){
+    return this.myClient.get(this.URL);
+  }
+  updateCustomer(user:any){
+    return this.myClient.post(this.URL + "/UpdateCustomer/" + user._id , user);
+  }
+  getCustumerById(_id:any){
+    return this.myClient.get(this.URL + "/GetCustomerByID/" + _id);
+  }
 }
 
-//   getAllUsers(){
-//     return this.myClient.get(this.URL);
-//   }
 //   getUserByID(id:any){
 //     return this.myClient.get(this.URL+'/'+id);
 //   }
