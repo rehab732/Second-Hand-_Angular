@@ -1,12 +1,15 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angularecommerce';
+  token:any;
  router: string;
   constructor(
     public _router: Router
@@ -14,4 +17,19 @@ export class AppComponent {
  {
   this.router = _router.url;
  }
+  ngOnInit(): void {/*
+    this.token = localStorage.getItem("UserToken");
+    const tokenInfo = this.getDecodedAccessToken(this.token); // decode token
+    this.IsAdmin = tokenInfo.isAdmin; // get id from token*/
+}
+/*
+ getDecodedAccessToken(token: string): any {
+  try {
+    return jwtDecode(token);
+  } catch (Error) {
+    return null;
+  }
+}
+
+*/
 }
