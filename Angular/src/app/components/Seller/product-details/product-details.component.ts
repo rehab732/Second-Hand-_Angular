@@ -16,11 +16,14 @@ export class ProductDetailsComponent implements OnInit {
   userId:any;
   userToken: string | null = null;
 
-
   constructor(activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
     this.prdId = activeRoute.snapshot.params["id"];
   }
+  ClickSeller(Seller:any){
+    console.log(Seller)
+    this.router.navigate(['/store',Seller._id]);
 
+  }
   ngOnInit(): void {
     this.userToken = localStorage.getItem("UserToken");
     if(this.userToken){

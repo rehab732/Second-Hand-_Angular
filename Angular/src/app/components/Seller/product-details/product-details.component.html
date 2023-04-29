@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="col-6">
-      <h1>{{Product.data.Name}}</h1>
+      <h1 style="color:brown;">{{Product.data.Name}}</h1>
       <p><B>Category: </B>{{Product.data.Category}}</p>
       <p><B>Price: </B>{{Product.data.Price}}</p>
       <p><B>Available Quantity: </B>{{Product.data.AvailableQuantity}}</p>
@@ -46,6 +46,11 @@
       <p><B>Color: </B>{{Product.data.Color}}</p>
       <p><B>Release Date: </B>{{Product.data.ReleaseDate}}</p>
       <p><B>Status: </B>{{Product.data.Status}}</p>
+      <div *ngIf="userId != Product.data.Seller.SellerID"   class="border border-warning border-5 w-20 h-20 p-4" >
+          <h4 class="text-decoration-underline" style="color:brown;">Seller Information</h4>
+          <div class="fw-bold">Name:    <a (click)="ClickSeller(Product.data.Seller.SellerID)" class="link-danger ">{{Product.data.Seller.SellerID.Name}}</a></div>
+          <div class="fw-bold">Rating:  <span style="color:red;" >{{Product.data.Seller.SellerID.Rating}}</span></div>
+      </div>
 
       <button *ngIf="userId == Product.data.Seller.SellerID" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
       <button *ngIf="userId == Product.data.Seller.SellerID" class="btn btn-info" >Edit</button>

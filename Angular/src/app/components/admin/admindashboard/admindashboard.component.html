@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo_details">
+      <i class="bx   ">
+        <img class=" logoimg" src="assets/img/logo-color.png" alt="logo" />
+      </i>
+
+      <div class="logo_name">Second Hand</div>
+      <i class="bx bx-menu" id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a (click)="currentpage=1">
+          <i class="bx bx-grid-alt"></i>
+          <span class="link_name">All Products</span>
+        </a>
+        <span class="tooltip">All Products</span>
+      </li>
+      <li>
+        <a (click)="currentpage=2">
+          <i class="bx bx-user"></i>
+          <span class="link_name">All Customers</span>
+        </a>
+        <span class="tooltip">All Customers</span>
+      </li>
+      <li>
+        <a (click)="currentpage=3">
+          <i class='bx bx-spa'></i>
+          <span class="link_name">Charites</span>
+        </a>
+        <span class="tooltip">Charites</span>
+      </li>
+      <li>
+        <a (click)="currentpage=4">
+          <i class="bx bx-cart-alt"></i>
+          <span class="link_name">Order</span>
+        </a>
+        <span class="tooltip">Order</span>
+      </li>
+      <li>
+        <a>
+          <i class="bx bx-log-out"></i>
+          <span class="link_name">Log OUt</span>
+        </a>
+        <span class="tooltip">Log OUt</span>
+      </li>
+    </ul>
+  </div>
+
+  <section class="home-section" style="background-color: #e4e9f7;">
+    <app-admin-component *ngIf="currentpage==1"></app-admin-component>
+    <app-users-list-component *ngIf="currentpage==2"></app-users-list-component>
+    <app-charity *ngIf="currentpage==3"></app-charity>
+
+  </section>
+
+</body>
+
+</html>

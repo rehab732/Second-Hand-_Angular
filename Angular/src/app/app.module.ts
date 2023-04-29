@@ -14,17 +14,21 @@ import { RouterModule } from '@angular/router';
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
 import { StoreComponent } from './components/Seller/store/store.component';
-
 import { CharityComponent } from './components/charity/charity.component';
 import { UpdateCharityComponent } from './components/charity/update-charity/update-charity.component';
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
-
 import { CartComponent } from './components/cart/cart.component';
+import { SellerEditProductComponent } from './components/Seller/seller-edit-product/seller-edit-product.component';
+import { MakeOrderComponent } from './components/Order/make-order/make-order.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from '../environments/environment';
+import { EditprofileComponent } from './components/Seller/editprofile/editprofile.component';
+import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
-
 
 
 @NgModule({
@@ -44,10 +48,14 @@ import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-
     AddCharityComponent,
     CharityDetailsComponent,
     CartComponent,
+    SellerEditProductComponent,
+    MakeOrderComponent,
+    PaymentComponent,
+    EditprofileComponent,
+    AdmindashboardComponent,
     UsersListComponentComponent,
     UserDetailsComponent,
     OrderTrackingComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -55,7 +63,8 @@ import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    NgxStripeModule.forRoot(environment.stripe.publicKey)
   ],
   providers: [],
   bootstrap: [AppComponent]

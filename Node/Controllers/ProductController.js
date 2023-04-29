@@ -41,7 +41,11 @@ let GetProductById = async (req,res)=>{
     //DB
     try{
         let getProduct = new mongoose.Types.ObjectId(req.params.id);
-        let found = await ProductModel.findOne({_id:getProduct}).exec();
+        let found = await ProductModel.findOne({_id:getProduct}).populate({
+            path:"Seller.SellerID",
+            strictPopulate: false 
+        
+        }).exec();
         if(!found) return res.status(401).json({message:"Invalid id"});
 
         res.status(200).json({message:"Product found",data:found})
@@ -156,6 +160,7 @@ let UpdateProduct = async (req,res)=>{
         found.Color=UpdatedProduct.Color;
         found.Category=UpdatedProduct.Category;
         found.Status = UpdatedProduct.Status;
+        found.Images = UpdatedProduct.Images;
 
         await found.save();
         console.log("saved")

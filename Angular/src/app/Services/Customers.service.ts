@@ -33,6 +33,15 @@ export class CustomerService {
     console.log(customer_id);
     return this.myClient.get(this.URL + '/GetCartItems/'+ customer_id);
   }
+  UpdateItemQuantityInCart(customer_id: any,cartItem:any){
+    console.log(cartItem);
+    return this.myClient.post(this.URL + '/UpdateItemQuantity/'+ customer_id,cartItem);
+  }
+
+  GetCustomerDetails(customer_id: any){
+    return this.myClient.get(this.URL + '/GetCustomerByID/'+ customer_id);
+  }
+
 
   getAllUsers(){
     return this.myClient.get(this.URL);
