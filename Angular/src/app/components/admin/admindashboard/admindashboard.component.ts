@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
+enum Admincomponents {
+  AllProducts = 1,
+  AllCustomers,
+  AllCharites,
+  Orders,
+};
 @Component({
   selector: 'app-admindashboard',
   templateUrl: './admindashboard.component.html',
@@ -7,12 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmindashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+   }
+
+   currentpage : any=Admincomponents.AllProducts;
+
 
   ngOnInit(): void {
     const sidebar = document.querySelector(".sidebar")!;
     const closeBtn = document.querySelector("#btn")!;
     const searchBtn = document.querySelector(".bx-search")!
+
 
     closeBtn.addEventListener("click",function(){
         sidebar.classList.toggle("open")
