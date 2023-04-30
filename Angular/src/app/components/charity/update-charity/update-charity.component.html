@@ -1,19 +1,19 @@
 
 
 <div class="container form" *ngIf="Charity; else loadingBlock">
-  <div class="row form-group">
+  <div class="row form-group my-3">
     <label class="col-2">Name : </label>
     <input #name class="col-5" value={{Charity.name}}>
   </div>
-  <div class="row form-group">
+  <div class="row form-group my-3">
     <label class="col-2">Website : </label>
     <input #website class="col-5" value={{Charity.website}}>
   </div>
-  <div class="row form-group">
+  <div class="row form-group my-3">
     <label class="col-2">Description : </label>
     <input #description class="col-5" value={{Charity.description}}>
   </div>
-  <div class="form-group">
+  <div class="form-group my-3">
     <input type="button" value="Update"
     (click)="update(name.value , website.value , description.value)" class="btn btn-outline-success"/>
   </div>

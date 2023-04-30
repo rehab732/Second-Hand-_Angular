@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="row">
-    <input type="button" (click)="add()" value="Add" class="btn btn-outline-success">
+    <input type="button" (click)="add()" value="Add" class="btn btn-outline-success m-2">
   </div>
   <div class="row">
     <div class="col">
@@ -24,9 +24,9 @@
             <td><a href="{{c.website}}">{{c.website}}</a></td>
             <td>{{c.DonatedItems.length}}</td>
             <td>
-              <input type="button" (click)="updateCharity(this.c)" value="Update" class="btn btn-outline-primary">
-              <input id="delete" type="button" (click)="deleteCharity(this.c,this)" value="Delete" class="btn btn-outline-danger">
-              <input type="button" (click)="details(this.c)" value="Details" class="btn btn-outline-info">
+              <input type="button" (click)="updateCharity(this.c)" value="Update" class="btn btn-outline-primary mx-2">
+              <input id="delete" type="button" (click)="deleteCharity(this.c,this)" value="Delete" class="btn btn-outline-danger mx-2">
+              <input type="button" (click)="details(this.c)" value="Details" class="btn btn-outline-info mx-2">
             </td>
             <!-- <td><input type="button" (click)="approveProduct(this.p)" value="Approve" class="btn btn-outline-success"></td>
             <td><input type="button" (click)="rejectProduct(this.p)" value="Reject" class="btn btn-outline-danger"></td>

@@ -34,7 +34,7 @@ export class UpdateCharityComponent implements OnInit {
       {
         next:(data:any)=>{
           console.log(data);
-          this.router.navigateByUrl("charity");
+          this.router.navigateByUrl("admindashboard");
         },
         error:(err)=>{
           console.error(err)}

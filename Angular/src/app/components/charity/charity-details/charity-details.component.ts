@@ -29,7 +29,7 @@ export class CharityDetailsComponent implements OnInit {
       })
   }
   backToList(){
-    this.router.navigateByUrl("charity");
+    this.router.navigateByUrl("admindashboard");
   }
   delete(){
     if(confirm("Are you sure you want to delete this product?")){

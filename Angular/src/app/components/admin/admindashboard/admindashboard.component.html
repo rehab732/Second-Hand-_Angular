@@ -15,21 +15,21 @@
     </div>
     <ul class="nav-list">
       <li>
-        <a href="#">
+        <a href="" (click)="$event.preventDefault(); currentpage=1">
           <i class="bx bx-grid-alt"></i>
           <span class="link_name">All Products</span>
         </a>
         <span class="tooltip">All Products</span>
       </li>
       <li>
-        <a href="#">
+        <a href="" (click)="$event.preventDefault(); currentpage=2">
           <i class="bx bx-user"></i>
           <span class="link_name">All Customers</span>
         </a>
         <span class="tooltip">All Customers</span>
       </li>
       <li>
-        <a href="#">
+        <a href="" (click)="$event.preventDefault(); currentpage=3">
           <i class='bx bx-spa'></i>
           <span class="link_name">Charites</span>
         </a>
@@ -43,7 +43,7 @@
         <span class="tooltip">Order</span>
       </li> -->
       <li>
-        <a href="#">
+        <a href="" (click)="logout()">
           <i class="bx bx-log-out"></i>
           <span class="link_name">Log OUt</span>
         </a>
@@ -52,7 +52,7 @@
     </ul>
   </div>
 
-  <section class="home-section" style="background-color: #e4e9f7;">
+  <section class="home-section pt-5" style="background-color: #e4e9f7;">
     <app-admin-component *ngIf="currentpage == 1"></app-admin-component>
     <app-users-list-component *ngIf="currentpage==2"></app-users-list-component>
     <app-charity *ngIf="currentpage==3"></app-charity>
