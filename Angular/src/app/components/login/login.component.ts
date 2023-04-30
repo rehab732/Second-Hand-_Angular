@@ -40,7 +40,7 @@ export class LoginComponent {
     this.adminService.Adminlogin(newUser).subscribe(
       {
         next:(data:any)=>{
-          this.router.navigate(['../'])
+          this.router.navigate(['../admindashboard']);
           console.log(data);
 
           localStorage.setItem("UserToken", data.data.token);

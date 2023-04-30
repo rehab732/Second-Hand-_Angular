@@ -10,19 +10,21 @@ import jwtDecode from 'jwt-decode';
 export class AppComponent implements OnInit {
   title = 'angularecommerce';
   token:any;
- router: string;
+  router: string;
+  IsAdmin:any ;
+
   constructor(
     public _router: Router
  )
  {
   this.router = _router.url;
  }
-  ngOnInit(): void {/*
+  ngOnInit(): void {
     this.token = localStorage.getItem("UserToken");
     const tokenInfo = this.getDecodedAccessToken(this.token); // decode token
-    this.IsAdmin = tokenInfo.isAdmin; // get id from token*/
+    this.IsAdmin = tokenInfo.isAdmin; // get id from token
 }
-/*
+
  getDecodedAccessToken(token: string): any {
   try {
     return jwtDecode(token);
@@ -31,5 +33,5 @@ export class AppComponent implements OnInit {
   }
 }
 
-*/
+
 }
