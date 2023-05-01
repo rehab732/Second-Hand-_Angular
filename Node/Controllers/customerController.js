@@ -40,7 +40,7 @@ let LoginCustomer = async (req,res)=>{
     if(!checkPass) return res.status(401).json({message:"Invalid Password"});
 
     var token = jwt.sign({customerId: foundCustomer._id, isAdmin:false}, process.env.JWTSecret);
-    //res.header("x-auth-token",token);
+    res.header("x-auth-token",token);
     
     res.status(200).json({message:"Logged-In Successfully", data:{token:token}})
 
