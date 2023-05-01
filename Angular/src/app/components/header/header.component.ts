@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
 
   logOut(){
     localStorage.removeItem("UserToken");
-    location.reload();
+    //location.reload();
   }
 
 }
