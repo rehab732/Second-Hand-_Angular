@@ -1,16 +1,17 @@
 const express = require("express");
 const router = new express.Router();
 const CharityController = require("../Controllers/CharityController");
+const adminPermission = require("../Middlewares/adminPermission");
 
 router.get("",CharityController.GetAllCharities);
-router.get("/ById/:id",CharityController.GetCharityById);
+router.get("/ById/:id", adminPermission,CharityController.GetCharityById);
 
-router.post("",CharityController.AddNewCharity);
+router.post("", adminPermission,CharityController.AddNewCharity);
 
-router.put("/:name",CharityController.UpdateCharityByName);
+router.put("/:name", adminPermission,CharityController.UpdateCharityByName);
 router.put("/DonatedItems/:name",CharityController.UpdateCharityDonatedItems);
 
-router.delete("/:name",CharityController.DeleteCharityByName);
-router.delete("/By/Id/:id",CharityController.DeleteCharityByID);
+router.delete("/:name", adminPermission, CharityController.DeleteCharityByName);
+router.delete("/By/Id/:id", adminPermission, CharityController.DeleteCharityByID);
 
 module.exports = router;
