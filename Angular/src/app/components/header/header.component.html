@@ -18,11 +18,11 @@
         <div  class="dropdown nav-item col-2" *ngIf="userToken">
           <img src="assets/img/user.png" class="user-pic dropdown-toggle row" data-bs-toggle="dropdown" aria-expanded="false">
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item " routerLink="editprofile">Edit Profile</a></li>
+            <li><a class="dropdown-item" routerLink="editprofile">Edit Profile</a></li>
             <li><a class="dropdown-item" routerLink="Seller/AddProduct">Add Product</a></li>
             <li><a class="dropdown-item" routerLink="cart">My Cart</a></li>
             <li><a class="dropdown-item" routerLink="store/{{userId}}">My Store</a></li>
-            <li><a class="dropdown-item" (click)="logOut()">LogOut</a></li>
+            <li><a class="dropdown-item" href="" (click)="logOut()">LogOut</a></li>
           </ul>
         </div>
 
