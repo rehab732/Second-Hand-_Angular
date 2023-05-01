@@ -47,7 +47,7 @@ export class CustomerService {
 
 
   getAllUsers(){
-    return this.myClient.get(this.URL);
+    return this.myClient.get(this.URL, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   updateCustomer(customer:any,customer_id:any){
     return this.myClient.post(this.URL + "/UpdateCustomer/" + customer_id , customer);
