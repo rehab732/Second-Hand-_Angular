@@ -13,4 +13,20 @@ export class CategoryService {
   GetAllCategories() {
     return this.myClient.get(this.URL);
   }
+
+  AddNewCategory(category: any) {
+    return this.myClient.post(this.URL, category, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
+
+  GetCategoryByName(categoryName:any){
+    return this.myClient.get(this.URL+"/"+categoryName, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
+
+  UpdateCategory(category: any) {
+    return this.myClient.put(this.URL, category, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
+
+  DeleteCategory(categoryName:any){
+    return this.myClient.delete(this.URL+"/"+categoryName, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
 }

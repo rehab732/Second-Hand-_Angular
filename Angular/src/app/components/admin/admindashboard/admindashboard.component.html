@@ -35,13 +35,13 @@
         </a>
         <span class="tooltip">Charites</span>
       </li>
-      <!-- <li>
+      <li>
         <a (click)="currentpage=4">
           <i class="bx bx-cart-alt"></i>
-          <span class="link_name">Order</span>
+          <span class="link_name">Categories</span>
         </a>
-        <span class="tooltip">Order</span>
-      </li> -->
+        <span class="tooltip">Categories</span>
+      </li>
       <li>
         <a href="" (click)="logout()">
           <i class="bx bx-log-out"></i>
@@ -60,6 +60,7 @@
     <app-admin-component *ngIf="currentpage == 1"></app-admin-component>
     <app-users-list-component *ngIf="currentpage==2"></app-users-list-component>
     <app-charity *ngIf="currentpage==3"></app-charity>
+    <app-category *ngIf="currentpage==4"></app-category>
 <!--    <div class="text">Hena elmafrood ykon fe kol el products with their status</div>-->
   </section>
 </body>
