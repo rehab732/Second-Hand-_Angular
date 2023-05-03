@@ -18,7 +18,7 @@ export class CategoryService {
     return this.myClient.post(this.URL, category, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
-  GetCategoryByName(categoryName:any){
+  GetCategoryById(categoryName:any){
     return this.myClient.get(this.URL+"/"+categoryName, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 

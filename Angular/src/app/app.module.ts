@@ -30,6 +30,8 @@ import { UsersListComponentComponent } from './components/admin/users-list-compo
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
 import { CategoryComponent } from './components/admin/category/category.component';
+import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
+import { UpdateCategoryComponent } from './components/admin/category/update-category/update-category.component';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { CategoryComponent } from './components/admin/category/category.componen
     UserDetailsComponent,
     OrderTrackingComponent,
     CategoryComponent,
+    AddCategoryComponent,
+    UpdateCategoryComponent,
   ],
   imports: [
     BrowserModule,

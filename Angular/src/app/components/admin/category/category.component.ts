@@ -26,10 +26,10 @@ export class CategoryComponent implements OnInit {
   }
 
   updateCategory(category:any){
-    //this.router.navigateByUrl("charity-update/"+category.name);
+    this.router.navigateByUrl("category-update/"+category.name);
   }
   add(){
-    //this.router.navigateByUrl("charity-add");
+    this.router.navigateByUrl("category-add");
   }
   deleteCategory(category:any, btn:any){
     // console.log(btn.parentElement)
@@ -47,8 +47,9 @@ export class CategoryComponent implements OnInit {
       console.log("deleted")
     }
   }
+  /*
   details(category:any){
-    //this.router.navigateByUrl("charity-details/"+charity._id);
-  }
+    this.router.navigateByUrl("category-details/"+category.name);
+  }*/
 
 }
