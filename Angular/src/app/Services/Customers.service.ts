@@ -11,6 +11,15 @@ export class CustomerService {
 
   private readonly URL = 'http://localhost:7010/api/Customers'; //API
 
+  token:any;
+
+  IsloggedIn(): boolean {
+    this.token = localStorage.getItem("UserToken");
+    if(this.token)  return true;
+
+    return false;
+  }
+
   AddNewCustomer(customer: any) {
     console.log(customer);
     return this.myClient.post(this.URL + '/reg', customer);
