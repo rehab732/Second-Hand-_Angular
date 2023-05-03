@@ -29,6 +29,9 @@ import { AdmindashboardComponent } from './components/admin/admindashboard/admin
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
+import { CategoryComponent } from './components/admin/category/category.component';
+import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
+import { UpdateCategoryComponent } from './components/admin/category/update-category/update-category.component';
 
 
 @NgModule({
@@ -56,6 +59,9 @@ import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-
     UsersListComponentComponent,
     UserDetailsComponent,
     OrderTrackingComponent,
+    CategoryComponent,
+    AddCategoryComponent,
+    UpdateCategoryComponent,
   ],
   imports: [
     BrowserModule,

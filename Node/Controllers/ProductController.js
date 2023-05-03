@@ -179,6 +179,7 @@ let GetPendingProducts = async (req,res)=>{
             {$or:[{"Status":"PendingAddApproval" } , {"Status":"PendingEditApproval" }]}
             ).exec();
         if(found.length==0) return res.status(401).json({message:"Invalid Category"});
+        //res.header("x-auth-token", localStorage.getItem("UserToken"));
         res.status(200).json({message:"Pending Products found",data:found})
     }catch(err){
         return res.status(401).json({message:"Invalid Name Format",error:err.message});

@@ -1,11 +1,12 @@
 const express = require("express");
 const router = new express.Router();
 const CustomerController = require("../Controllers/customerController");
+const adminPermission = require("../Middlewares/adminPermission");
 
 router.post("/reg",CustomerController.AddNewCustomer);
 router.post("/login",CustomerController.LoginCustomer);
 router.get("/GetCustomerByID/:id",CustomerController.GetCustomerByID);
-router.get("",CustomerController.getAllCustomers);
+router.get("", adminPermission,CustomerController.getAllCustomers);
 router.post("/AddAddress/:id",CustomerController.AddNewAddress);
 router.post("/UpdateCustomer/:id",CustomerController.UpdateCustomer);
 router.post("/AddItemToCart/:id",CustomerController.AddItemToCart);

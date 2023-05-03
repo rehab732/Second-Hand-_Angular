@@ -19,7 +19,8 @@ export class AdminServiceService {
   GetProducts() {
     console.log("all Products --> admin service");
     //TODO: in Node --> get all pending products
-    return this.myClient.get(this.prdURL+"/pending");
+    //console.log(localStorage.getItem("UserToken"));
+    return this.myClient.get(this.prdURL+"/pending", {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   UpdateProduct(product:any){
     try{

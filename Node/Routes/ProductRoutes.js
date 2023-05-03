@@ -1,5 +1,6 @@
 const express = require("express");
 const router = new express.Router();
+const adminPremission = require("../Middlewares/adminPermission")
 const ProductController = require("../Controllers/ProductController");
 
 router.get("",ProductController.GetAllProducts);
@@ -8,7 +9,7 @@ router.get("/getByName/:name",ProductController.GetProductByName);
 router.get("/getByCategory/:category",ProductController.GetProductByCategory);
 
 router.get("/Seller/:id",ProductController.GetProductBySellerId);
-router.get("/pending",ProductController.GetPendingProducts);
+router.get("/pending", adminPremission,ProductController.GetPendingProducts);
 
 
 router.post("",ProductController.AddNewProduct);

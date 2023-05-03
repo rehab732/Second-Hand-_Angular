@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
-import { CharityService } from 'src/app/Services/charity.service';
+import { CategoryService } from 'src/app/Services/category.service';
 
 @Component({
-  selector: 'app-add-charity',
-  templateUrl: './add-charity.component.html',
-  styleUrls: ['./add-charity.component.css']
+  selector: 'app-add-category',
+  templateUrl: './add-category.component.html',
+  styleUrls: ['./add-category.component.css']
 })
-export class AddCharityComponent implements OnInit {
+export class AddCategoryComponent implements OnInit {
 
-  constructor(private charityService:CharityService, private router : Router) {}
+  constructor(private categoryService:CategoryService, private router:Router) { }
 
+  errorMsg:any;
   IsAdmin:any ;
   token:any;
 
@@ -20,19 +21,24 @@ export class AddCharityComponent implements OnInit {
     const tokenInfo = this.getDecodedAccessToken(this.token); // decode token
     this.IsAdmin = tokenInfo.isAdmin; // get isAdmin from token payload
   }
-  add(name:any , website:any , description:any){
-    this.charityService.AddCharity({name,description,website}).subscribe(
+
+  add(name:any){
+    this.categoryService.AddNewCategory({name}).subscribe(
       {
         next:(data:any)=>{
           console.log(data);
+          console.log("added")
           this.router.navigateByUrl("admindashboard");
         },
         error:(err)=>{
+          if(err.status==401){
+            this.errorMsg = "You are not authorized to make this action";
+          }else{
+            this.errorMsg = "Please enter a category name";
+          }
           console.error(err)}
       })
-    console.log("added")
   }
-
   getDecodedAccessToken(token: string): any {
     try {
       return jwtDecode(token);

@@ -10,6 +10,7 @@ import { AdminServiceService } from 'src/app/Services/admin-service.service';
 export class AdminComponentComponent implements OnInit {
 
   Products: any;
+  UnaithorizedMsg:any;
 
   constructor(private adminSevice:AdminServiceService, private router:Router) { }
 
@@ -22,7 +23,12 @@ export class AdminComponentComponent implements OnInit {
           console.log(this.Products);
         },
         error:(err)=>{
-          console.error(err)}
+          if(err.status == 401){
+            this.UnaithorizedMsg = err.error ;
+          }else{
+            console.error(err);
+          }
+        }
       })
 
   }

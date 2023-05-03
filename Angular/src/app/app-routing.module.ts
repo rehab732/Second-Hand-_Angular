@@ -7,8 +7,6 @@ import { SellerAddProductComponent } from './components/Seller/seller-add-produc
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { StoreComponent } from './components/Seller/store/store.component';
 import { CartComponent } from './components/cart/cart.component';
-import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
-import { CharityComponent } from './components/charity/charity.component';
 import { UpdateCharityComponent } from './components/charity/update-charity/update-charity.component';
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
@@ -20,6 +18,8 @@ import { AdmindashboardComponent } from './components/admin/admindashboard/admin
 import { UsersListComponentComponent } from './components/admin/users-list-component/users-list-component.component';
 import { UserDetailsComponent } from './components/admin/user-details/user-details.component';
 import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
+import { UpdateCategoryComponent } from './components/admin/category/update-category/update-category.component';
+import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
 
 
 
@@ -47,9 +47,9 @@ const routes: Routes = [
   {path:"cart",component:CartComponent},
   {path:"buyer/orders",component:OrderTrackingComponent},
   {path:"payment", component: PaymentComponent},
-  {path:"cart/order",component:MakeOrderComponent}
-
-
+  {path:"cart/order",component:MakeOrderComponent},
+  {path:"category-update/:name" , component:UpdateCategoryComponent},
+  {path:"category-add" , component:AddCategoryComponent},
 ];
 
 @NgModule({

@@ -1,10 +1,15 @@
-<div *ngIf="Charity; else loadingBlock" class="alert alert-info">
-  <h5>Name: {{Charity.name}}</h5>
-  <h5>Description: {{Charity.description}}</h5>
-  <h5>Website: <a href="{{Charity.website}}">{{Charity.website}}</a></h5>
-  <input type="button" value="Back to List" (click)="backToList()" class="btn btn-outline-primary">
-  <input type="button" value="Delete" (click)="delete()" class="btn btn-danger">
+<div class="container my-5">
+  <div *ngIf="Charity; else loadingBlock" class="alert alert-info">
+    <h5>Name: {{Charity.name}}</h5>
+    <h5>Description: {{Charity.description}}</h5>
+    <h5>Website: <a href="{{Charity.website}}">{{Charity.website}}</a></h5>
+    <input type="button" value="Back to List" (click)="backToList()" class="btn btn-outline-primary mx-3">
+    <input type="button" value="Delete" (click)="delete()" class="btn btn-danger mx-3">
+  </div>
+  <ng-template #loadingBlock>
+    <h1 *ngIf="IsAdmin" style="color: red;">Loading...</h1>
+  </ng-template>
+  <div class="alert alert-danger p-5" *ngIf="!IsAdmin">
+    You are not authorized to access this page...
+  </div>
 </div>
-<ng-template #loadingBlock>
-  <h1 style="color: red;">Loading...</h1>
-</ng-template>

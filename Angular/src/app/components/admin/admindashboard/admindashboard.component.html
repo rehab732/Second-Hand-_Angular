@@ -4,7 +4,7 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-  <div class="sidebar">
+  <div class="sidebar" *ngIf="IsAdmin">
     <div class="logo_details">
       <i class="bx   ">
         <img class=" logoimg" src="assets/img/logo-color.png"  alt="logo" />
@@ -35,13 +35,13 @@
         </a>
         <span class="tooltip">Charites</span>
       </li>
-      <!-- <li>
-        <a (click)="currentpage=4">
+      <li>
+        <a href="" (click)="$event.preventDefault(); currentpage=4">
           <i class="bx bx-cart-alt"></i>
-          <span class="link_name">Order</span>
+          <span class="link_name">Categories</span>
         </a>
-        <span class="tooltip">Order</span>
-      </li> -->
+        <span class="tooltip">Categories</span>
+      </li>
       <li>
         <a href="" (click)="logout()">
           <i class="bx bx-log-out"></i>
@@ -52,10 +52,15 @@
     </ul>
   </div>
 
-  <section class="home-section pt-5" style="background-color: #e4e9f7;">
+  <div class="alert alert-danger p-5" *ngIf="!IsAdmin">
+    You are not authorized to access this page...
+  </div>
+
+  <section *ngIf="IsAdmin" class="home-section pt-5" style="background-color: #e4e9f7;">
     <app-admin-component *ngIf="currentpage == 1"></app-admin-component>
     <app-users-list-component *ngIf="currentpage==2"></app-users-list-component>
     <app-charity *ngIf="currentpage==3"></app-charity>
+    <app-category *ngIf="currentpage==4"></app-category>
 <!--    <div class="text">Hena elmafrood ykon fe kol el products with their status</div>-->
   </section>
 </body>
