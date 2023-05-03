@@ -35,4 +35,7 @@ export class CharityService {
     return this.myClient.get<any> (this.URL);
 
   }
+  AddProductToCharity(CharityName:any,DonatedItem:any){
+    return this.myClient.post(this.URL+"/"+CharityName,DonatedItem);
+  }
 }
