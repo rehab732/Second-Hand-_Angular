@@ -33,7 +33,7 @@ export class CategoryComponent implements OnInit {
   }
   deleteCategory(category:any, btn:any){
     // console.log(btn.parentElement)
-    if(confirm("Are you sure you want to delete this product?")){
+    if(confirm("Are you sure you want to delete this category?")){
       this.categoryService.DeleteCategory(category.name).subscribe(
         {
           next:(data:any)=>{

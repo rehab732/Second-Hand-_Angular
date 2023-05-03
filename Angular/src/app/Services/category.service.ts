@@ -18,12 +18,12 @@ export class CategoryService {
     return this.myClient.post(this.URL, category, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
-  GetCategoryById(categoryName:any){
+  GetCategoryByName(categoryName:any){
     return this.myClient.get(this.URL+"/"+categoryName, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
-  UpdateCategory(category: any) {
-    return this.myClient.put(this.URL, category, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  UpdateCategory(categoryName: any, category:any) {
+    return this.myClient.put(this.URL+"/"+categoryName, category, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
   DeleteCategory(categoryName:any){
