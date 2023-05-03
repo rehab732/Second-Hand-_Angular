@@ -21,7 +21,7 @@ let AddNewCustomer = async (req,res)=>{
     let newCustomer = new CustomerModel(newCus);
     await newCustomer.save();
 
-    var token = jwt.sign({customerId: newCustomer._id,isAdmin:false}, process.env.JWTSecret)
+    var token = jwt.sign({customerId: newCustomer._id, userName:foundCustomer, isAdmin:false}, process.env.JWTSecret)
     //res.header("x-auth-token",token);
 
     return res.status(201).json({message:"Customer Added Successfully",data:{newCustomer, token:token}});
@@ -39,7 +39,7 @@ let LoginCustomer = async (req,res)=>{
     let checkPass = bcrypt.compareSync(logCustomer.Password, foundCustomer.Password);//true | false
     if(!checkPass) return res.status(401).json({message:"Invalid Password"});
 
-    var token = jwt.sign({customerId: foundCustomer._id, isAdmin:false}, process.env.JWTSecret);
+    var token = jwt.sign({customerId: foundCustomer._id, userName:foundCustomer.Name, isAdmin:false}, process.env.JWTSecret);
     //res.header("x-auth-token",token);
     
     res.status(200).json({message:"Logged-In Successfully", data:{token:token}})
