@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { CategoryService } from 'src/app/Services/category.service';
 
 @Component({
@@ -12,8 +13,13 @@ export class AddCategoryComponent implements OnInit {
   constructor(private categoryService:CategoryService, private router:Router) { }
 
   errorMsg:any;
+  IsAdmin:any ;
+  token:any;
 
   ngOnInit(): void {
+    this.token = localStorage.getItem("UserToken");
+    const tokenInfo = this.getDecodedAccessToken(this.token); // decode token
+    this.IsAdmin = tokenInfo.isAdmin; // get isAdmin from token payload
   }
 
   add(name:any){
@@ -21,13 +27,23 @@ export class AddCategoryComponent implements OnInit {
       {
         next:(data:any)=>{
           console.log(data);
+          console.log("added")
           this.router.navigateByUrl("admindashboard");
         },
         error:(err)=>{
-          this.errorMsg = "Please enter a category name";
+          if(err.status==401){
+            this.errorMsg = "You are not authorized to make this action";
+          }else{
+            this.errorMsg = "Please enter a category name";
+          }
           console.error(err)}
       })
-    console.log("added")
   }
-
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
+  }
 }

@@ -4,11 +4,13 @@
     <input #name class="col-5" value={{Category.name}}>
   </div>
   <div class="form-group my-3">
-    <input type="button" value="Update"
-    (click)="update(name.value)" class="btn btn-outline-success"/>
+    <input type="button" value="Update" (click)="update(name.value)" class="btn btn-outline-success" />
   </div>
 </div>
 
 <ng-template #loadingBlock>
-  <h1 style="color: red;">Loading...</h1>
+  <h1 *ngIf="IsAdmin"> style="color: red;">Loading...</h1>
 </ng-template>
+<div class="alert alert-danger p-5" *ngIf="!IsAdmin">
+  You are not authorized to access this page...
+</div>

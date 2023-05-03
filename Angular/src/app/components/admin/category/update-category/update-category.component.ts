@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { CategoryService } from 'src/app/Services/category.service';
 
 @Component({
@@ -11,11 +12,17 @@ export class UpdateCategoryComponent implements OnInit {
 
   Category:any;
   name:any;
+  IsAdmin:any ;
+  token:any;
 
   constructor(activeRoute: ActivatedRoute
     , private categoryService:CategoryService, private router : Router) {
 
       this.name = activeRoute.snapshot.params["name"];
+
+      this.token = localStorage.getItem("UserToken");
+      const tokenInfo = this.getDecodedAccessToken(this.token); // decode token
+      this.IsAdmin = tokenInfo.isAdmin; // get isAdmin from token payload
     }
 
   ngOnInit(): void {
@@ -44,4 +51,11 @@ export class UpdateCategoryComponent implements OnInit {
     console.log("updated")
   }
 
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
+  }
 }

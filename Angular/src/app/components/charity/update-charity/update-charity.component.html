@@ -20,5 +20,8 @@
 </div>
 
 <ng-template #loadingBlock>
-  <h1 style="color: red;">Loading...</h1>
+  <h1 *ngIf="IsAdmin" style="color: red;">Loading...</h1>
 </ng-template>
+<div class="alert alert-danger p-5" *ngIf="!IsAdmin">
+  You are not authorized to access this page...
+</div>
