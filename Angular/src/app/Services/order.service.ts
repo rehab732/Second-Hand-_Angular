@@ -10,6 +10,6 @@ export class OrderService {
   private readonly URL = 'http://localhost:7010/api/Orders';
 
   AddOrder(order: any) {
-    return this.myClient.post(this.URL + '/add', order);
+    return this.myClient.post(this.URL + '/add', order, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 }
