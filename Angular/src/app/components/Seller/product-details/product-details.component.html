@@ -1,62 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
-
-<body class="container">
-  <div *ngIf="Product" class="row my-5">
-    <div class="col-6">
-      <div id="carousel1" class="carousel carousel-dark slide">
-        <!-- <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active" aria-current="true"
-            aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carousel1" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div> -->
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="assets/img/{{Product.data.Images[0]}}" class="d-block w-100" alt="...">
-          </div>
-          <div *ngFor="let it of Product.data.Images.slice(1)" class="carousel-item">
-            <img src="assets/img/{{it}}" class="d-block w-100" alt="...">
-          </div>
+<body>
+  <div class="container">
+    <div class="product" *ngIf="Product">
+      <div class="galllery">
+        <img [src]="currentImage" alt="" id="proimg">
+        <div class="controls">
+          <span class="btn" [class.active]="activeIndex === 0" (click)="changeImage(0)"></span>
+          <span class="btn" [class.active]="activeIndex === 1" (click)="changeImage(1)"></span>
+          <span class="btn" [class.active]="activeIndex === 2" (click)="changeImage(2)"></span>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel1"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel1"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-    <div class="col-6">
-      <h1 style="color:brown;">{{Product.data.Name}}</h1>
-      <p><B>Category: </B>{{Product.data.Category}}</p>
-      <p><B>Price: </B>{{Product.data.Price}}</p>
-      <p><B>Available Quantity: </B>{{Product.data.AvailableQuantity}}</p>
-      <p><B>Description: </B>{{Product.data.Description}}</p>
-      <p><B>Color: </B>{{Product.data.Color}}</p>
-      <p><B>Release Date: </B>{{Product.data.ReleaseDate}}</p>
-      <p><B>Status: </B>{{Product.data.Status}}</p>
-      <div *ngIf="userId != Product.data.Seller.SellerID"   class="border border-warning border-5 w-20 h-20 p-4" >
-          <h4 class="text-decoration-underline" style="color:brown;">Seller Information</h4>
-          <div class="fw-bold">Name:    <a (click)="ClickSeller(Product.data.Seller.SellerID)" class="link-danger ">{{Product.data.Seller.SellerID.Name}}</a></div>
-          <div class="fw-bold">Rating:  <span style="color:red;" >{{Product.data.Seller.SellerID.Rating}}</span></div>
+      <div class="details">
+        <h1>{{Product.data.Name}}</h1>
+        <p><B class="txt">Price: </B>EGP {{Product.data.Price}}</p>
+        <p><B class="txt">Category: </B>{{Product.data.Category}}</p>
+        <p><B class="txt">Color: </B>{{Product.data.Color}}</p>
+        <p><B class="txt">Quantity: </B>{{Product.data.AvailableQuantity}}</p>
+        <p><B class="txt">Release Date: </B>{{Product.data.ReleaseDate}}</p>
+        <p><B class="txt">Seller Name: </B><a (click)="ClickSeller(Product.data.Seller.SellerID)" class="link" style="color:#64113F;">{{Product.data.Seller.SellerID.Name}}</a></p>
+        <p><B class="txt">Seller Rate: </B>  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> </p>
+        <button class="btn-icon"  routerLink="" >Add To Cart<i class="fa-solid fa-shopping-cart"></i></button>
+        <div class="btn-group" *ngIf="0">
+          <button class="btn-icon" (click)="deleteProduct()">Delete<i class="fa-solid fa-trash"></i></button>
+          <button class="btn-icon" >Edit<i class="fa-solid fa-pencil-alt"></i></button>
+        </div>
       </div>
-
-      <button *ngIf="userId == Product.data.Seller.SellerID" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
-      <button *ngIf="userId == Product.data.Seller.SellerID" class="btn btn-info" >Edit</button>
-
     </div>
   </div>
 </body>
-
 </html>
