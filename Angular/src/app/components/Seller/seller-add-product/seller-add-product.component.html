@@ -1,6 +1,6 @@
 
 
-    <div class="container tm-mt-big tm-mb-big">
+    <div *ngIf="userCanAdd" class="container tm-mt-big tm-mb-big">
       <div class="row">
         <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
           <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
@@ -205,5 +205,9 @@
       </div>
     </div>
 
+</div>
+
+<div *ngIf="!userCanAdd" class="container tm-mt-big tm-mb-big">
+  <p class="fs-1 text-danger">Oops! It seems that your account is banned from adding any new products, please contact customer support for more details.</p>
 </div>
 

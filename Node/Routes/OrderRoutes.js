@@ -8,6 +8,6 @@ router.get("/get/:id", loginPermission, OrderController.GetOrderById);
 router.get("/get", loginPermission, OrderController.GetAllOrders);
 // router.put("status/:id",OrderController.updateOrderStatus);
 router.get("/get/buyer/:id", loginPermission, OrderController.GetBuyerOrders);
-
+router.put("/update/:id",OrderController.updateOrderItemRating)
 
 module.exports = router;
