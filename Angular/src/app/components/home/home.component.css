@@ -2,3 +2,18 @@
   background-color: #64113F;
   color: white;
 }
+.Custom_Btn{
+  color:  #64113F;
+  background-color: #fff;
+  border-color: #64113F; /*set the color you want here*/
+}
+.Custom_Btn:hover, .Custom_Btn:focus, .Custom_Btn:active, .Custom_Btn.active, .open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #64113F;
+  border-color: #fff; /*set the color you want here*/
+}
+.slider::-webkit-slider-thumb{
+  /* default track color: */
+  background-color: #64113F;
+  /* background-color: red ; */
+}
