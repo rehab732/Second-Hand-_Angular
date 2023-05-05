@@ -4,12 +4,17 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const ItemModel = require("../Models/ItemModel");
 const jwt = require("jsonwebtoken");
-
+const ValidateLogin = require("../utils/LoginValidate");
+const ValidateCustomer = require("../utils/CustomerSchema");
 
 // tested
 let AddNewCustomer = async (req,res)=>{
   
     let newCus= req.body;
+    if(ValidateCustomer(newCus) == false)//bad request
+        return res.status(400).json({message:"Request Body is Wrong!!"});
+    console.log(newCus.DateOfBirth)
+
     let foundCustomer = await CustomerModel.findOne({Email:newCus.Email}).exec();//found[true] || notFound[false]
     if(foundCustomer) return res.status(401).json({message:"Customer Already Exist !!"});
 
@@ -32,9 +37,11 @@ let AddNewCustomer = async (req,res)=>{
 let LoginCustomer = async (req,res)=>{
     //DB
     let logCustomer = req.body;//From Client
+    if(ValidateLogin(logCustomer) == false)//bad request
+        return res.status(400).json({message:"Request Body is Wrong!!"});
     let foundCustomer = await CustomerModel.findOne({Email:logCustomer.Email}).exec();//From DB [Encrypted]
     if(!foundCustomer) return res.status(401).json({message:"Invalid Email Or Password"});
-    console.log(req.body);
+    // console.log(req.body);
     //2)Check Password
     let checkPass = bcrypt.compareSync(logCustomer.Password, foundCustomer.Password);//true | false
     if(!checkPass) return res.status(401).json({message:"Invalid Password"});
@@ -249,9 +256,9 @@ let UpdateCustomer = async (req,res)=>{
     found.Phone = body.Phone;
     found.CanSellStatus = body.CanSellStatus;
     
-    // found.NuOfRatings = body.NuOfRatings;
+    found.NumOfRatings = body.NumOfRatings;
     // found.CanSellStatus = body.CanSellStatus;
-    // found.Rating = body.Rating;
+    found.Rating = body.Rating;
 
     await found.save();
     return res.status(201).json({message:"Customer Updated Successfully",data:found});

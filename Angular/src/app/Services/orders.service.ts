@@ -15,5 +15,7 @@ export class OrdersService {
 
     return this.myClient.get(this.URL + '/get/buyer/'+id);
   }
-
+  UpdateOrderRatings(order:any){
+    return this.myClient.put(this.URL + '/update/'+order._id , order);
+  }
 }
