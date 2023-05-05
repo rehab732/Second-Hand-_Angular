@@ -66,8 +66,16 @@ customerSchema = mongoose.Schema({
   
   DateOfBirth: Date,
   Phone: String,
-  Rating: Number,
-  NuOfRatings: Number,
+  Rating: {
+    type:Number,
+    required: true,
+    default:0
+  },
+  NumOfRatings: {
+    type:Number,
+    required: true,
+    default:0
+  },
   CanSellStatus: {
     type:Boolean,
     default:true

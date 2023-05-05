@@ -20,7 +20,9 @@ let OrderSchema = new mongoose.Schema({
     },
     //OrderItems
     orderItems: [
-       ItemModel
+       
+         ItemModel,
+       
     ],
     TotalPrice:Number,
     //BuyerId

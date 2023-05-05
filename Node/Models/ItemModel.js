@@ -11,6 +11,10 @@ const ItemModel ={
       type: Number,
       required: true,
       min: 1
+    },
+    userRating:{
+       type:Number,
+       default:0
     }
   };
 

@@ -8,6 +8,9 @@ let AddNewProduct = async (req,res)=>{
    
     let newProduct = req.body;
     console.log(req.body);
+    console.log("Product Add Validate" , ProductValidate(newProduct));
+    if(ProductValidate(newProduct) == false)//bad request
+        return res.status(400).json({message:"Request Body is Wrong!!"});
     newProduct.SoldQuantity = 0;
     newProduct.ReleaseDate = Date.now() - 10000;
     newProduct.Status = "PendingAddApproval";
@@ -59,7 +62,11 @@ let GetProductBySellerId = async (req,res)=>{
     //DB
     try{
         let getProduct = new mongoose.Types.ObjectId(req.params.id);
-        let found = await ProductModel.find({["Seller.SellerID"]:getProduct}).exec();
+        let found = await ProductModel.find({["Seller.SellerID"]:getProduct}).populate({
+            path:"Seller.SellerID",
+            strictPopulate: false 
+        
+        }).exec();
         if(!found) return res.status(401).json({message:"Invalid id"});
 
         res.status(200).json({message:"Products found",data:found})
@@ -148,7 +155,9 @@ let UpdateProduct = async (req,res)=>{
 
         // if(ProductValidate(UpdatedProduct) == false)
         // UpdatedProduct = req.body.product
-        console.log(ProductValidate(UpdatedProduct));
+        console.log("Product Validate" , ProductValidate(UpdatedProduct));
+        if(ProductValidate(UpdatedProduct) == false)//bad request
+            return res.status(400).json({message:"Request Body is Wrong!!"});
 
         let found = await ProductModel.findOne({_id:getProductId}).exec();
         if(!found) return res.status(401).json({message:"Invalid id"});

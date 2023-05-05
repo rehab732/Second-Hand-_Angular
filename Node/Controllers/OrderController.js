@@ -104,6 +104,28 @@ let GetBuyerOrders = async (req,res)=>{
 
 //update order (low priority/later)
 
+let updateOrderItemRating = async (req,res)=>{
+
+    try{
+        let orderId= req.params.id;
+        let order = req.body;
+        ///*
+        let found = await OrderModel.findOne({_id:orderId}).exec();//From DB [Encrypted]
+            if(!found)
+                return res.status(401).json({message:"Invalid id"});
+
+        for(var i=0;i< found.orderItems.length ;i++)
+        {
+            found.orderItems[i].userRating = order.orderItems[i].userRating;
+        }
+        //*/
+        await found.save();
+        return res.status(201).json({message:"Order Rating Updated Successfully",data:found});
+    }catch(ex){
+        return res.status(401).json({message:"Error",data:ex.message});
+    }
+}
+
 
 //exports
 module.exports = {
@@ -112,4 +134,5 @@ module.exports = {
     GetAllOrders,
     // updateOrderStatus,
     GetBuyerOrders,
+    updateOrderItemRating
 }
