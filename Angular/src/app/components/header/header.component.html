@@ -14,6 +14,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#All"style="color: #64113F;">All Products</a></li>
           <li *ngIf="userToken"  class="nav-item px-2"><a class="nav-link fw-medium" routerLink="store/{{userId}}">My Store!</a></li>
+          <li *ngIf="userToken"  class="nav-item px-2"><a class="nav-link fw-medium" routerLink="buyer/orders">Orders</a></li>
           <!-- <li class="nav-item px-2"><a class="nav-link fw-medium" routerLink="cart">Cart</a></li> -->
           <!-- Cart  -->
           <div  class="pt-3">
