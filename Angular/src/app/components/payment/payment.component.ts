@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
 import { OrderService } from 'src/app/Services/order.service';
 import { CustomerService } from '../../Services/Customers.service';
+import { CharityService } from '../../Services/charity.service';
+import { ProductService } from '../../Services/Product.service';
 import { Router } from '@angular/router';
 import jwt from 'jwt-decode';
 
@@ -26,7 +28,8 @@ export class PaymentComponent implements OnInit {
   payToken:any;
   handler: any = null;
 
-  constructor(private customerService:CustomerService,private orderService:OrderService,private router : Router) {}
+  constructor(private customerService:CustomerService,private orderService:OrderService,private router : Router,
+    private charityService:CharityService,private productService:ProductService) {}
 
 
   ngOnInit(): void {
@@ -104,6 +107,7 @@ export class PaymentComponent implements OnInit {
         "PaymentMethod":"Cash"
       }
       this.AddNewOrder(order);
+      this.CheckCharity(this.CartProducts);
     }
 
   }
@@ -113,6 +117,7 @@ export class PaymentComponent implements OnInit {
     this.orderService.AddOrder(order).subscribe(
       {
         next:()=>{
+
         console.log("Order Created");
         this.orderCompleted=true;
         this.router.navigate(['']);
@@ -122,7 +127,22 @@ export class PaymentComponent implements OnInit {
       }
     );
   }
+  CheckCharity(products:any){
+    for(var i in products){
+        if(products[i].product.Donate){
+          var item={product:products[i].product._id,quantity:products[i].quantity}
+          console.log(item);
+          this.charityService.AddProductToCharity(products[i].product.Charity,item).subscribe({
+            next:(data:any)=>{
+              console.log(data);
+              },
+              error:(err)=>{
+                console.error(err)}
+          });
+        }
 
+    }
+  }
   pay(amount: any) {
     this.handler = (<any>window).StripeCheckout.configure({
       key: env.stripe.publicKey,

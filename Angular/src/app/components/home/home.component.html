@@ -1,4 +1,4 @@
-<section class="py-11 bg-light-gradient border-bottom border-white border-5">
+<section class="py-6 bg-light-gradient border-bottom border-white border-5">
   <div class="bg-holder overlay overlay-light" style="background-image:url(/assets/img/bg-registration-form-1.jpg);background-size:cover;"></div>
   <div class="container">
     <div class="row flex-center">
@@ -9,6 +9,11 @@
           </h1>
         </div>
       </div>
+      <div class="input-group">
+        <input type="search" class="form-control rounded" #searchInput placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="Button" id="Search_Btn" (click)="SearchProducts(searchInput.value)" class="Custom_Btn btn btn-outline-primary">search</button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -37,7 +42,17 @@
                     aria-selected="false" style="color: #64113F;">{{cat.name}} </button></li>
               </ul>
             </nav>
+            <div class=" container d-flex align-items-center justify-content-center" data-role="rangeslider">
+              <div ><pre class="fs-6 fs-lg-6 fs-md-6 fw-bold" style="color: #64113F;">Price </pre>  </div>
+              <div  class="position-relative py-4" style="width:40%;">
+                <input type="range" class="form-range slider" id="customRange1" max="1000" min="0" (input)="SliderMoved($event)">
+                <span class="position-absolute top-50 end-0 pt-2">1000</span>
+                <span class="position-absolute top-50 start-0  pt-2">{{CurrPrice}}</span>
+                  <!-- <span>0</span><span>EGP</span> -->
 
+              </div>
+
+            </div>
 
 
             <div class="tab-content" id="pills-tabContentWomen">
@@ -78,7 +93,7 @@
                         <hr class="my-0" />
                         <div class="card-body">
                           <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
-                            <button type="button" class="btn btn-primary" (click)="AddItemToCart(p._id)">Buy now</button>
+                            <button type="button" class="Custom_Btn btn btn-primary" (click)="AddItemToCart(p._id)">Buy now</button>
                           </div>
                         </div>
                       </div>
@@ -86,56 +101,6 @@
                   </div>
                 </div>
               </section>
-
-
-              <!--All Products-->
-              <!-- <div class="tab-pane fade show active" id="pills-wtshirt" role="tabpanel"
-                aria-labelledby="pills-wtshirt-tab">
-                <div class="" id="carouselCategoryWTshirt" data-bs-touch="false" data-bs-interval="false">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="10000">
-                      <div class="row h-100 align-items-center g-2">
-                        <div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100  " *ngFor="let p of CurrProducts">
-
-                          <div class="card card-span h-100 text-white rounded-4  "style="border-color: #64113F; border-width: 2px;">
-
-
-                              <img (click)="ClickDetails(p)" class="img-fluid h-100 " src="assets/img/{{p.Images[0]}}"
-                                alt="..." />
-
-                              <div class="card-body ps-0 rounded-4" style="background-color:#ced4da;">
-
-                                <h5 class="fw-bold  text-truncate text-center" style="color: #64113F;">{{p.Name}}</h5>
-                                <div class="fw-bold text-center"><span class=" text-uppercase  fw-bold  me-2"
-                                    style="color: #64113F;">Price : </span><span style="color: black;">{{p.Price}}</span>
-                                </div>
-                                <div class="fw-bold text-center"><span class=" text-uppercase  fw-bold  me-2"
-                                    style="color: #64113F;">Category : </span><span
-                                    style="color: black;">{{p.Category}}</span></div>
-                                <div class="d-grid gap-5 d-md-flex justify-content-md-end">
-                                  <button type="button" class="btn fw-bold "
-                                    style="background-color: #FFCB77; color: #64113F;" (click)="AddItemToCart(p._id)">Add to Cart</button>
-                                <div>
-                                   <button type="button" class="btn fw-bold"
-                                    style="background-color: #FFCB77; color: #64113F;" >View Details</button>
-                                </div>
-                              </div>
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
-
-
-
-
-
-
 
 
 
