@@ -2,6 +2,7 @@ import { CategoryServiceService } from 'src/app/Services/category-service.servic
 import { Component, OnInit } from '@angular/core';
 import { SellerService } from 'src/app/Services/seller.service';
 import { CharityService } from 'src/app/Services/charity.service';
+import { CustomerService } from 'src/app/Services/Customers.service';
 import jwt from 'jwt-decode';
 
 
@@ -18,7 +19,7 @@ export class SellerAddProductComponent implements OnInit {
   productDescription="";
   productQuantity="";
   productColor="";
-
+  userCanAdd:boolean=true;
   productCharity="";
   categories :any;
   charities :any;
@@ -29,7 +30,7 @@ export class SellerAddProductComponent implements OnInit {
   images=new Array<string>(6);
   imageIndx=0;
 
-  constructor(private sellerService: SellerService , private categoryService:CategoryServiceService,
+  constructor(private sellerService: SellerService,private customerService:CustomerService, private categoryService:CategoryServiceService,
     private charityService:CharityService)
    {
 
@@ -75,6 +76,19 @@ export class SellerAddProductComponent implements OnInit {
     this.userToken = localStorage.getItem("UserToken");
     if(this.userToken){
       this.userId = (jwt(this.userToken) as any).customerId;
+      this.customerService.getCustumerById(this.userId).subscribe(
+        {
+          next:(data:any)=>{
+            console.log(data);
+            this.userCanAdd=data["data"].CanSellStatus;
+            console.log("User can sell: ", this.userCanAdd);
+
+
+          },
+
+          error:(data:any)=>{ console.log(data);}
+        })
+
     }
   }
 

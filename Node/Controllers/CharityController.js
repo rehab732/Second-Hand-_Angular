@@ -135,7 +135,41 @@ let UpdateCharityByName = async (req,res)=>{
 
 //->>>>>Done but not tested
 
+let AddItemToCharity= async (req,res)=>{
+    // {
+        //product:{}
+        //quantity:{}
+    // }
+    try{
+        let name = req.params.name;//From Client
+        let DonatedItem=req.body;
 
+        console.log("add item to charity");
+        let found = await CharityModel.findOne({name:name}).exec();
+        if(!found) return res.status(401).json({message:"Invalid name"});
+    
+        //check format
+        let productID=new mongoose.Types.ObjectId(DonatedItem.product);
+        //check if product exists
+        let find=await ProductModel.findOne({_id:productID}).exec();
+        if(find){
+            let item= DonatedItem;
+            item.product=productID;
+            item.quantity=DonatedItem.quantity;
+            found.DonatedItems.push(item);
+            await found.save();
+            return res.status(201).json({message:"Item added to charity Successfully",data:DonatedItem});
+        }
+        else 
+            return res.status(401).json({message:"Invalid product id",data:DonatedItem.product});
+    }
+    catch(err){
+        return res.status(401).json({message:"Error",data:err.message});
+    }
+    
+
+
+}
 let UpdateCharityDonatedItems = async (req,res)=>{
     //DB
     let name = req.params.name;//From Client
@@ -181,6 +215,7 @@ module.exports = {
     DeleteCharityByID,
     DeleteCharityByName,
     UpdateCharityByName,
-    UpdateCharityDonatedItems
+    UpdateCharityDonatedItems,
+    AddItemToCharity
 }
 

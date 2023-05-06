@@ -7,11 +7,13 @@ router.get("",CharityController.GetAllCharities);
 router.get("/ById/:id", adminPermission,CharityController.GetCharityById);
 
 router.post("", adminPermission,CharityController.AddNewCharity);
+router.post("/:name",CharityController.AddItemToCharity);
 
 router.put("/:name", adminPermission,CharityController.UpdateCharityByName);
 router.put("/DonatedItems/:name",CharityController.UpdateCharityDonatedItems);
 
 router.delete("/:name", adminPermission, CharityController.DeleteCharityByName);
 router.delete("/By/Id/:id", adminPermission, CharityController.DeleteCharityByID);
+
 
 module.exports = router;

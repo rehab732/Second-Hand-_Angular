@@ -19,23 +19,42 @@ nav{
   cursor: pointer;
   margin-left: 30px;
 }
- nav ul{
+nav ul{
   width: 100%;
   text-align: right;
 
- }
- nav ul li{
+}
+nav ul li{
   display: inline-block;
   list-style: none;
   margin: 10px 20px;
- }
- nav ul li a{
+}
+nav ul li a{
   color: #64113F;
   font-weight: bold;
   text-decoration: none;
- }
+}
 
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
 
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+}
 
 
 

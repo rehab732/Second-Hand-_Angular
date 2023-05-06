@@ -1,6 +1,7 @@
 import { Component, OnInit,Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/Services/Product.service';
+import { CustomerService } from 'src/app/Services/Customers.service';
 import jwt from 'jwt-decode';
 
 @Component({
@@ -9,19 +10,25 @@ import jwt from 'jwt-decode';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  images = ['assets/img/bagpacks-2.png', 'assets/img/bagpacks-3.png', 'assets/img/bagpacks-4.png'];
-  currentImage = this.images[0];
+  ratingPartial=false;
+  rating:any;
+  prodImages:any;
+  currentImage:string="";
   activeIndex = 0;
   prdId:any;
   Product: any;
   userId:any;
   userToken: string | null = null;
-
-  constructor(activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
+  buttonValue="Add to cart";
+  productDate="";
+  constructor(private CustService:CustomerService,activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
     this.prdId = activeRoute.snapshot.params["id"];
   }
+  EditProduct(productId:any){
+    this.router.navigate(['Seller/EditProduct/',productId]);
+  }
   changeImage(index: number) {
-    this.currentImage = this.images[index];
+    this.currentImage = this.prodImages[index];
     this.activeIndex = index;
   }
   ClickSeller(Seller:any){
@@ -40,15 +47,56 @@ export class ProductDetailsComponent implements OnInit {
     }
     this.prdService.GetProductsDetails(this.prdId).subscribe(
       {
-        next:(data)=>{
-          this.Product = data ;
-          console.log(this.Product);
+        next:(data:any)=>{
+          this.Product = data["data"] ;
+          this.prodImages=this.Product.Images;
+          this.currentImage=this.prodImages[0];
+          this.productDate= this.Product.ReleaseDate.split("T")[0];
+          let SellerRating=this.Product.Seller.SellerID.Rating;
+          console.log(SellerRating);
+         console.log(this.Product.Seller.SellerID._id, this.userId);
+          //get heighst value
+          let rate=Math.ceil(SellerRating);
+          //check if there will be half a star
+          console.log(rate-SellerRating)
+          if(rate-SellerRating<=0.5  ){
+              this.ratingPartial=true;
+              this.rating=Array(Math.floor(SellerRating)).fill(1);
+          }
+          else{
+            this.rating=Array(Math.floor(SellerRating)).fill(1);
+          }
+
+
+
+
         },
         error:(err)=>{
           console.error(err)}
       })
   }
+  AddItemToCart(id:any){
+    var item={product:id, quantity:1};
+    this.CustService.AddItemToCart(this.userId,item).subscribe({
+      next:(data:any)=>{
+        console.log(data);
+        this.buttonValue="Item Added !"
+        let wait=3000;
+        setTimeout(() => {
+          this.buttonValue="Add to cart"
+        }, wait);
+      },
+      error:(err)=>{
+        console.error(err);
+        this.buttonValue="Item already in cart !"
 
+        let wait=3000;
+        setTimeout(() => {
+          this.buttonValue="Add to cart"
+        }, wait);
+      }
+    })
+  }
   deleteProduct(){
     if(confirm("Are you sure you want to delete this product?")){
       this.prdService.DeleteProduct(this.prdId).subscribe({
