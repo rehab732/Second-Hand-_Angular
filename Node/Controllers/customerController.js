@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const ItemModel = require("../Models/ItemModel");
 const jwt = require("jsonwebtoken");
 const ValidateLogin = require("../utils/LoginValidate");
-const ValidateCustomer = require("../utils/CustomerSchema");
+const ValidateCustomer = require("../utils/CustomerAJV");
 
 // tested
 let AddNewCustomer = async (req,res)=>{

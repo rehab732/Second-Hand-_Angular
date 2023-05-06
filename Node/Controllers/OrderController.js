@@ -1,5 +1,6 @@
 const OrderModel = require("../Models/OrderModel");
 const mongoose = require("mongoose");
+const validateOrder = require("../utils/OrderAJV")
 
 const bcrypt = require("bcrypt");
 
@@ -8,7 +9,9 @@ const bcrypt = require("bcrypt");
 let AddNewOrder = async (req,res)=>{
 
     let newOr = req.body;
-   
+    console.log(validateOrder(newOr))
+    if(validateOrder(newOr) == false)//bad request
+        return res.status(400).json({message:"Request Body is Wrong!!"});
     //TODO:check schema
     //check Item Model -->[existence of product + product Qty]
 
@@ -109,7 +112,8 @@ let updateOrderItemRating = async (req,res)=>{
     try{
         let orderId= req.params.id;
         let order = req.body;
-        ///*
+        if(validateOrder(order) == false)//bad request
+            return res.status(400).json({message:"Request Body is Wrong!!"});
         let found = await OrderModel.findOne({_id:orderId}).exec();//From DB [Encrypted]
             if(!found)
                 return res.status(401).json({message:"Invalid id"});
