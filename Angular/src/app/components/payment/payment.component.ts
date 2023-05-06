@@ -98,6 +98,7 @@ export class PaymentComponent implements OnInit {
       }
     }
     else{
+
       let order = {
         //"ShippingDate":"12.10.2020 - 14.10.2020" ,
         "orderItems": this.CartProducts,
@@ -110,8 +111,23 @@ export class PaymentComponent implements OnInit {
       this.CheckCharity(this.CartProducts);
     }
 
-  }
 
+  }
+  UpdateProductInfo(UpProduct:any){
+    let product = {
+      "Name":UpProduct.Name,
+      "Description": UpProduct.Description,
+      "Price":+UpProduct.Price,
+      "AvailableQuantity":+UpProduct.Quantity,
+      "Images": UpProduct.Images,
+      "Color": UpProduct.Color,
+      "Category":UpProduct.Category,
+      "Donate":UpProduct.Donate,
+      "Charity":UpProduct.Charity,
+      "Seller":UpProduct.Seller
+      }
+
+  }
   AddNewOrder(order:any)
   {
     this.orderService.AddOrder(order).subscribe(

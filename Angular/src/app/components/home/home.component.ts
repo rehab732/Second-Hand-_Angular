@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   //CustomerID:string="643f45fcbe67bc74a0ec1b44";
   userToken: string | null = null;
   userId:any;
+  buttonValue:string="Buy Now";
 
   SearchProducts(searchWord:string){
 
@@ -80,9 +81,20 @@ export class HomeComponent implements OnInit {
     this.CustService.AddItemToCart(this.userId,item).subscribe({
       next:(data:any)=>{
         console.log(data);
+        // let wait=3000;
+        // this.buttonValue="Item Added !"
+        // setTimeout(() => {
+        //   this.buttonValue="Buy Now"
+        // }, wait);
       },
       error:(err)=>{
         console.error(err);
+        // this.buttonValue="Item already in cart !"
+
+        // let wait=3000;
+        // setTimeout(() => {
+        //   this.buttonValue="Buy Now"
+        // }, wait);
       }
     })
   }

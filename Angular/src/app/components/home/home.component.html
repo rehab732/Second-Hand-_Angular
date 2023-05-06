@@ -46,8 +46,8 @@
               <div ><pre class="fs-6 fs-lg-6 fs-md-6 fw-bold" style="color: #64113F;">Price </pre>  </div>
               <div  class="position-relative py-4" style="width:40%;">
                 <input type="range" class="form-range slider" id="customRange1" max="1000" min="0" (input)="SliderMoved($event)">
-                <span class="position-absolute top-50 end-0 pt-2">1000</span>
-                <span class="position-absolute top-50 start-0  pt-2">{{CurrPrice}}</span>
+                <span class="position-absolute top-50 end-0 pt-2 fw-bold">1000</span>
+                <span class="position-absolute top-50 start-0  pt-2 fw-bold">{{CurrPrice}}</span>
                   <!-- <span>0</span><span>EGP</span> -->
 
               </div>
@@ -93,7 +93,7 @@
                         <hr class="my-0" />
                         <div class="card-body">
                           <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
-                            <button type="button" class="Custom_Btn btn btn-primary" (click)="AddItemToCart(p._id)">Buy now</button>
+                            <button type="button" class="Custom_Btn btn btn-primary" (click)="AddItemToCart(p._id)">Buy Now</button>
                           </div>
                         </div>
                       </div>

@@ -148,6 +148,17 @@ let DeleteProductByID = async (req,res)=>{
 //******TODO */
 //update product without seller--Done
 let UpdateProduct = async (req,res)=>{
+    //param -> id
+    //body  ->{
+    // "Name":"",
+    // "Description":"",
+    //  "Price":,
+    //  "AvailableQuantity":,
+    //  "Color":"",
+    //  "Category":"",
+    //   "Status":"",
+    //   "Images":""
+    //}
    console.log("UpdateProduct --> controller" , req.body)
     try{
         let getProductId = new mongoose.Types.ObjectId(req.params.id);

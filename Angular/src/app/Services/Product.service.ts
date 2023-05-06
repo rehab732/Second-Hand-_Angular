@@ -28,6 +28,9 @@ export class ProductService {
   GetSellerProducts(id:any){
     return this.myClient.get(this.URL+'/Seller/'+id);
   }
+  UpdateProduct(){
+
+  }
 
 }
 
