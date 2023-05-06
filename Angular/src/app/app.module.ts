@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CanActivate, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ProductDetailsComponent } from './components/Seller/product-details/product-details.component';
 import { AdminComponentComponent } from './components/admin/admin-component/admin-component.component';
 import { StoreComponent } from './components/Seller/store/store.component';
@@ -32,6 +32,7 @@ import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-
 import { CategoryComponent } from './components/admin/category/category.component';
 import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
 import { UpdateCategoryComponent } from './components/admin/category/update-category/update-category.component';
+import { CustomerService } from './Services/Customers.service';
 
 
 @NgModule({
@@ -76,18 +77,3 @@ import { UpdateCategoryComponent } from './components/admin/category/update-cate
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-/*@Injectable()
-class OnlyLoggedInUsersGuard implements CanActivate {
-  constructor(private userService: UserService) {};
-
-  canActivate() {
-    console.log("OnlyLoggedInUsers");
-    if (this.userService.isLoggedIn()) { (3)
-      return true;
-    } else {
-      window.alert("You don't have permission to view this page"); (4)
-      return false;
-    }
-  }
-}*/

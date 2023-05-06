@@ -13,7 +13,7 @@ export class OrdersService {
   GetBuyerOrders(id:any) {
     console.log("Service : Buyer Orders");
 
-    return this.myClient.get(this.URL + '/get/buyer/'+id);
+    return this.myClient.get(this.URL + '/get/buyer/'+id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   UpdateOrderRatings(order:any){
     return this.myClient.put(this.URL + '/update/'+order._id , order);

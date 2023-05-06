@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Injectable, NgModule } from '@angular/core';
+import { CanActivate, Router, RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -20,40 +20,62 @@ import { UserDetailsComponent } from './components/admin/user-details/user-detai
 import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-tracking.component';
 import { UpdateCategoryComponent } from './components/admin/category/update-category/update-category.component';
 import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
+import { CustomerService } from './Services/Customers.service';
 
 
+@Injectable()
+class OnlyLoggedInUsersGuard implements CanActivate {
+  constructor(private customerService: CustomerService, private router: Router) {};
+
+  canActivate() {
+    console.log("OnlyLoggedInUsers");
+    if (this.customerService.IsloggedIn()) {
+      return true;
+    } else {
+      alert("You don't authenticated to view this page, please Log in");
+      this.router.navigateByUrl("login");
+      return false;
+    }
+  }
+}
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"products",component:HomeComponent},
   {path:"signup",component:RegisterComponent},
   {path:"login",component:LoginComponent},
-  {path:"Seller/AddProduct",component:SellerAddProductComponent},
-  {path:"Seller/EditProduct/:id",component:SellerEditProductComponent},
+  {path:"Seller/AddProduct",component:SellerAddProductComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"Seller/EditProduct/:id",component:SellerEditProductComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"ProductDetails/:id", component:ProductDetailsComponent},
-  {path:"store",component:StoreComponent},
+  {path:"store",component:StoreComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"Seller/ProductDetails/:id", component:ProductDetailsComponent},
   {path:"store/:id",component:StoreComponent},
   {path:"Seller/store/:id",component:StoreComponent},
   //{path:"admin/pending", component:AdminComponentComponent},
-  {path:"admindashboard",component:AdmindashboardComponent},
+  {path:"admindashboard",component:AdmindashboardComponent, canActivate:[OnlyLoggedInUsersGuard]},
   //{path:"admin/users", component:UsersListComponentComponent},
-  {path:"admin/users/:id", component:UserDetailsComponent},
+  {path:"admin/users/:id", component:UserDetailsComponent, canActivate:[OnlyLoggedInUsersGuard]},
   //{path:"charity" , component:CharityComponent},
-  {path:"charity-update/:id" , component:UpdateCharityComponent},
-  {path:"charity-add" , component:AddCharityComponent},
+  {path:"charity-update/:id" , component:UpdateCharityComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"charity-add" , component:AddCharityComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"charity-details/:id" , component:CharityDetailsComponent},
-  {path:"editprofile",component:EditprofileComponent},
-  {path:"cart",component:CartComponent},
-  {path:"buyer/orders",component:OrderTrackingComponent},
-  {path:"payment", component: PaymentComponent},
-  {path:"cart/order",component:MakeOrderComponent},
-  {path:"category-update/:name" , component:UpdateCategoryComponent},
-  {path:"category-add" , component:AddCategoryComponent},
+  {path:"editprofile", component:EditprofileComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {
+    path:"cart",
+    component:CartComponent,
+    canActivate: [OnlyLoggedInUsersGuard],
+  },
+  {path:"buyer/orders",component:OrderTrackingComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"payment", component: PaymentComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"cart/order",component:MakeOrderComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"category-update/:name" , component:UpdateCategoryComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"category-add" , component:AddCategoryComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"**",component:HomeComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [OnlyLoggedInUsersGuard],
 })
 export class AppRoutingModule { }

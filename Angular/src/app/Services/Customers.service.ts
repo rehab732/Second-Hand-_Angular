@@ -11,13 +11,22 @@ export class CustomerService {
 
   private readonly URL = 'http://localhost:7010/api/Customers'; //API
 
+  token:any;
+
+  IsloggedIn(): boolean {
+    this.token = localStorage.getItem("UserToken");
+    if(this.token)  return true;
+
+    return false;
+  }
+
   AddNewCustomer(customer: any) {
     console.log(customer);
     return this.myClient.post(this.URL + '/reg', customer);
   }
   AddnewAddress(customer: any,customer_id:any) {
     console.log(customer);
-    return this.myClient.post(this.URL + '/AddAddress/'+customer_id, customer);
+    return this.myClient.post(this.URL + '/AddAddress/'+customer_id, customer, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   Customerlogin(customer: any) {
     console.log(customer);
@@ -25,24 +34,25 @@ export class CustomerService {
   }
   AddItemToCart(customer_id: any,cartItem:any){
     console.log(customer_id,cartItem);
-    return this.myClient.post(this.URL + '/AddItemToCart/'+ customer_id,cartItem);
+    return this.myClient.post(this.URL + '/AddItemToCart/'+ customer_id,cartItem, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   RemoveItemFromCart(customer_id: any,cartItemId:any){
     console.log(customer_id);
     var obj={product:cartItemId}
-    return this.myClient.post(this.URL + '/RemoveItemFromCart/'+ customer_id,obj);
+    return this.myClient.post(this.URL + '/RemoveItemFromCart/'+ customer_id,obj, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   GetCartItems(customer_id: any){
     console.log(customer_id);
-    return this.myClient.get(this.URL + '/GetCartItems/'+ customer_id);
+    return this.myClient.get(this.URL + '/GetCartItems/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   UpdateItemQuantityInCart(customer_id: any,cartItem:any){
     console.log(cartItem);
-    return this.myClient.post(this.URL + '/UpdateItemQuantity/'+ customer_id,cartItem);
+    return this.myClient.post(this.URL + '/UpdateItemQuantity/'+ customer_id,cartItem , {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
   GetCustomerDetails(customer_id: any){
-    return this.myClient.get(this.URL + '/GetCustomerByID/'+ customer_id);
+    console.log(localStorage.getItem("UserToken"));
+    return this.myClient.get(this.URL + '/GetCustomerByID/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
 
@@ -50,10 +60,10 @@ export class CustomerService {
     return this.myClient.get(this.URL, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   updateCustomer(customer:any,customer_id:any){
-    return this.myClient.post(this.URL + "/UpdateCustomer/" + customer_id , customer);
+    return this.myClient.post(this.URL + "/UpdateCustomer/" + customer_id , customer, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   getCustumerById(_id:any){
-    return this.myClient.get(this.URL + "/GetCustomerByID/" + _id);
+    return this.myClient.get(this.URL + "/GetCustomerByID/" + _id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 }
 

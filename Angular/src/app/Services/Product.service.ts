@@ -22,11 +22,11 @@ export class ProductService {
 
   DeleteProduct(id:any){
 
-    return this.myClient.delete(this.URL +"/"+ id);
+    return this.myClient.delete(this.URL +"/"+ id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
   GetSellerProducts(id:any){
-    return this.myClient.get(this.URL+'/Seller/'+id);
+    return this.myClient.get(this.URL+'/Seller/'+id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   UpdateProduct(){
 
