@@ -30,17 +30,17 @@
               <button type="button" (click)="RemoveItemFromCart(Itemid.value)" class="btn-danger btn-xs trash" title="Remove item"><i class="fas fa-trash"></i></button>
             </div>
             <div class="col d-flex">
-              <button class=" btn-sm plusbtn"   (click)="ClickIncQuantity(item)">
-                <i class="fas fa-plus minus-icon"></i>
-              </button>
-              <label #quan id="form1" min="1" name="quantity" type="number" class="form-control ms-2"
-                style="width: 40px;">{{item.quantity}}</label>
               <button class=" btn-sm ms-2 plusbtn" (click)="ClickDecQuantity(item)">
                 <i class="fas fa-minus minus-icon "></i>
               </button>
+              <label #quan id="form1" min="1" name="quantity" type="number" class="form-control ms-2"
+                style="width: 40px;">{{item.quantity}}</label>
+              <button class=" btn-sm plusbtn ms-2"   (click)="ClickIncQuantity(item)">
+                <i class="fas fa-plus minus-icon"></i>
+              </button>
             </div>
 
-            <div class="col">EGP {{item.product.Price}} <span class="close">&#10005;</span></div>
+
             <strong style="color:green">Price: {{item.product.Price}} * {{item.quantity}} = {{item.product.Price*item.quantity}}EGP</strong>
           </div>
         </div>
