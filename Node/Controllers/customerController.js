@@ -144,8 +144,8 @@ let AddItemToCart = async (req,res)=>{
         let foundProduct =await ProductModel.findOne({_id:productID}).exec();
         if(!foundProduct) return res.status(401).json({message:"product not found"});
         
-        let cartProduct =await CustomerModel.findOne({["Cart.items.product"]:productID}).exec();
-        console.log(cartProduct);
+        let cartProduct =await CustomerModel.findOne({_id:customerID,["Cart.items.product"]:productID}).exec();
+        //console.log(cartProduct.Cart.items);
         if(cartProduct) return res.status(401).json({message:"product already in cart"});
 
         found.Cart.items.push(body);

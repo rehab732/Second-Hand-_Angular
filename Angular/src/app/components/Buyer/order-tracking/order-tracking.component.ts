@@ -32,7 +32,7 @@ export class OrderTrackingComponent implements OnInit {
       {
         next:(data:any)=>{
           this.Orders = data.data;
-          console.log(this.Orders);
+          console.log("orders",this.Orders);
         },
         error:(err)=>{
           console.error(err)}
@@ -47,7 +47,7 @@ export class OrderTrackingComponent implements OnInit {
   }
   //TODO: handle date
   formatDate(dateStr : any){
-    //console.log("dateStr" , dateStr)
+    console.log("dateStr" , dateStr)
     var date = new Date(dateStr.substr(0,10))
     //console.log(date);
     return date.toLocaleDateString("en-US");
