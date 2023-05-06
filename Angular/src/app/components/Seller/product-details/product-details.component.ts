@@ -24,6 +24,9 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private CustService:CustomerService,activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
     this.prdId = activeRoute.snapshot.params["id"];
   }
+  EditProduct(productId:any){
+    this.router.navigate(['Seller/EditProduct/',productId]);
+  }
   changeImage(index: number) {
     this.currentImage = this.prodImages[index];
     this.activeIndex = index;
@@ -51,12 +54,12 @@ export class ProductDetailsComponent implements OnInit {
           this.productDate= this.Product.ReleaseDate.split("T")[0];
           let SellerRating=this.Product.Seller.SellerID.Rating;
           console.log(SellerRating);
-
+         console.log(this.Product.Seller.SellerID._id, this.userId);
           //get heighst value
           let rate=Math.ceil(SellerRating);
           //check if there will be half a star
           console.log(rate-SellerRating)
-          if(rate-SellerRating>=0.5 && rate-SellerRating<=0.8 ){
+          if(rate-SellerRating<=0.5  ){
               this.ratingPartial=true;
               this.rating=Array(Math.floor(SellerRating)).fill(1);
           }

@@ -16,22 +16,22 @@
         </div>
       </div>
       <div class="details">
-        <h1>{{Product.Name}}</h1>
+        <h1 class="pb-4">{{Product.Name}}</h1>
         <p><B class="txt">Price: </B>EGP {{Product.Price}}</p>
         <p><B class="txt">Category: </B>{{Product.Category}}</p>
         <p><B class="txt">Color: </B>{{Product.Color}}</p>
         <p><B class="txt">Quantity: </B>{{Product.AvailableQuantity}}</p>
         <p><B class="txt">Release Date: </B>{{productDate}}</p>
-        <p><B class="txt">Seller Name: </B><a (click)="ClickSeller(Product.Seller.SellerID)" class="link" style="color:#64113F;">{{Product.Seller.SellerID.Name}}</a></p>
-        <p>
+        <p *ngIf="userId!=Product.Seller.SellerID._id" ><B class="txt">Seller Name: </B><a (click)="ClickSeller(Product.Seller.SellerID)" class="link" style="color:#64113F;">{{Product.Seller.SellerID.Name}}</a></p>
+        <p *ngIf="userId!=Product.Seller.SellerID._id">
           <B class="txt">Seller Rate: </B>
           <i *ngFor="let star of rating" class="fa-solid fa-star"></i>
           <i *ngIf="ratingPartial" class="fa fa-star-half" aria-hidden="true"></i>
         </p>
-        <button class="btn-icon" value="" #cartBtn (click)="AddItemToCart(Product._id)" >{{buttonValue}}<i class="fa-solid fa-shopping-cart"></i></button>
-        <div class="btn-group" *ngIf="0">
+        <button  *ngIf="userId!=Product.Seller.SellerID._id" class="btn-icon" value="" #cartBtn (click)="AddItemToCart(Product._id)" >{{buttonValue}}<i class="fa-solid fa-shopping-cart"></i></button>
+        <div class="btn-group" *ngIf="userId==Product.Seller.SellerID._id">
           <button class="btn-icon" (click)="deleteProduct()">Delete<i class="fa-solid fa-trash"></i></button>
-          <button class="btn-icon" >Edit<i class="fa-solid fa-pencil-alt"></i></button>
+          <button class="btn-icon" (click)="EditProduct(Product._id)" >Edit<i class="fa-solid fa-pencil-alt"></i></button>
         </div>
       </div>
     </div>
