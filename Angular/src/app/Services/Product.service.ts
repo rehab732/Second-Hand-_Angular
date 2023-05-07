@@ -28,8 +28,9 @@ export class ProductService {
   GetSellerProducts(id:any){
     return this.myClient.get(this.URL+'/Seller/'+id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
-  UpdateProduct(){
-
+  UpdateProductQuantity(productQuantity: any ,id:any)
+  {
+    return this.myClient.put < any > (this.URL+'/quantity/'+id, productQuantity, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}})
   }
 
 }

@@ -173,6 +173,7 @@ let UpdateProduct = async (req,res)=>{
         let found = await ProductModel.findOne({_id:getProductId}).exec();
         if(!found) return res.status(401).json({message:"Invalid id"});
 
+    
         found.Name=UpdatedProduct.Name;
         found.Description=UpdatedProduct.Description;
         found.Price=UpdatedProduct.Price;
@@ -181,7 +182,7 @@ let UpdateProduct = async (req,res)=>{
         found.Category=UpdatedProduct.Category;
         found.Status = UpdatedProduct.Status;
         found.Images = UpdatedProduct.Images;
-
+       
         await found.save();
         console.log("saved")
         return res.status(201).json({message:"Product Updated Successfully",data:found});
@@ -190,7 +191,28 @@ let UpdateProduct = async (req,res)=>{
     }
 
 }
+let UpdateProductQuantity= async (req,res)=>{
+    try{
+        let getProductId = new mongoose.Types.ObjectId(req.params.id);
+        let BoughtQuantity = req.body.quantity;
 
+   
+        let found = await ProductModel.findOne({_id:getProductId}).exec();
+        if(!found) return res.status(401).json({message:"Invalid id"});
+
+        if( found.AvailableQuantity-BoughtQuantity<0){
+            return res.status(401).json({message:"Not enough products in inventory",error:err.message});
+        }
+        found.AvailableQuantity-= BoughtQuantity;
+        found.SoldQuantity+=BoughtQuantity;
+        await found.save();
+        return res.status(201).json({message:"Product Quantity Updated Successfully",data:found});
+
+    }catch(err){
+        return res.status(401).json({message:"Error",error:err.message});
+    }
+
+}
 let GetPendingProducts = async (req,res)=>{
     try{
         //console.log("GetProductByCategory " + req.params.category);
@@ -202,7 +224,7 @@ let GetPendingProducts = async (req,res)=>{
         //res.header("x-auth-token", localStorage.getItem("UserToken"));
         res.status(200).json({message:"Pending Products found",data:found})
     }catch(err){
-        return res.status(401).json({message:"Invalid Name Format",error:err.message});
+        return res.status(401).json({message:"Error",error:err.message});
     }
 
 }
@@ -241,6 +263,7 @@ module.exports = {
     GetProductBySellerId,
     DeleteProductByID,
     UpdateProduct,
-    GetPendingProducts
+    GetPendingProducts,
+    UpdateProductQuantity
 }
 

@@ -21,8 +21,8 @@ const OrderSchema = {
         TotalPrice:{type:"number" , minimum: 0},
         Address:{type:"string"}
     },
-    required:["Status" , "PaymentMethod" , "RegistrationDate" 
-            , "TotalPrice", "Address" , "buyer"],
+    required:[ "PaymentMethod" , 
+             "TotalPrice", "Address" , "buyer"],
     //additionalProperties:false
 }
 

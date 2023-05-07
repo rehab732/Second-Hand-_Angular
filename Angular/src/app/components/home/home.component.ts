@@ -124,8 +124,8 @@ export class HomeComponent implements OnInit {
           console.log(data);
 
           this.products=data['data'];
-          this.products=this.products.filter((pro:any) =>
-          pro.Seller.SellerID!=this.userId && pro.Status=="Approved");
+          this.products=this.products.filter((pro:any) =>{
+            return pro.Seller.SellerID!=this.userId && pro.Status=="Approved"&& pro.AvailableQuantity>0});
           this.CurrProducts=this.products;
 
           console.log(this.products)

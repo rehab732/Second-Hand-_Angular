@@ -12,8 +12,8 @@
                 for="address"
                 >Address &nbsp; </label >
 
-              <select #address *ngIf="customer"
-                class="custom-select tm-select-accounts" id="address" (change)="onSelectionAddressChange(address.value)">
+              <select #addr *ngIf="customer"
+                class="custom-select tm-select-accounts" [(ngModel)]="currentAddress" id="address">
                       <option *ngFor="let add of customer.Addresses" [value]="add.City">
                         {{add.ApartmentNumber+" | "+add.Street+" | "+add.Zone+" | "+add.City}}
                       </option>

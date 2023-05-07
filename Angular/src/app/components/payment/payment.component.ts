@@ -74,10 +74,7 @@ export class PaymentComponent implements OnInit {
       this.ItemsPrice+=item.product.Price * item.quantity;
     }
   }
-  onSelectionAddressChange(value:any)
-  {
-    this.currentAddress=value;
-  }
+
   OrderNow(payMethod:any)
   {
     if(payMethod=="Stripe"){
@@ -88,10 +85,15 @@ export class PaymentComponent implements OnInit {
           "orderItems": this.CartProducts,
           "buyer": this.userId,
           "TotalPrice": this.ItemsPrice+this.ShippingPrice,
-          "Address":this.SelectedAddress,
+          "Address":this.currentAddress,
           "PaymentMethod":"Stripe"
         }
+        this.CartProducts.forEach((element:any) => {
+          this.UpdateProductInfo(element)
+        });
         this.AddNewOrder(order);
+        this.ClearCart();
+
       }
       else{
         this.pay(this.ItemsPrice+this.ShippingPrice);
@@ -104,28 +106,58 @@ export class PaymentComponent implements OnInit {
         "orderItems": this.CartProducts,
         "buyer": this.userId,
         "TotalPrice": this.ItemsPrice+this.ShippingPrice,
-        "Address":this.SelectedAddress,
+        "Address":this.currentAddress,
         "PaymentMethod":"Cash"
       }
+      console.log(this.currentAddress);
+      this.CartProducts.forEach((element:any) => {
+         this.UpdateProductInfo(element);
+      });
       this.AddNewOrder(order);
-      this.CheckCharity(this.CartProducts);
+
     }
+
+
+  }
+  ClearCart(){
+
+    this.CartProducts.forEach((element:any) => {
+      this.customerService.ClearCart(this.userId).subscribe(
+        {
+          next:(data:any)=>{
+            console.log(data);
+            this.router.navigate(['']);
+          },
+          error:(err)=>{
+            console.error(err);
+          }
+        }
+      );
+
+    });
+
 
 
   }
   UpdateProductInfo(UpProduct:any){
     let product = {
-      "Name":UpProduct.Name,
-      "Description": UpProduct.Description,
-      "Price":+UpProduct.Price,
-      "AvailableQuantity":+UpProduct.Quantity,
-      "Images": UpProduct.Images,
-      "Color": UpProduct.Color,
-      "Category":UpProduct.Category,
-      "Donate":UpProduct.Donate,
-      "Charity":UpProduct.Charity,
-      "Seller":UpProduct.Seller
+
+      "quantity":UpProduct.quantity
       }
+
+      console.log(product);
+      this.productService.UpdateProductQuantity(product,UpProduct.product._id).subscribe({
+        next:(data)=>{
+        console.log("Product quantity Updated");
+        console.log(data["data"]);
+        return 1;
+        },
+        error:(err)=>{
+          console.error(err)
+          return 0;
+        }
+
+      })
 
   }
   AddNewOrder(order:any)
@@ -136,7 +168,8 @@ export class PaymentComponent implements OnInit {
 
         console.log("Order Created");
         this.orderCompleted=true;
-        this.router.navigate(['']);
+        this.CheckCharity(this.CartProducts);
+        this.ClearCart();
         },
         error:(err)=>{
           console.error(err)}
