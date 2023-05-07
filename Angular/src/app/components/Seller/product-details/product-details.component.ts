@@ -59,14 +59,20 @@ export class ProductDetailsComponent implements OnInit {
           let rate=Math.ceil(SellerRating);
           //check if there will be half a star
           console.log(rate-SellerRating)
-          if(rate-SellerRating<=0.5  ){
+          //2.8 =>3
+          if(rate-SellerRating<=0.2){
+            this.rating=Array(rate).fill(1);
+          }
+          //(2.2 -> 2,7) =>2  +half star
+          else if(rate-SellerRating>=0.2 && rate-SellerRating<=0.8  ){
               this.ratingPartial=true;
               this.rating=Array(Math.floor(SellerRating)).fill(1);
           }
+            //(2->2.1) =>2  only
           else{
             this.rating=Array(Math.floor(SellerRating)).fill(1);
           }
-
+          console.log(SellerRating);
 
 
 
