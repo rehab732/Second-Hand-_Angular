@@ -30,7 +30,7 @@ export class ProductService {
   }
   UpdateProductQuantity(productQuantity: any ,id:any)
   {
-    return this.myClient.put < any > (this.URL+'/quantity/'+id, productQuantity, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}})
+    return this.myClient.put(this.URL+'/quantity/'+id, productQuantity, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}})
   }
 
 }

@@ -13,7 +13,7 @@ router.post("/UpdateCustomer/:id", loginPermission, CustomerController.UpdateCus
 router.post("/AddItemToCart/:id", loginPermission, CustomerController.AddItemToCart);
 router.post("/UpdateItemQuantity/:id", loginPermission, CustomerController.UpdateItemQuantityInCart);
 router.post("/RemoveItemFromCart/:id", loginPermission, CustomerController.RemoveItemFromCart);
-router.post("/ClearCart/:id", loginPermission, CustomerController.ClearCart);
+router.delete("/ClearCart/:id",loginPermission, CustomerController.ClearCart);
 router.get("/GetCartItems/:id", loginPermission, CustomerController.GetCartItems);
 
 

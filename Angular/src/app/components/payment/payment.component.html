@@ -29,11 +29,11 @@
                   <option value="Stripe">Stripe</option>
               </select>
               </div>
-            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="OrderNow(method.value)">
+            <button *ngIf="!orderCompleted" type="button" class="btn btn-primary btn-lg btn-block" (click)="OrderNow(method.value)">
               Order Now
             </button>
             <div *ngIf="payVerified" style="color: red;"> Payment Verified</div>
-            <div *ngIf="orderCompleted" style="color: red;"> Order Completed ! Please keep track of your order status.</div>
+            <div *ngIf="orderCompleted" style="color: green;"> Order Completed ! Please keep track of your order status, you will be redirected to home page in a few seconds.</div>
             </div>
           </div>
         <!-- <button class="btn-primary" (click)="pay(100)">Checkout</button> -->

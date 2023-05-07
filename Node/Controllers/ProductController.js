@@ -201,7 +201,7 @@ let UpdateProductQuantity= async (req,res)=>{
         if(!found) return res.status(401).json({message:"Invalid id"});
 
         if( found.AvailableQuantity-BoughtQuantity<0){
-            return res.status(401).json({message:"Not enough products in inventory",error:err.message});
+            return res.status(401).json({message:"Not enough products in inventory"});
         }
         found.AvailableQuantity-= BoughtQuantity;
         found.SoldQuantity+=BoughtQuantity;

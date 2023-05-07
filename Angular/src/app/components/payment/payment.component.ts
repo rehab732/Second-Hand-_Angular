@@ -53,8 +53,8 @@ export class PaymentComponent implements OnInit {
            console.log(this.CartProducts);
 
         },
-        error:(err)=>{
-          console.error(err)}
+        error:(err:any)=>{
+          console.log(err)}
       }
     );
     this.customerService.getCustumerById(this.userId).subscribe(
@@ -63,8 +63,8 @@ export class PaymentComponent implements OnInit {
          this.customer=data.data;
         console.log(this.customer);
         },
-        error:(err)=>{
-          console.error(err)}
+        error:(err:any)=>{
+          console.log(err)}
       }
     );
   }
@@ -92,7 +92,7 @@ export class PaymentComponent implements OnInit {
           this.UpdateProductInfo(element)
         });
         this.AddNewOrder(order);
-        this.ClearCart();
+
 
       }
       else{
@@ -121,20 +121,24 @@ export class PaymentComponent implements OnInit {
   }
   ClearCart(){
 
-    this.CartProducts.forEach((element:any) => {
+
       this.customerService.ClearCart(this.userId).subscribe(
         {
           next:(data:any)=>{
             console.log(data);
-            this.router.navigate(['']);
+            this.orderCompleted=true;
+            setTimeout(() => {
+              this.router.navigate(['']);
+            }, 5000);
+
           },
-          error:(err)=>{
-            console.error(err);
+          error:(err:any)=>{
+            console.log(err);
           }
         }
       );
 
-    });
+
 
 
 
@@ -147,14 +151,13 @@ export class PaymentComponent implements OnInit {
 
       console.log(product);
       this.productService.UpdateProductQuantity(product,UpProduct.product._id).subscribe({
-        next:(data)=>{
+        next:(data:any)=>{
         console.log("Product quantity Updated");
-        console.log(data["data"]);
-        return 1;
+        console.log(data.data);
         },
-        error:(err)=>{
-          console.error(err)
-          return 0;
+        error:(err:any)=>{
+          console.log(err)
+
         }
 
       })
@@ -167,12 +170,12 @@ export class PaymentComponent implements OnInit {
         next:()=>{
 
         console.log("Order Created");
-        this.orderCompleted=true;
         this.CheckCharity(this.CartProducts);
         this.ClearCart();
+
         },
-        error:(err)=>{
-          console.error(err)}
+        error:(err:any)=>{
+          console.log(err)}
       }
     );
   }
@@ -185,8 +188,8 @@ export class PaymentComponent implements OnInit {
             next:(data:any)=>{
               console.log(data);
               },
-              error:(err)=>{
-                console.error(err)}
+              error:(err:any)=>{
+                console.log(err)}
           });
         }
 

@@ -42,8 +42,8 @@ export class CustomerService {
     return this.myClient.post(this.URL + '/RemoveItemFromCart/'+ customer_id,obj, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   ClearCart(customer_id:any){
-    console.log(customer_id);
-    return  this.myClient.post(this.URL + '/ClearCart/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+    console.log( {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+    return  this.myClient.delete(this.URL + '/ClearCart/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   GetCartItems(customer_id: any){
     console.log(customer_id);
