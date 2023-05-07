@@ -9,9 +9,9 @@ const bcrypt = require("bcrypt");
 let AddNewOrder = async (req,res)=>{
 
     let newOr = req.body;
-    console.log(validateOrder(newOr))
-    if(validateOrder(newOr) == false)//bad request
-        return res.status(400).json({message:"Request Body is Wrong!!"});
+    const valid=validateOrder(newOr)
+    if(valid== false)//bad request
+        return res.status(400).json({message:validateOrder.errors});
     //TODO:check schema
     //check Item Model -->[existence of product + product Qty]
 

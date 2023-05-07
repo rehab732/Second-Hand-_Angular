@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryServiceService } from 'src/app/Services/category-service.service';
 import { CharityService } from 'src/app/Services/charity.service';
 import { SellerService } from 'src/app/Services/seller.service';
+import jwt from 'jwt-decode';
 
 @Component({
   selector: 'app-seller-edit-product',
@@ -22,10 +23,10 @@ export class SellerEditProductComponent implements OnInit {
   categories :any;
   charities :any;
   isDonated = false;
-
+  userToken: string | null = null;
+  userId:any;
   images=new Array<string>(6);
   imageIndx=0;
-
   productID:any;
   Product:any;
 
@@ -38,6 +39,13 @@ export class SellerEditProductComponent implements OnInit {
    }
 
   ngOnInit(): void {
+     //user
+     this.userToken = localStorage.getItem("UserToken");
+     if(this.userToken){
+
+       this.userId = (jwt(this.userToken) as any).customerId;
+
+     }
     this.GetAllCategories();
     this.GetAllCharities();
     this.LoadProduct();
@@ -52,7 +60,7 @@ export class SellerEditProductComponent implements OnInit {
           this.categories = data.data;
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
+          console.error("error");
           console.error(err)}
       }
     );
@@ -68,7 +76,7 @@ export class SellerEditProductComponent implements OnInit {
           this.charities = data.data;
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
+          console.error("error");
           console.error(err)}
       }
     );
@@ -84,7 +92,7 @@ export class SellerEditProductComponent implements OnInit {
           this.FillControlls();
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
+          console.error("error");
           console.error(err)}
       }
     );
@@ -146,7 +154,7 @@ export class SellerEditProductComponent implements OnInit {
       "Category":this.productCategory,
       "Donate":this.isDonated,
       "Charity":this.productCharity,
-      "Seller":{"SellerID":"643f45fcbe67bc74a0ec1b44"}
+      "Seller":{"SellerID":this.userId}
       }
    console.log(product);
 

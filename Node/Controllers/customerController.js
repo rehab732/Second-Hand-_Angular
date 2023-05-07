@@ -173,15 +173,15 @@ let RemoveItemFromCart = async (req,res)=>{
         if(!found) return res.status(401).json({message:"Invalid Customer id"});
     
         let isItemFound = false;
-              for(var i in found.Cart.items){
-                if(body.product== found.Cart.items[i].product)
-                {
-                    found.Cart.items.splice(i,1);
-                    isItemFound=true;
-                    break;
-                }
-              }
-        
+        for(var i in found.Cart.items){
+        if(body.product== found.Cart.items[i].product)
+        {
+            found.Cart.items.splice(i,1);
+            isItemFound=true;
+            break;
+        }
+        }
+              
         if(!isItemFound)
             return res.status(401).json({message:"Item Not Found",data:found});
         
@@ -191,6 +191,31 @@ let RemoveItemFromCart = async (req,res)=>{
         catch(err){
             return res.status(500).json({message:"Server Error",Error:err.message});
         }
+}
+
+let ClearCart = async (req,res)=>{
+    // {   
+    //         "product": "529590520"
+    //         "quantity": "5"           
+    // }
+
+    try{
+       
+        let customerID = new mongoose.Types.ObjectId(req.params.id);
+        let found = await CustomerModel.findOne({_id:customerID}).exec();
+        if(!found) return res.status(401).json({message:"Invalid Customer id"});
+       
+        console.log("Cart size: ",found.Cart.items.length)
+        if(found.Cart.items.length==0)
+            return res.status(401).json({message:"Cart is empty!",data:found});
+        
+        found.Cart.items=[]
+        await found.save();
+        return res.status(201).json({message:"Items removed From Cart Successfully",data:found});
+    }
+    catch(err){
+        return res.status(401).json({message:"Error",Error:err.message});
+    }
 }
 
 
@@ -230,6 +255,7 @@ let UpdateItemQuantityInCart = async (req,res)=>{
         return res.status(500).json({message:"Server Error",Error:err.message});
     }
 }
+
 
 
 //tested
@@ -302,7 +328,8 @@ module.exports = {
     UpdateItemQuantityInCart,
     RemoveItemFromCart,
     GetCartItems,
-    getAllCustomers
+    getAllCustomers,
+    ClearCart
 }
 
 
