@@ -205,7 +205,6 @@ let ClearCart = async (req,res)=>{
         let found = await CustomerModel.findOne({_id:customerID}).exec();
         if(!found) return res.status(401).json({message:"Invalid Customer id"});
        
-        console.log("Cart size: ",found.Cart.items.length)
         if(found.Cart.items.length==0)
             return res.status(401).json({message:"Cart is empty!",data:found});
         

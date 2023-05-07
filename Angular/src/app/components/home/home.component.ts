@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   Categories:any=[];
   CurrProducts:any=[];
   CurrPrice:Number=0;
+  val="Buy Now"
   //CustomerID:string="643f45fcbe67bc74a0ec1b44";
   userToken: string | null = null;
   userId:any;
@@ -76,25 +77,26 @@ export class HomeComponent implements OnInit {
     this.CurrProducts=this.products
   }
 
-  AddItemToCart(id:any){
+  AddItemToCart(id:any,button:any){
+
+
     var item={product:id, quantity:1};
     this.CustService.AddItemToCart(this.userId,item).subscribe({
       next:(data:any)=>{
         console.log(data);
-        // let wait=3000;
-        // this.buttonValue="Item Added !"
-        // setTimeout(() => {
-        //   this.buttonValue="Buy Now"
-        // }, wait);
+        let wait=3000;
+        button.target.innerHTML="Item Added To Cart!"
+        setTimeout(() => {
+          button.target.innerHTML="Buy Now"
+        }, wait);
       },
       error:(err)=>{
         console.error(err);
-        // this.buttonValue="Item already in cart !"
-
-        // let wait=3000;
-        // setTimeout(() => {
-        //   this.buttonValue="Buy Now"
-        // }, wait);
+        button.target.innerHTML="Item already in cart !"
+        let wait=3000;
+        setTimeout(() => {
+          button.target.innerHTML="Buy Now"
+        }, wait);
       }
     })
   }
