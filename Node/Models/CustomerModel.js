@@ -68,12 +68,12 @@ customerSchema = mongoose.Schema({
   Phone: String,
   Rating: {
     type:Number,
-    required: true,
+    required: false,
     default:0
   },
   NumOfRatings: {
     type:Number,
-    required: true,
+    required: false,
     default:0
   },
   CanSellStatus: {

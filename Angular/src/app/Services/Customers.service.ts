@@ -24,9 +24,10 @@ export class CustomerService {
     console.log(customer);
     return this.myClient.post(this.URL + '/reg', customer);
   }
-  AddnewAddress(customer: any,customer_id:any) {
-    console.log(customer);
-    return this.myClient.post(this.URL + '/AddAddress/'+customer_id, customer, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  AddnewAddress(address: any,customer_id:any) {
+    console.log("AddAddress-Service")
+    console.log(address);
+    return this.myClient.post(this.URL + '/AddAddress/'+customer_id, address, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   Customerlogin(customer: any) {
     console.log(customer);
@@ -41,6 +42,10 @@ export class CustomerService {
     var obj={product:cartItemId}
     return this.myClient.post(this.URL + '/RemoveItemFromCart/'+ customer_id,obj, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
+  ClearCart(customer_id:any){
+    console.log( {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+    return  this.myClient.delete(this.URL + '/ClearCart/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
   GetCartItems(customer_id: any){
     console.log(customer_id);
     return this.myClient.get(this.URL + '/GetCartItems/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
@@ -51,7 +56,6 @@ export class CustomerService {
   }
 
   GetCustomerDetails(customer_id: any){
-    console.log(localStorage.getItem("UserToken"));
     return this.myClient.get(this.URL + '/GetCustomerByID/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
@@ -64,6 +68,9 @@ export class CustomerService {
   }
   getCustumerById(_id:any){
     return this.myClient.get(this.URL + "/GetCustomerByID/" + _id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
+  editCustomerProfile(customer:any,customer_id:any){
+    return this.myClient.put(this.URL + "/EditCustomer/" + customer_id , customer, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 }
 

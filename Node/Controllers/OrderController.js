@@ -1,6 +1,7 @@
 const OrderModel = require("../Models/OrderModel");
 const mongoose = require("mongoose");
 const validateOrder = require("../utils/OrderAJV")
+const ValidateOrderItems = require("../utils/ItemModelAJV")
 
 const bcrypt = require("bcrypt");
 
@@ -9,11 +10,16 @@ const bcrypt = require("bcrypt");
 let AddNewOrder = async (req,res)=>{
 
     let newOr = req.body;
-    console.log(validateOrder(newOr))
-    if(validateOrder(newOr) == false)//bad request
-        return res.status(400).json({message:"Request Body is Wrong!!"});
-    //TODO:check schema
-    //check Item Model -->[existence of product + product Qty]
+    
+    //console.log(validateOrder(newOr))
+    //console.log((newOr))
+    var valid= validateOrder(newOr)
+    if(valid == false)//bad request
+        return res.status(400).json({message:{
+            valid:validateOrder.errors,
+            OrderItems:newOr.orderItems
+        }});
+    
 
     let newOrder = new OrderModel(newOr);
     await newOrder.save();
@@ -89,7 +95,7 @@ let GetBuyerOrders = async (req,res)=>{
  
 }
 
-//TODO:y update order status
+//TODO:update order status
 // let updateOrderStatus = async (req,res)=>{
 //     try{
 //         let getOrder = new mongoose.Types.ObjectId(req.params.id);//From Client
@@ -112,11 +118,12 @@ let updateOrderItemRating = async (req,res)=>{
     try{
         let orderId= req.params.id;
         let order = req.body;
-        if(validateOrder(order) == false)//bad request
-            return res.status(400).json({message:"Request Body is Wrong!!"});
+        const valid=validateOrder(order);
+        if(valid == false)//bad request
+            return res.status(400).json({message:validateOrder.errors});
         let found = await OrderModel.findOne({_id:orderId}).exec();//From DB [Encrypted]
-            if(!found)
-                return res.status(401).json({message:"Invalid id"});
+        if(!found)
+            return res.status(401).json({message:"Invalid id"});
 
         for(var i=0;i< found.orderItems.length ;i++)
         {

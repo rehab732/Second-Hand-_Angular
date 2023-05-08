@@ -1,218 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-b1K5+5/5n3dh87vTY8vfWcX9XABjhezrHGbBdCmzVRHmI1w+sKiuOvSpPQWYwe0X" crossorigin="anonymous">
+
+</head>
+<body>
 
 
-    <div *ngIf="userCanAdd" class="container tm-mt-big tm-mb-big">
-      <div class="row">
-        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+  <div class="container rounded bg-white mt-5 mb-5 card " *ngIf="userCanAdd">
+    <div class="row">
+      <form action="">
+        <div class="col-md-8 cart ">
+          <div class="title">
             <div class="row">
-              <div class="col-12">
-                <h2 class="tm-block-title d-inline-block">Add Product</h2>
+              <div class="col">
+                <h4 style="color: #64113F;"><b>Add New Product </b></h4>
               </div>
             </div>
-            <div class="row tm-edit-product-row">
-              <div class="col-xl-12 col-lg-12 col-md-12">
-                <form action="" class="tm-edit-product-form">
-                  <div class="form-group mb-3">
-                    <label
-                      for="name"
-                      >Product Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      [(ngModel)]= "productName"
-                      class="form-control validate"
-                      required
-                    />
+          </div>
+          <div class="row border-top border-bottom">
+            <div class="row main align-items-center">
+
+              <div>
+                <div class="col">
+                  <label for="name">Product Name
+                  </label>
+                  <div class="">
+                    <input type="text" id="name" name="name" placeholder="Product Name" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Product Name'" class="form-control validate single-input"
+                      [(ngModel)]="productName" required>
                   </div>
-                  <div class="form-group mb-3">
-                    <label
-                      for="description"
-                      >Description</label
-                    >
-                    <textarea
-                      class="form-control validate"
-                      name="message"
-                      rows="3"
-                      [(ngModel)]= "productDescription"
-                      required
-                    ></textarea>
-                  </div>
-
-                  <div class="form-group mb-3"  >
-                    <label
-                      for="category"
-                      >Category</label
-
-                    >
-                    <select #category
-                      class="custom-select tm-select-accounts"
-                      id="category"
-                      (change)="onSelectionCategoryChange(category.value)"
-                    >
-                    <option default>Pick a category</option>
-                      <option *ngFor="let c of categories" [value]="c.name">
-                        {{c.name}}
-
-                      </option>
-                    </select>
-                  </div>
-
-                  <div class="row">
-                    <div class="form-group mb-3 col-xs-12 col-sm-6">
-                      <label
-                        for="color"
-                        >Color
-                      </label>
-                      <input
-                        id="color"
-                        name="color"
-                        type="text"
-                        class="form-control validate"
-                        data-large-mode="true"
-                        [(ngModel)]= "productColor"
-                      />
-                    </div>
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="stock"
-                            >Units In Stock
-                          </label>
-                          <input
-                            id="stock"
-                            name="stock"
-                            type="text"
-                            class="form-control validate"
-                            required
-                            [(ngModel)]= "productQuantity"
-                          />
-                        </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="form-group mb-3 col-xs-12 col-sm-6">
-                        <label
-                          for="price"
-                          >Price
-                        </label>
-                        <input
-                          id="price"
-                          name="price"
-                          type="text"
-                          class="form-control validate"
-                          data-large-mode="true"
-                          [(ngModel)]= "productPrice"
-                        />
-                      </div>
-
-
-
                 </div>
-
-                <div>
-                  <label>
-                  <input type="checkbox" class="form-check-input filled-in"
-                  (change)="OnChecked($event)"/>
+                <div class="col">
+                  <label for="description">Description
+                  </label>
+                  <div class="">
+                    <input type="text" name="message" placeholder="Description" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Description'" [(ngModel)]="productDescription" required
+                      class="form-control validate single-input">
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="cat">Product Category
+                  </label>
+                  <select #category class="single-input" style="height: 45px;" id="category"
+                    (change)="onSelectionCategoryChange(category.value)">
+                    <option *ngFor="let c of categories" [value]="c.name">
+                      {{c.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row main align-items-center">
+                <div class="col">
+                  <label for="price">Product Price
+                  </label>
+                  <div class="">
+                    <input type="number" name="price" placeholder="Product Price" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Product Price'" required [(ngModel)]="productPrice"
+                      class="form-control validate single-input">
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="color">Color
+                  </label>
+                  <div class="">
+                    <input type="text" name="color" placeholder="Product Color" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Product Color'" required [(ngModel)]="productColor"
+                      class="form-control validate single-input">
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="stock">Units In Stock
+                  </label>
+                  <div class="">
+                    <input type="number" name="stock" placeholder="Units In Stock" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Units In Stock'" required [(ngModel)]="productQuantity"
+                      class="form-control validate single-input">
+                  </div>
+                </div>
+              </div>
+              <div class="row main align-items-center">
+                <div class="col">
                   Donate
+                  <label>
+                    <input type="checkbox" class=" filled-in" (change)="OnChecked($event)" />
                   </label>
                 </div>
+                <div class="col" *ngIf="isDonated">
+                  <label for="category">Charity</label>
+                  <select #charity class="single-input" style="height: 45px;" id="charity"
+                    (change)="onSelectionCharityChange(charity.value)">
+                    <option *ngFor="let c of charities" [value]="c.name">
+                      {{c.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
 
-                <div class="form-group mb-3" *ngIf="isDonated"  >
-                    <label
-                      for="category"
-                      >Charity</label
-
-                    >
-                    <select #charity
-                      class="custom-select tm-select-accounts"
-                      id="charity"
-                      (change)="onSelectionCharityChange(charity.value)"
-                    >
-                    <option default>Pick a charity</option>
-                      <option *ngFor="let c of charities" [value]="c.name">
-                        {{c.name}}
-
-                      </option>
-                    </select>
+              <div class="row main align-items-center">
+              <div class="images-container">
+                  <div *ngFor="let i of images">
+                    <div *ngIf="i">
+                      <img  *ngIf="i" class="product-image" src="assets/img/{{i}}" />
+                    </div>
                   </div>
-
-
-              <!-- <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                <div class="tm-product-img-dummy mx-auto">
-                  <i
-                    class="fas fa-cloud-upload-alt tm-upload-icon"
-                    onclick="document.getElementById('fileInput').click();"
-                  ></i>
-                </div>
-                <div class="custom-file mt-3 mb-3">
-                  <input id="fileInput" type="file" style="display:none;" (change)="onFileSelected($event)"/>
-                  <input
-                    type="button"
-                    class="btn btn-primary btn-block mx-auto"
-                    value="UPLOAD PRODUCT IMAGE"
-                    onclick="document.getElementById('fileInput').click();"
-                  />
-                </div>
-              </div> -->
-
-
-              <div class="row p-5">
-
-
-                <div class="col-lg-4 col-sm-4 p-3"
-
-                 *ngFor="let i of images"
-                 >
-
-                 <div *ngIf="i">
-                  <img  class="productImage" src="assets/img/{{i}}" />
-                 </div>
-
-                 <!-- <div *ngIf="i" class="text-center">
-                  <input id="fileInput" type="file" style="display:none;" (change)="onFileSelected($event)"/>
-                  <input
-                  type="button"
-                  class="btn btn-primary btn-block mx-auto"
-                  value="REMOVE IMAGE"
-                  (click)="RemoveImage(i)"
-                />
-                  </div> -->
-                </div>
-
+              </div>
                 <div class="text-center">
-                  <input id="fileInput" type="file" style="display:none;" (change)="onFileSelected($event)"/>
-                  <input
-                  type="button"
-                  class="btn btn-primary btn-block mx-auto"
-                  value="UPLOAD IMAGE"
-                  onclick="document.getElementById('fileInput').click();"
-                />
-                  </div>
-
+                    <input id="fileInput" type="file" style="display:none; " (change)="onFileSelected($event)" />
+                  <input type="button" class="btn ss  mx-auto" value="UPLOAD IMAGE"
+                    onclick="document.getElementById('fileInput').click();" />
+                </div>
+              </div>
+              <div class="col">
+                <input type="button" value="Add Product" (click)="AddProduct()"
+                  class="btn text-uppercase" />
               </div>
 
-              <div style="color: red;">{{maxLengthWarn}}</div>
-
-
-              <div *ngIf="!validData" style="color: red;">You Should Enter All Data and at Least One Image </div>
-              <div class="col-12">
-                <!-- <button type="button" class="btn btn-primary btn-block text-uppercase">Add Product Now</button> -->
-                <input type="button" value="Add Product Now" (click)="AddProduct()" class="btn btn-primary btn-block text-uppercase"/>
-
-              </div>
-
-              <div style="color: red">{{productAdded}}</div>
-            </form>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
+  </div>
 
-</div>
+  <div *ngIf="!userCanAdd" class="container tm-mt-big tm-mb-big">
+    <p class="fs-1 text-danger">Oops! It seems that your account is banned from adding any new products, please contact
+      customer support for more details.</p>
+  </div>
+</body>
+</html>
 
-<div *ngIf="!userCanAdd" class="container tm-mt-big tm-mb-big">
-  <p class="fs-1 text-danger">Oops! It seems that your account is banned from adding any new products, please contact customer support for more details.</p>
-</div>
 

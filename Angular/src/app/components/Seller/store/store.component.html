@@ -1,7 +1,22 @@
-<section class="py-0" id="All">
-  <div class="container">
 
-    <div class="dropdown row h-100 col-12">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<section class="py-0 pt-5" id="All">
+   <div class="container">
+    <div class="col-12 text-center">
+      <img  style="width: 5%; display: inline;padding-right: 3px;" src="assets/img/shop.png"  alt="logo" />
+      <span style="font-size: 3vw;color:#64113F; padding: 20px; text-decoration: underline;"><strong>Welcome to {{sellerName}}'s store</strong> </span>
+      <img  style="width: 5%; display: inline;padding-left: 3px;" src="assets/img/shop.png"  alt="logo" />
+
+    </div >
+    <div class="col-12 text-center pb-5 pt-2">
+      <img  style="width: 3%; display: inline;padding-right: 3px;" src="assets/img/star.png"  alt="logo" />
+      <span *ngIf="userId==Sellerid" style="font-size: 2vw;color:#64113F;padding:5px;"><strong>You've got a wooping rating of {{SellerObj.Rating}} out of 5 !</strong> </span>
+      <span *ngIf="userId!=Sellerid" style="font-size: 2vw;color:#64113F;padding:5px;"><strong>{{sellerName}}'ve got a wooping rating of {{SellerObj.Rating}} out of 5 !</strong> </span>
+      <img  style="width: 3%; display: inline;padding-right: 3px;" src="assets/img/star.png"  alt="logo" />
+    </div>
+
+    <div *ngIf="userId==Sellerid" class="dropdown row h-100 col-6 m-auto pb-4">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         All Products
       </button>
@@ -16,7 +31,46 @@
 
 
        <!--All Products-->
-       <div class="row h-100 col-12 p-5">
+
+       <div class="row justify-content-center">
+        <div class="col-md-3 col-lg-3 col-xl-3  p-2" *ngFor="let p of CurrProducts">
+          <div class="card" style="border-radius: 15px;">
+            <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light " style="height:250px; width:100%"
+              data-mdb-ripple-color="light">
+              <img src="assets/img/{{p.Images[0]}}"
+                style="border-top-left-radius: 15px; border-top-right-radius: 15px;height:100%; width:100%" class="img-fluid"
+                alt={{p.Name}}
+                (click)="ProductClick(p)"/>
+              <a href="#!">
+                <div class="mask"></div>
+              </a>
+            </div>
+            <div class="card-body pb-0 "  style="height:160px;background-color:#F6F6F6;">
+              <div class="d-flex justify-content-between pb-2">
+                <div>
+                  <p style="color:#64113F"><strong>{{(p.Name||"None")}}</strong></p>
+                  <img *ngIf="p.Donate"  style="width: 10%; display: inline; position: absolute;
+                      bottom: 8px;
+                      right: 16px;
+                      font-size: 18px;"  src="assets/img/heart.png"  title="When this product is sold, the money will go to charity" alt="loading"
+                    />
+                  <span class="small text-muted">{{p.Category||"None"}}</span>
+                  <span><a class="text-dark position-absolute top-80 end-0 pe-3">{{p.Price}} EGP</a></span>
+                </div>
+              </div>
+
+              <div *ngIf="userId==Sellerid" class="fw-bold text-center">
+                <span  class=" fw-bold  me-2" style="color: #64113F;">Approval Status : </span>
+                <span *ngIf="p.Status !=('Approved'||'Rejected') "   style="color: black;">Pending</span>
+                <span *ngIf="p.Status ==('Approved'||'Rejected') "   style="color: black;">{{p.Status}}</span>
+            </div>
+            <div *ngIf="p.AvailableQuantity==0 && p.SoldQuantity>0" style="color: #e02909;" class="fw-bold text-center">SOLD</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+       <!-- <div class="row h-100 col-12 p-5 m-auto" >
 
         <div class="row h-100 align-items-center g-2">
 
@@ -30,8 +84,8 @@
               <div class="w-100 h-50">
                 <h5 class="fw-bold  text-truncate text-center" style="color: #64113F;">{{product.Name}}</h5>
                 <div class="fw-bold text-center"><span class=" text-uppercase  fw-bold  me-2" style="color: #64113F;">Price : </span><span style="color: black;">{{product.Price}}</span> EGP</div>
-                <div class="fw-bold text-center">
-                  <span class=" fw-bold  me-2" style="color: #64113F;">Approval Status : </span>
+                <div *ngIf="userId==Sellerid" class="fw-bold text-center">
+                    <span  class=" fw-bold  me-2" style="color: #64113F;">Approval Status : </span>
                     <span *ngIf="product.Status !=('Approved'||'Rejected') "   style="color: black;">Pending</span>
                     <span *ngIf="product.Status ==('Approved'||'Rejected') "   style="color: black;">{{product.Status}}</span>
                 </div>
@@ -43,7 +97,7 @@
 
         </div>
 
-    </div>
+    </div> -->
   </div><!-- end of .container-->
 </section><!-- <section> close ============================-->
 <!-- ============================================-->

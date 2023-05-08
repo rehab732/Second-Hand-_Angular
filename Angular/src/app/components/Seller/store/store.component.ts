@@ -1,7 +1,9 @@
 import { Component,EventEmitter, OnInit,Output,Input } from '@angular/core';
 import { CategoryService } from '../../../Services/category.service';
 import { ProductService } from '../../../Services/Product.service';
+import { CustomerService } from '../../../Services/Customers.service';
 import { Router,ActivatedRoute,RouterModule } from '@angular/router';
+
 import jwt from 'jwt-decode';
 
 
@@ -18,13 +20,14 @@ export class StoreComponent implements OnInit {
   CurrProducts:any=[];
   userId:any;
   userToken: string | null = null;
-  //"643f45fcbe67bc74a0ec1b44"
+  sellerName="your";
   Sellerid:any;
+  SellerObj:any;
   // @Output("ProdDetails") myEvent = new EventEmitter();
   //@Input('master') masterName = '';
 
 
-  constructor(public catService:CategoryService,public proService:ProductService,private router:Router,private route: ActivatedRoute){
+  constructor(private CustService:CustomerService ,public catService:CategoryService,public proService:ProductService,private router:Router,private route: ActivatedRoute){
   }
 
   ProductClick(Product:any){
@@ -81,19 +84,18 @@ export class StoreComponent implements OnInit {
 
     });
 
-
-
-    this.catService.GetAllCategories().subscribe(
+    this.CustService.getCustumerById(this.Sellerid).subscribe(
       {
         next:(data:any)=>{
-          this.Categories=data["data"];
-           console.log(this.Categories);
-
+          console.log("Seller ",data["data.Name"])
+          if(this.userId!=this.Sellerid)
+             this.sellerName=data.data.Name;
+          this.SellerObj=data["data"];
         },
-        error:(err)=>{
-          console.error(err)}
+        error:(data)=>{ console.log(data);}
       }
-    );
+    )
+
 
     this.proService.GetSellerProducts(this.Sellerid).subscribe(
       {
