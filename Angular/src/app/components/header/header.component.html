@@ -21,7 +21,7 @@
           </li> -->
           <!-- <li class="nav-item px-2"><a class="nav-link fw-medium" routerLink="cart">Cart</a></li> -->
           <!-- Cart  -->
-          <div  class="pt-3 ">
+          <div *ngIf="userToken"   class="pt-3 ">
             <a style="color:black" routerLink="cart"w><i style="font-size: 30px;" class="fa fa-shopping-cart"></i></a>
             <span class='badge badge-warning' id='lblCartCount' routerLink="cart">*</span>
          </div>

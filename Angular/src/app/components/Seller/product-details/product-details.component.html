@@ -12,7 +12,7 @@
       <div  class="galllery">
         <img style="height: 400px;" src="assets/img/{{currentImage}}" alt="" id="proimg">
         <div class="controls">
-          <span *ngFor="let img of prodImages;index as i" class="btn" [class.active]="activeIndex === i" (click)="changeImage(i)"></span>
+          <a *ngFor="let img of prodImages;index as i"><span *ngIf="img" class="btn"[class.active]="activeIndex === i" (click)="changeImage(i)"></span></a>
         </div>
       </div>
       <div class="details">
