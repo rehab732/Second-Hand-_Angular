@@ -1,4 +1,3 @@
-//TODO: ajv file test add address ui
 const Ajv = require("ajv");
 const ajv = new Ajv();
 

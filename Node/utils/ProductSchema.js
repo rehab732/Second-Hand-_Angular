@@ -34,7 +34,7 @@ const ProductSchema = {
         Donate:{"type":"boolean"},
         Charity:{"type":"string"},
         SoldQuantity:{type:"number" , minimum:0},
-        Seller:{type:"object"}//TODO:ajv seller object
+        Seller:{type:"object"}//FIXME:ajv seller object
     },
     required:["Name", "Price", "AvailableQuantity" , "Color","Donate","Seller"],
 

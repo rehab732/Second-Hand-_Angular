@@ -25,9 +25,13 @@ const OrderSchema = {
         orderItems:{type:"array" , items:{
                 type:"object",
                 properties:{
-                    product: {type: 'string', pattern: '^[a-f\\d]{24}$'},
+                    product: {
+                        // type: 'string', pattern: '^[a-f\\d]{24}$'
+                    },
                     quantity: {type: "number",minimum: 1},
-                    userRating:{type:"number"}
+                    userRating:{
+                        // type:"number"
+                    }
                 },
                 required:[
                     "product" ,     
