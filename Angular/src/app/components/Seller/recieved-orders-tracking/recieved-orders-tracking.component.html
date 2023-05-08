@@ -1,0 +1,73 @@
+<!-- <p>order-tracking works!</p> -->
+
+
+<div class="container">
+  <div class="col-12 text-center pb-1">
+    <img  style="width: 5%; display: inline;padding-right: 3px;" src="assets/img/shopping-bag.png"  alt="logo" />
+    <span style="font-size: 3vw;color:#64113F; padding: 20px; text-decoration: underline;"><strong>Recieved orders</strong> </span>
+    <img  style="width: 5%; display: inline;padding-left: 3px;" src="assets/img/shopping-bag.png"  alt="logo" />
+
+  </div >
+  <div class="col-12 text-center pb-5">
+
+    <span style="font-size: 2vw;color:#64113F; padding: 20px; text-decoration: underline;"><strong>From newest to oldest</strong> </span>
+
+
+  </div >
+
+  <div class="row">
+    <div class="col">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th style="width:30%; color:#FFCB77">Info</th>
+            <th  style="width:20%; color:#FFCB77">Status</th>
+            <th  style="width:60%; color:#FFCB77" >Your Products</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of Orders">
+            <td >
+              <div style="color:#64113F"> <strong>Ordered in: </strong>{{formatDate(o.RegistrationDate)}}</div>
+              <div style="color:#64113F" *ngIf="o.Status == 'Shipped' || o.Status == 'Delivered'"> <strong>Shipped in: </strong>{{(o.ShippingDate)}}</div>
+              <div style="color:#64113F" *ngIf="o.Status == 'Delivered'"> <strong>Arrival Date: </strong> {{(o.ArrivalDate)}}</div>
+              <div style="color:#64113F"> <strong>Payment Method: </strong> {{o.PaymentMethod}}</div>
+
+            </td>
+            <td style="color:#64113F"><strong>{{o.Status}}</strong></td>
+            <td>
+              <table class="table text-center table-bordered table-info">
+                <tbody>
+                  <tr *ngFor="let item of o.orderItems;index as i">
+                    <!-- <div class="b border border-0 "> -->
+                  <div *ngIf="item.product.Seller.SellerID==this.userId" class="container d-flex justify-content-center">
+                      <img class="img-fluid col-3" src="assets/img/{{item.product.Images[0]}}">
+                    <!-- </div> -->
+                    <span class="col-6 in">
+                      <div class="b border border-0" >
+                        <strong style="color:#64113F">Product's Name:</strong> {{(item.product.Name||"None")}}
+                      </div>
+                      <div class="b border border-dark border-0">
+                        <strong style="color:#64113F">Bought Quantity:</strong> {{item.quantity||"None"}}
+                      </div>
+                      <div class="b border border-dark border-0">
+                        <strong style="color:#64113F">Product Price:</strong>{{item.product.Price||"None"}}
+                      </div>
+                      <div class="b border border-dark border-0">
+                       <strong style="color:#64113F"> Delivery Address:</strong> {{o.Address||"None"}}
+                      </div>
+
+                    </span>
+                  </div>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <!-- <td>
+             </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,9 @@ import { OrderTrackingComponent } from './components/Buyer/order-tracking/order-
 import { UpdateCategoryComponent } from './components/admin/category/update-category/update-category.component';
 import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
 import { CustomerService } from './Services/Customers.service';
+import {RecievedOrdersTrackingComponent} from  './components/Seller/recieved-orders-tracking/recieved-orders-tracking.component';
 import {CharityComponent} from "./components/charity/charity.component"
+
 
 
 @Injectable()
@@ -47,6 +49,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"Seller/AddProduct",component:SellerAddProductComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"Seller/EditProduct/:id",component:SellerEditProductComponent, canActivate:[OnlyLoggedInUsersGuard]},
+  {path:"Seller/RecievedOrders",component:RecievedOrdersTrackingComponent},
   {path:"ProductDetails/:id", component:ProductDetailsComponent},
   {path:"store",component:StoreComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"Seller/ProductDetails/:id", component:ProductDetailsComponent},
