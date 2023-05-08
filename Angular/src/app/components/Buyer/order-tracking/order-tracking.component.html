@@ -51,7 +51,7 @@
                        <strong style="color:#64113F"> Delivery Address:</strong> {{o.Address||"None"}}
                       </div>
                       <div *ngIf="o.Status == 'Delivered' && !item.userRating ">
-                        <select #rating [value]="item.userRating">
+                        <select #rating [value]="(item.userRating||'1')">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
