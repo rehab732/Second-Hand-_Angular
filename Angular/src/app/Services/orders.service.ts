@@ -16,6 +16,8 @@ export class OrdersService {
     return this.myClient.get(this.URL + '/get/buyer/'+id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   UpdateOrderRatings(order:any){
-    return this.myClient.put(this.URL + '/update/'+order._id , order);
+    console.log(order);
+
+    return this.myClient.put(this.URL + '/update/'+order._id , order,{headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 }

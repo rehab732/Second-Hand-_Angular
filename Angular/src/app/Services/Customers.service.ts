@@ -55,7 +55,6 @@ export class CustomerService {
   }
 
   GetCustomerDetails(customer_id: any){
-    console.log(localStorage.getItem("UserToken"));
     return this.myClient.get(this.URL + '/GetCustomerByID/'+ customer_id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 
