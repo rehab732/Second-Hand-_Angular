@@ -7,7 +7,7 @@ module.exports = (req, res, next)=>{
     var Token = req.headers.authorizaion.split(" ")[1];
 //    console.log("Token: " + Token);
     if(Token && Token != "null"){
-        console.log("Token: " + Token);
+        // console.log("Token: " + Token);
         next();
     }else{
         return res.status(400).send("You are not Logged in...");

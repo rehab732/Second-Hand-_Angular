@@ -112,11 +112,12 @@ let updateOrderItemRating = async (req,res)=>{
     try{
         let orderId= req.params.id;
         let order = req.body;
-        if(validateOrder(order) == false)//bad request
-            return res.status(400).json({message:"Request Body is Wrong!!"});
+        const valid=validateOrder(order);
+        if(valid == false)//bad request
+            return res.status(400).json({message:validateOrder.errors});
         let found = await OrderModel.findOne({_id:orderId}).exec();//From DB [Encrypted]
-            if(!found)
-                return res.status(401).json({message:"Invalid id"});
+        if(!found)
+            return res.status(401).json({message:"Invalid id"});
 
         for(var i=0;i< found.orderItems.length ;i++)
         {
