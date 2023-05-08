@@ -2,7 +2,9 @@ const Ajv = require("ajv");
 const ajv = new Ajv(); 
 // const addressSchema = require("../utils/AddressAJV")
 
-const dateTimeRegex = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/);
+// const dateTimeRegex = new RegExp(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/);
+const dateTimeRegex 
+    = new RegExp('((?:2|1)\\d{3}(?:-|\/)(?:(?:0[1-9])|(?:1[0-2]))(?:-|\/)(?:(?:0[1-9])|(?:[1-2][0-9])|(?:3[0-1]))((?:T|\\s)(?:(?:[0-1][0-9])|(?:2[0-3])):(?:[0-5][0-9]):(?:[0-5][0-9])){0,1})')
 
 ajv.addFormat('date-time', {
     validate: (dateTimeString) => dateTimeRegex.test(dateTimeString)
@@ -36,6 +38,7 @@ const CustomerSchema = {
                 Zone:{type:"string" , maxLength:50},
                 City:{type:"string" , maxLength:50},
                 Governorate:{type:"string" , maxLength:50},
+                //Cart:{}
             },
             required:["FloorNumber" , "Street" , "Zone" , "City" , "Governorate"],
             additionalProperties:false

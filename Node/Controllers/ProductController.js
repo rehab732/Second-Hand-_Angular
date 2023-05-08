@@ -109,10 +109,17 @@ let GetProductByName = async (req,res)=>{
 
 
 let GetAllProducts = async (req,res)=>{
+    const {page=1, limit=10} = req.query;
+    const skip = (page - 1) * limit;
    //DB
-    let allProducts= await ProductModel.find().exec();//From DB
+    let allProducts= await ProductModel.find().skip(skip).limit(limit);
+    const totalProducts = await ProductModel.countDocuments();
+    //await ProductModel.find().exec();//From DB
+    
+    
+    
     if(!allProducts||allProducts.length==0) return res.status(401).json({message:"No Products found"});
-    res.status(200).json({message:"Products found",data:allProducts})
+    res.status(200).json({message:"Products found",data:allProducts, page, limit, totalProducts});
 
 
 }
@@ -167,6 +174,7 @@ let UpdateProduct = async (req,res)=>{
         // if(ProductValidate(UpdatedProduct) == false)
         // UpdatedProduct = req.body.product
         console.log("Product Validate" , ProductValidate(UpdatedProduct));
+        console.log("ProductToUpdate" , (UpdatedProduct));
         if(ProductValidate(UpdatedProduct) == false)//bad request
             return res.status(400).json({message:"Request Body is Wrong!!"});
 

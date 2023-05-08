@@ -1,6 +1,7 @@
 const OrderModel = require("../Models/OrderModel");
 const mongoose = require("mongoose");
 const validateOrder = require("../utils/OrderAJV")
+const ValidateOrderItems = require("../utils/ItemModelAJV")
 
 const bcrypt = require("bcrypt");
 
@@ -9,11 +10,16 @@ const bcrypt = require("bcrypt");
 let AddNewOrder = async (req,res)=>{
 
     let newOr = req.body;
-    const valid=validateOrder(newOr)
-    if(valid== false)//bad request
-        return res.status(400).json({message:validateOrder.errors});
-    //TODO:check schema
-    //check Item Model -->[existence of product + product Qty]
+    
+    //console.log(validateOrder(newOr))
+    //console.log((newOr))
+    var valid= validateOrder(newOr)
+    if(valid == false)//bad request
+        return res.status(400).json({message:{
+            valid:validateOrder.errors,
+            OrderItems:newOr.orderItems
+        }});
+    
 
     let newOrder = new OrderModel(newOr);
     await newOrder.save();
@@ -89,6 +95,7 @@ let GetBuyerOrders = async (req,res)=>{
  
 }
 
+
 let GetSellerOrders = async (req,res)=>{
     let sellerId = new mongoose.Types.ObjectId(req.params.id);//From Client
         //console.log(getOrder)
@@ -163,6 +170,7 @@ let updateOrderItemRating = async (req,res)=>{
         let orderId= req.params.id;
         let order = req.body;
         const valid=validateOrder(order);
+        console.log("orderToUpdate" , order , "up-valid" , valid)
         if(valid == false)//bad request
             return res.status(400).json({message:validateOrder.errors});
         let found = await OrderModel.findOne({_id:orderId}).exec();//From DB [Encrypted]

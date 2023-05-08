@@ -22,6 +22,8 @@ import { UpdateCategoryComponent } from './components/admin/category/update-cate
 import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
 import { CustomerService } from './Services/Customers.service';
 import {RecievedOrdersTrackingComponent} from  './components/Seller/recieved-orders-tracking/recieved-orders-tracking.component';
+import {CharityComponent} from "./components/charity/charity.component"
+
 
 
 @Injectable()
@@ -57,7 +59,7 @@ const routes: Routes = [
   {path:"admindashboard",component:AdmindashboardComponent, canActivate:[OnlyLoggedInUsersGuard]},
   //{path:"admin/users", component:UsersListComponentComponent},
   {path:"admin/users/:id", component:UserDetailsComponent, canActivate:[OnlyLoggedInUsersGuard]},
-  //{path:"charity" , component:CharityComponent},
+  // {path:"charity" , component:CharityComponent},
   {path:"charity-update/:id" , component:UpdateCharityComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"charity-add" , component:AddCharityComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"charity-details/:id" , component:CharityDetailsComponent},

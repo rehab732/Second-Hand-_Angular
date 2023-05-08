@@ -2,10 +2,19 @@ const CharityModel = require("../Models/CharityModel");
 const ItemModel = require("../Models/ItemModel");
 const ProductModel = require("../Models/ProductModel");
 const mongoose = require("mongoose");
+const ValidateCharity = require("../utils/CharityAJV")
+const ValidateDonatedItems = require("../utils/ItemModelAJV")
 
 let AddNewCharity = async (req,res)=>{
     
     let newCharity = req.body;
+    //console.log(`Charity Validation:${ValidateCharity(newCharity)}`)
+    if(ValidateCharity(newCharity) == false)//bad request
+    return res.status(400).json({message:"Request Body is Wrong!!"});
+    if(newCharity.DonatedItems && ValidateDonatedItems(newCharity.DonatedItems) == false)
+        return res.status(400).json({message:"Request Body is Wrong!!"});
+
+    console.log(`DonatedItems:${newCharity.DonatedItems}`)
     newCharity=(req.body);
     // newCharity=new mongoose.Types.ObjectId(req.body);
     let found = await CharityModel.findOne({name:newCharity.name}).exec();//found[true] || notFound[false]
@@ -109,6 +118,15 @@ let UpdateCharityByName = async (req,res)=>{
     try{
         let oldName= req.params.name;//From Client
         let newBody=req.body;
+
+        console.log("e=req.body" , newBody)
+        console.log(`Charity Validation:${ValidateCharity(newBody)}`)
+        if(newBody && ValidateCharity(newBody) == false)//bad request
+            return res.status(400).json({message:"Request Body is Wrong!!"});
+
+        console.log(ValidateDonatedItems(newBody.DonatedItems))
+        if(newBody.DonatedItems && ValidateDonatedItems(newBody.DonatedItems) == false)
+            return res.status(400).json({message:"Request Body is Wrong!!"});
         //find old data
         let found = await CharityModel.findOne({name:oldName}).exec();//From DB [Encrypted]
         if(!found)
