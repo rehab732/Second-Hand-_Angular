@@ -34,7 +34,8 @@ export class UsersListComponentComponent implements OnInit {
   ban(user:any){
     console.log("Banned!")
     user.CanSellStatus = false;
-    this.cutomerService.updateCustomer(user,this.ID).subscribe({
+    // console.log("banUser" , user)
+    this.cutomerService.updateCustomer(user,user._id).subscribe({
       next:(data)=>{
         console.log(data)
       },
