@@ -89,6 +89,56 @@ let GetBuyerOrders = async (req,res)=>{
  
 }
 
+let GetSellerOrders = async (req,res)=>{
+    let sellerId = new mongoose.Types.ObjectId(req.params.id);//From Client
+        //console.log(getOrder)
+       
+    let ord=[];
+    let allOrders = await OrderModel.find({ "orderItems.0":{$exists: true} }
+        ).populate({
+            path:"orderItems.product",
+            strictPopulate: false,        
+
+        }).populate({
+            path:"orderItems.product.Seller.SellerID",
+            strictPopulate: false,
+            match: {
+                "SellerID": sellerId,         
+            }}
+    ).then((res)=> 
+        res.filter((order)=> 
+        {
+                let orderit=order.orderItems.filter((item) =>{
+                    return item.product.Seller.SellerID.toString()== sellerId.toString()
+                    
+                })
+                if(orderit.length>0)
+                    return {buyer: order.buyer,
+                            Status: order.Status,
+                            Address: order.Address,
+                            PaymentMethod: order.PaymentMethod,
+                            RegistrationDate: order.RegistrationDate,
+                            ShippingDate:order.ShippingDate,
+                            ArrivalDate:order.ArrivalDate,
+                            orderItems:orderit
+             
+                    }
+                
+        })
+
+           
+       );
+    
+    
+    
+ 
+     if(!allOrders)//||allOrders.length==0) 
+        return res.status(401).json({message:"No Orders found"});
+     res.status(200).json({message:"Orders found",data:allOrders})
+ 
+ 
+}
+
 //TODO:y update order status
 // let updateOrderStatus = async (req,res)=>{
 //     try{
@@ -139,5 +189,6 @@ module.exports = {
     GetAllOrders,
     // updateOrderStatus,
     GetBuyerOrders,
-    updateOrderItemRating
+    updateOrderItemRating,
+    GetSellerOrders
 }

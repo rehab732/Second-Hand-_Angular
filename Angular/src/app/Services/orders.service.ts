@@ -20,4 +20,7 @@ export class OrdersService {
 
     return this.myClient.put(this.URL + '/update/'+order._id , order,{headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
+  GetSellerOrders(id:any){
+      return this.myClient.get(this.URL + '/getSeller/'+id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
 }

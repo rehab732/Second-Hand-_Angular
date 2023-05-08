@@ -12,16 +12,20 @@
 
       <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#All"style="color: #64113F;">All Products</a></li>
-          <li *ngIf="userToken"  class="nav-item px-2"><a class="nav-link fw-medium" routerLink="store/{{userId}}">My Store!</a></li>
-          <li *ngIf="userToken"  class="nav-item px-2"><a class="nav-link fw-medium" routerLink="buyer/orders">Orders</a></li>
+          <li class="nav-item "><a class="nav-link fw-medium active" aria-current="page" href="#All"style="color: #64113F;">All Products</a></li>
+          <li *ngIf="userToken"  class="nav-item "><a class="nav-link fw-medium" routerLink="store/{{userId}}">My Store!</a></li>
+          <li *ngIf="userToken"  class="nav-item "><a class="nav-link fw-medium" routerLink="buyer/orders">My Orders</a></li>
+          <li *ngIf="userToken"  class="nav-item "><a class="nav-link fw-medium" routerLink="Seller/RecievedOrders">Recieved Orders</a></li>
+          <!-- <li  *ngIf="userToken"  class="nav-item ">
+
+          </li> -->
           <!-- <li class="nav-item px-2"><a class="nav-link fw-medium" routerLink="cart">Cart</a></li> -->
           <!-- Cart  -->
-          <div  class="pt-3">
+          <div  class="pt-3 ">
             <a style="color:black" routerLink="cart"w><i style="font-size: 30px;" class="fa fa-shopping-cart"></i></a>
-            <span class='badge badge-warning' id='lblCartCount' routerLink="cart">0</span>
+            <span class='badge badge-warning' id='lblCartCount' routerLink="cart">*</span>
+         </div>
 
-          </div>
         </ul>
 
         <span *ngIf="userToken" style="color: #64113F;font-weight:bold;">Welcome, {{userName}}</span>

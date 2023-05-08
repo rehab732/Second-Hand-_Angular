@@ -33,6 +33,7 @@ import { CategoryComponent } from './components/admin/category/category.componen
 import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
 import { UpdateCategoryComponent } from './components/admin/category/update-category/update-category.component';
 import { CustomerService } from './Services/Customers.service';
+import { RecievedOrdersTrackingComponent } from './components/Seller/recieved-orders-tracking/recieved-orders-tracking.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { CustomerService } from './Services/Customers.service';
     CategoryComponent,
     AddCategoryComponent,
     UpdateCategoryComponent,
+    RecievedOrdersTrackingComponent,
   ],
   imports: [
     BrowserModule,
