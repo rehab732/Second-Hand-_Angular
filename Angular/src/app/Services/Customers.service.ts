@@ -16,7 +16,7 @@ export class CustomerService {
   IsloggedIn(): boolean {
     this.token = localStorage.getItem("UserToken");
     if(this.token)  return true;
-
+  //
     return false;
   }
 
