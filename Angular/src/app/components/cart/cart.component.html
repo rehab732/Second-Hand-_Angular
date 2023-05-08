@@ -64,7 +64,7 @@
           <div class="col">TOTAL AMOUNT</div>
           <div class="col text-right">{{(ItemsPrice+ShippingPrice)}} EGP</div>
         </div>
-        <button class="btn"  (click)="ShowOrderDetails()">GO TO CHECKOUT</button>
+        <button *ngIf="ItemsPrice" class="btn"  (click)="ShowOrderDetails()">GO TO CHECKOUT</button>
       </div>
     </div>
   </div>

@@ -19,6 +19,7 @@
         <h1 class="pb-4">{{Product.Name}}</h1>
         <p><B class="txt">Price: </B>EGP {{Product.Price}}</p>
         <p><B class="txt">Category: </B>{{Product.Category}}</p>
+        <p *ngIf="Product.Donate"><B class="txt">Charity: </B>{{Product.Charity}}</p>
         <p><B class="txt">Color: </B>{{Product.Color}}</p>
         <p><B class="txt">Quantity: </B>{{Product.AvailableQuantity}}</p>
         <p><B class="txt">Release Date: </B>{{productDate}}</p>
