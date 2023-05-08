@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   userId:any;
   userName:any;
   cartCount:any;
+  isAdmin:any;
   constructor() { }
 
   ngOnInit(): void {
@@ -20,11 +21,10 @@ export class HeaderComponent implements OnInit {
 
       this.userId = (jwt(this.userToken) as any).customerId;
       this.userName = (jwt(this.userToken) as any).userName;
-      // this.cartCount= (jwt(this.userToken) as any).cartCount;
-      // if(!this.cartCount)
-      //   this.cartCount=0;
+      this.isAdmin= (jwt(this.userToken) as any).isAdmin;
 
-      console.log( this.userId);
+
+      //console.log( this.userId);
     }
   }
 

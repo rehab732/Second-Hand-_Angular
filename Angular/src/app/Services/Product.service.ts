@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {URLs} from './ServiceUrl'
 
 //HttpClient [Get-Post-Delete-Put-Patch]
 @Injectable({
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
   constructor(private readonly myClient: HttpClient) {}
 
-  private readonly URL = 'http://localhost:7010/api/Products'; //API
+  private readonly URL =URLs+'/Products'; //API
 
   GetProductsDetails(id:any) {
     console.log("Product details services");

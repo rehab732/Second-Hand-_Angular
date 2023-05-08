@@ -14,7 +14,7 @@
 
               <select #addr *ngIf="customer"
                 class="custom-select tm-select-accounts" [(ngModel)]="currentAddress" id="address">
-                      <option *ngFor="let add of customer.Addresses" [value]="add.City">
+                      <option *ngFor="let add of customer.Addresses" [value]="add.ApartmentNumber+' | '+add.Street+ '| '+add.Zone+' | '+add.City">
                         {{add.ApartmentNumber+" | "+add.Street+" | "+add.Zone+" | "+add.City}}
                       </option>
                     </select>
@@ -29,10 +29,11 @@
                   <option value="Stripe">Stripe</option>
               </select>
               </div>
-            <button *ngIf="!orderCompleted" type="button" class="btn btn-primary btn-lg btn-block" (click)="OrderNow(method.value)">
+            <button *ngIf="!orderCompleted && currentAddress" type="button" class="btn btn-primary btn-lg btn-block" (click)="OrderNow(method.value)">
               Order Now
             </button>
-            <div *ngIf="payVerified" style="color: red;"> Payment Verified</div>
+            <div *ngIf="!currentAddress" style="color: red;">You must choose an address, if you don't have one,then add one from <a routerLink="/editprofile">here</a></div>
+            <div *ngIf="this.payToken" style="color: green;"> Payment Verified</div>
             <div *ngIf="orderCompleted" style="color: green;"> Order Completed ! Please keep track of your order status, you will be redirected to home page in a few seconds.</div>
             </div>
           </div>

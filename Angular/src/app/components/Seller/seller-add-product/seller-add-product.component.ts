@@ -79,7 +79,7 @@ export class SellerAddProductComponent implements OnInit {
       this.customerService.getCustumerById(this.userId).subscribe(
         {
           next:(data:any)=>{
-            console.log(data);
+            //console.log(data);
             this.userCanAdd=data["data"].CanSellStatus;
             console.log("User can sell: ", this.userCanAdd);
 
@@ -135,14 +135,14 @@ export class SellerAddProductComponent implements OnInit {
        "Charity":this.productCharity,
        "Seller":{"SellerID":this.userId}
   }
-    console.log(product);
-    // this.sellerService.AddProduct(product).subscribe(data => console.log('success', data), error => console.log('error', error));
+    //console.log(product);
+    //this.sellerService.AddProduct(product).subscribe(data => console.log('success', data), error => console.log('error', error));
     // console.log("Product Added");
 
     this.sellerService.AddProduct(product).subscribe(
       {
         next:(data)=>{
-          console.log('success', data);
+         // console.log('success', data);
         },
         error:(err)=>{
           console.error(err)}

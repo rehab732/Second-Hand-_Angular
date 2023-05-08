@@ -77,7 +77,7 @@ export class StoreComponent implements OnInit {
 
       }
       else{
-       console.log("Cant find seller :",data);
+       //console.log("Cant find seller :",data);
       }
 
       console.log("Seller",this.Sellerid,"User",this.userId);
@@ -87,7 +87,7 @@ export class StoreComponent implements OnInit {
     this.CustService.getCustumerById(this.Sellerid).subscribe(
       {
         next:(data:any)=>{
-          console.log("Seller ",data["data.Name"])
+          //console.log("Seller ",data["data.Name"])
           if(this.userId!=this.Sellerid)
              this.sellerName=data.data.Name;
           this.SellerObj=data["data"];
@@ -109,7 +109,7 @@ export class StoreComponent implements OnInit {
 
           );}
           this.CurrProducts=this.Products;
-          console.log(this.Products);
+          //console.log(this.Products);
         },
         error:(data)=>{ console.log(data);}
       }

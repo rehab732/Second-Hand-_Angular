@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {URLs} from './ServiceUrl'
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,8 @@ export class AdminServiceService {
 
   constructor(private readonly myClient: HttpClient) {}
 
-  private readonly URL = 'http://localhost:7010/api/Admins'; //API
-  private readonly prdURL = 'http://localhost:7010/api/Products'; //API
+  private readonly URL = URLs+'/Admins'; //API
+  private readonly prdURL =URLs+ '/Products'; //API
 
   Adminlogin(admin: any) {
     console.log(admin);

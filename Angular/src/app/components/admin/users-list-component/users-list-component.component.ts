@@ -20,7 +20,7 @@ export class UsersListComponentComponent implements OnInit {
     this.cutomerService.getAllUsers().subscribe({
       next:(data:any)=>{
         this.Users = data.data
-        console.log(this.Users)
+        //console.log(this.Users)
       },
       error:(err:any)=>{
         if(err.status == 401){
@@ -37,7 +37,7 @@ export class UsersListComponentComponent implements OnInit {
     // console.log("banUser" , user)
     this.cutomerService.updateCustomer(user,user._id).subscribe({
       next:(data)=>{
-        console.log(data)
+        //console.log(data)
       },
       error:(err)=>{
         console.log(err);
@@ -47,9 +47,9 @@ export class UsersListComponentComponent implements OnInit {
   removeBan(user:any){
     console.log("ban removede!")
     user.CanSellStatus = true;
-    this.cutomerService.updateCustomer(user,this.ID).subscribe({
+    this.cutomerService.updateCustomer(user,user._id).subscribe({
       next:(data)=>{
-        console.log(data)
+       // console.log(data)
       },
       error:(err)=>{
         console.log(err);

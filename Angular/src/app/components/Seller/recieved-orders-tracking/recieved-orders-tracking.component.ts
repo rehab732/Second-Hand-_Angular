@@ -24,7 +24,7 @@ export class RecievedOrdersTrackingComponent implements OnInit {
         next:(data:any)=>{
 
           this.Orders=data["data"].sort((b:any, a:any) => new Date(a.RegistrationDate).valueOf() - new Date(b.RegistrationDate).valueOf()) ;
-          console.log(this.Orders);
+          //console.log(this.Orders);
 
 
         },

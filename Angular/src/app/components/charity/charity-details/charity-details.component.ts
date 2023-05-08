@@ -29,7 +29,7 @@ export class CharityDetailsComponent implements OnInit {
       {
         next:(data:any)=>{
           this.Charity = data.data ;
-          console.log(this.Charity);
+          //console.log(this.Charity);
         },
         error:(err)=>{
           console.error(err)}
@@ -43,7 +43,7 @@ export class CharityDetailsComponent implements OnInit {
       this.charityService.deleteCharity(this.Charity._id).subscribe(
         {
           next:(data:any)=>{
-            console.log(data);
+            //console.log(data);
             this.router.navigateByUrl("charity");
           },
           error:(err)=>{
