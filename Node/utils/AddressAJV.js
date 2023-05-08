@@ -2,7 +2,8 @@
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
-const AddressSchema = {type:"array" , items:{
+const AddressSchema = {
+    // type:"array" , items:{
     type:"object",
     properties:{
         ApartmentNumber:{type:"number"},
@@ -14,7 +15,7 @@ const AddressSchema = {type:"array" , items:{
     },
     required:["FloorNumber" , "Street" , "Zone" , "City" , "Governorate"],
     additionalProperties:false
-    }
+    // }
 }
 
 module.exports = ajv.compile(AddressSchema);

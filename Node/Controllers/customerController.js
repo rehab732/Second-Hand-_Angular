@@ -112,13 +112,13 @@ let AddNewAddress = async (req,res)=>{//TODO:u ajv validate address
     try{
         let body = req.body;
         let customerID = new mongoose.Types.ObjectId(req.params.id);
-        // var valid= ValidateAddress(body)
-        // console.log("AddressBody" , body , "valid" , valid)
-        // if(valid == false)//bad request
-        //     return res.status(400).json({message:{
-        //         valid:ValidateAddress.errors,
-        //         body:body
-        //     }});
+        var valid= ValidateAddress(body)
+        console.log("AddressBody" , body , "valid" , valid)
+        if(valid == false)//bad request
+            return res.status(400).json({message:{
+                valid:ValidateAddress.errors,
+                body:body
+            }});
         let found = await CustomerModel.findOne({_id:customerID}).exec();
         if(!found) return res.status(401).json({message:"Invalid Customer id"});
 
