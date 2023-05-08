@@ -14,6 +14,7 @@ router.post("/AddItemToCart/:id", loginPermission, CustomerController.AddItemToC
 router.post("/UpdateItemQuantity/:id", loginPermission, CustomerController.UpdateItemQuantityInCart);
 router.post("/RemoveItemFromCart/:id", loginPermission, CustomerController.RemoveItemFromCart);
 router.get("/GetCartItems/:id", loginPermission, CustomerController.GetCartItems);
+router.put("/EditCustomer/:id", loginPermission,  CustomerController.EditCustomerProfile);
 
 
 module.exports = router;

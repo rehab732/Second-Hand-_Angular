@@ -21,7 +21,7 @@ let OrderSchema = new mongoose.Schema({
     //OrderItems
     orderItems: [
        
-         ItemModel,
+         ItemModel
        
     ],
     TotalPrice:Number,
@@ -43,8 +43,6 @@ let OrderSchema = new mongoose.Schema({
       enum:PaymentMethod,
       default:"Cash"
    }
-   
-    //TODO:payment
 });
 
 module.exports = mongoose.model("Order",OrderSchema);

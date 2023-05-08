@@ -15,6 +15,7 @@ import jwt from 'jwt-decode';
 export class PaymentComponent implements OnInit {
 
   CartProducts:any=[];
+  FetchedItems:any=[];
   ItemsPrice:number=0;
   ShippingPrice:number=40;
   customer:any;
@@ -48,7 +49,16 @@ export class PaymentComponent implements OnInit {
     this.customerService.GetCartItems(this.userId).subscribe(
       {
         next:(data:any)=>{
-          this.CartProducts=data["data"].items;
+          this.FetchedItems = data["data"].items
+          this.CartProducts=[];
+          for(var i=0;i<data["data"].items.length ; i++){
+            this.CartProducts.push({
+              "product":data["data"].items[i].product._id,
+              "quantity":data["data"].items[i].quantity,
+              "userRating":data["data"].items[i].userRating,
+              "_id":data["data"].items[i]._id,
+            })
+          }
           this.CalculatePrice();
            console.log(this.CartProducts);
 
@@ -70,7 +80,7 @@ export class PaymentComponent implements OnInit {
   }
   CalculatePrice(){
     this.ItemsPrice=0;
-    for(var item of this.CartProducts){
+    for(var item of this.FetchedItems){
       this.ItemsPrice+=item.product.Price * item.quantity;
     }
   }
@@ -91,6 +101,7 @@ export class PaymentComponent implements OnInit {
           "Address":this.SelectedAddress,
           "PaymentMethod":"Stripe"
         }
+        console.log("order in pay comp" , order)
         this.AddNewOrder(order);
       }
       else{
