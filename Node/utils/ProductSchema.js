@@ -18,7 +18,7 @@ const ProductSchema = {
         AvailableQuantity:{type:"number", minimum:1},
         IsDeleted: {type: "boolean"},
         Images:{type:"array" , "minItems": 0,"maxItems": 6
-                ,"items": {"type": "string"}, 
+                //,"items": {"type": "string"}, 
             },
         ReleaseDate:{"type":"string" ,  
                         // "format": "date-time" 
@@ -31,7 +31,7 @@ const ProductSchema = {
         Seller:{type:"object"}//TODO:ajv
     },
     required:["Name", "Price", "AvailableQuantity" , "Color","Donate","Seller"],
-    additionalProperties:false
+   // additionalProperties:false
 }
 
 module.exports = ajv.compile(ProductSchema);//validate(body)==> true || false ===> method()
