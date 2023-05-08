@@ -7,8 +7,8 @@ const mongoose = require("mongoose");
 let AddNewProduct = async (req,res)=>{
    
     let newProduct = req.body;
-    console.log(req.body);
-    console.log("Product Add Validate" , ProductValidate(newProduct));
+    //console.log(req.body);
+    //console.log("Product Add Validate" , ProductValidate(newProduct));
     if(ProductValidate(newProduct) == false)//bad request
         return res.status(400).json({message:"Request Body is Wrong!!"});
     newProduct.SoldQuantity = 0;
@@ -96,7 +96,7 @@ let GetProductByCategory = async (req,res)=>{
 let GetProductByName = async (req,res)=>{
     //DB
     try{
-        console.log("GetProductByName " + req.params.name);
+       // console.log("GetProductByName " + req.params.name);
         let getProductName = req.params.name;//From Client
         let found = await ProductModel.find({Name:getProductName}).exec();
         if(!found) return res.status(401).json({message:"Invalid name"});

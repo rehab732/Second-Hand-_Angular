@@ -113,7 +113,7 @@ let AddNewAddress = async (req,res)=>{
         let body = req.body;
         let customerID = new mongoose.Types.ObjectId(req.params.id);
         var valid= ValidateAddress(body)
-        console.log("AddressBody" , body , "valid" , valid)
+        //console.log("AddressBody" , body , "valid" , valid)
         if(valid == false)//bad request
             return res.status(400).json({message:{
                 valid:ValidateAddress.errors,
@@ -122,7 +122,7 @@ let AddNewAddress = async (req,res)=>{
         let found = await CustomerModel.findOne({_id:customerID}).exec();
         if(!found) return res.status(401).json({message:"Invalid Customer id"});
 
-        console.log("body");
+        //console.log("body");
         found.Addresses.push(body);
         await found.save();
         return res.status(201).json({message:"Address Added Successfully",data:found});
