@@ -1,10 +1,15 @@
-//crud by name
 const mongoose = require("mongoose");
 const CategoryModel = require("../Models/CategoryModel");
+const ValidateCategory = require("../utils/CategoryAJV")
 
 let AddNewCategory= async (req,res)=>{
    try{
     let newCategory = req.body;
+
+    console.log(`Charity Validation:${ValidateCategory(newCategory)}`)
+    if(ValidateCategory(newCategory) == false)//bad request
+        return res.status(400).json({message:"Request Body is Wrong!!"});
+
     let found = await CategoryModel.findOne({name:newCategory.name}).exec();//found[true] || notFound[false]
     if(found) 
         return res.status(401).json({message:"Category Already Exist !!"});

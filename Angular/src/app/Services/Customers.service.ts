@@ -24,9 +24,10 @@ export class CustomerService {
     console.log(customer);
     return this.myClient.post(this.URL + '/reg', customer);
   }
-  AddnewAddress(customer: any,customer_id:any) {
-    console.log(customer);
-    return this.myClient.post(this.URL + '/AddAddress/'+customer_id, customer, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  AddnewAddress(address: any,customer_id:any) {
+    console.log("AddAddress-Service")
+    console.log(address);
+    return this.myClient.post(this.URL + '/AddAddress/'+customer_id, address, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   Customerlogin(customer: any) {
     console.log(customer);
@@ -67,6 +68,9 @@ export class CustomerService {
   }
   getCustumerById(_id:any){
     return this.myClient.get(this.URL + "/GetCustomerByID/" + _id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+  }
+  editCustomerProfile(customer:any,customer_id:any){
+    return this.myClient.put(this.URL + "/EditCustomer/" + customer_id , customer, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
 }
 

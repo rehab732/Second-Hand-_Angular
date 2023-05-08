@@ -42,7 +42,7 @@ Add(Apart:any,Floor:any,Street:any,Zone:any,City:any,Gover:any)
     this.customerService.AddnewAddress(newaddress,this.customerID).subscribe(
       {
         next:(data)=>{
-           console.log(data);
+           console.log("customerService.AddnewAddress" , data);
         },
         error:(err)=>{
           console.error("errrrrrrrrrrrrror");
@@ -58,15 +58,16 @@ Edit(name:any,phone:any,email:any,dofb:any)
     Name:name,
     Phone:phone,
     Email:email,
-    DateOfBirth:dofb
+    DateOfBirth:dofb,
+    Password:"dummyJustToKeepStructure"//not updated in DB
   }
-this.customerService.updateCustomer(editedCustomer,this.customerID).subscribe(
+this.customerService.editCustomerProfile(editedCustomer,this.customerID).subscribe(
   {
     next:(data)=>{
       console.log(data);
     },
     error:(err)=>{
-      console.error("errrrrrrrrrrrrror");
+      console.error("up-error" , err.message);
     }
   }
 )

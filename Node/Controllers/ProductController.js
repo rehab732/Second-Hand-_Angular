@@ -174,6 +174,7 @@ let UpdateProduct = async (req,res)=>{
         // if(ProductValidate(UpdatedProduct) == false)
         // UpdatedProduct = req.body.product
         console.log("Product Validate" , ProductValidate(UpdatedProduct));
+        console.log("ProductToUpdate" , (UpdatedProduct));
         if(ProductValidate(UpdatedProduct) == false)//bad request
             return res.status(400).json({message:"Request Body is Wrong!!"});
 
