@@ -1,6 +1,6 @@
 const AdminModel = require("../Models/AdminModel");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 let AddNewAdmin = async (req,res)=>{
