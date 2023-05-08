@@ -12,68 +12,129 @@
         </div>
         <div class="row mt-3" *ngIf="customerdetails">
           <div class="col-md-12"><label class="labels">User Name</label><input #name type="text" class="form-control"
-              placeholder="enter User Name" value="{{customerdetails.Name}}"></div>
-          <div class="col-md-12"><label class="labels">Mobile Number</label><input #phone type="text"
-              class="form-control" placeholder="enter phone number" value="{{customerdetails.Phone}}"></div>
+              placeholder="enter User Name" value="{{customerdetails.Name}}" [(ngModel)]="customerdetails.Name"></div>
+
+              <div class="warning" *ngIf="customerdetails.Name.length>50">
+                 The Name Must not exceed 50 characters.
+              </div>
+
+              <div class="warning" *ngIf="customerdetails.Name.length<2">
+                The Name Must be greater than one character
+              </div>
+
+          <div class="col-md-12"><label class="labels">Mobile Number</label><input #phone type="number"
+              class="form-control" placeholder="enter phone number" value="{{customerdetails.Phone}}"
+              [(ngModel)]="customerdetails.Phone" ></div>
+
           <div class="col-md-12"><label class="labels">Email</label><input #email type="email" class="form-control"
-              placeholder="enter email Address" value="{{customerdetails.Email}}"></div>
+              placeholder="enter email Address" value="{{customerdetails.Email}}"
+              [(ngModel)]="customerdetails.Email" ></div>
+
+              <div class="warning" *ngIf="!customerdetails.Email.includes('@') || !customerdetails.Email.includes('.')">
+                The Email Must contain '@' and '.'
+              </div>
+
           <!-- <div class="col-md-12"><label class="labels">Passowrd</label><input #pass type="password" class="form-control"
               placeholder="enter your Passowrd" value=""></div> -->
           <div class="col-md-12"><label class="labels">Date Of Birth</label><input #dofb type="date"
-              class="form-control" placeholder="enter date of birth" value="{{customerdetails.DateOfBirth}}"></div>
+              class="form-control" placeholder="enter date of birth" value="{{customerdetails.DateOfBirth}}"
+              ></div>
+
+
+
           <hr class="col-md-12">
           <h4 class="text-right">Adress Details</h4>
 
           <div *ngFor="let item of customerdetails.Addresses" >
           <div class="row mt-3">
-            <div class="col-md-6"><label class="labels">Apartment Number</label><input type="text" class="form-control"
+            <div class="col-md-6"><label class="labels">Apartment Number</label><input type="number" class="form-control"
                 placeholder="Apartment Number" value="{{item.ApartmentNumber}}"></div>
-            <div class="col-md-6"><label class="labels">Floor Number</label><input type="text" class="form-control"
+
+            <div class="col-md-6"><label class="labels">Floor Number</label><input type="number" class="form-control"
                 value="{{item.FloorNumber}}" placeholder="Floor Number"></div>
           </div>
+
           <div class="row mt-3">
             <div class="col-md-6"><label class="labels">Street</label><input type="text" class="form-control"
                 placeholder="Street" value="{{item.Street}}"></div>
+
             <div class="col-md-6"><label class="labels">Zone</label><input type="text" class="form-control" value="{{item.Zone}}"
-                placeholder="Zone"></div>
+                placeholder="Zone" ></div>
           </div>
+
+
           <div class="row mt-3">
             <div class="col-md-6"><label class="labels">City</label><input type="text" class="form-control"
-                placeholder="City" value="{{item.City}}"></div>
+                placeholder="City" value="{{item.City}}" ></div>
+
             <div class="col-md-6"><label class="labels">Government</label><input type="text" class="form-control"
-                value="{{item.Governorate}}" placeholder="Government"></div>
+                value="{{item.Governorate}}" placeholder="Government" ></div>
           </div>
+
+
           <hr>
         </div>
+
+
         <div class="mt-5 text-center"><button (click)="showDetails()" class="btn btn-primary profile-button" type="button">Add Address</button>
 
           <div *ngIf="showDetailsFlag">
             <div class="row mt-3">
-              <div class="col-md-6"><label class="labels">Apartment Number</label><input #Apart type="text" class="form-control"
+              <div class="col-md-6"><label class="labels">Apartment Number</label><input #Apart type="number" class="form-control"
                   placeholder="Apartment Number" value=""></div>
-              <div class="col-md-6"><label class="labels">Floor Number</label><input #Floor type="text" class="form-control"
+
+              <div class="col-md-6"><label class="labels">Floor Number</label><input #Floor type="number" class="form-control"
                   value="" placeholder="Floor Number"></div>
+
+
             </div>
             <div class="row mt-3">
               <div class="col-md-6"><label class="labels">Street</label><input #Street type="text" class="form-control"
                   placeholder="Street" value=""></div>
+
+                  <div class="col-md-6 warning" *ngIf="Street.value.length>50">
+                    The Street Must not exceed 50 characters.
+                 </div>
+
               <div class="col-md-6"><label class="labels">Zone</label><input #Zone type="text" class="form-control" value=""
                   placeholder="Zone"></div>
             </div>
+
             <div class="row mt-3">
               <div class="col-md-6"><label class="labels">City</label><input #City type="text" class="form-control"
                   placeholder="City" value=""></div>
+
               <div class="col-md-6"><label class="labels">Government</label><input #Gover type="text" class="form-control"
                   value="" placeholder="Government"></div>
-                  <div class="mt-5 text-center">
 
+                  <div class="mt-5 text-center warning" *ngIf="addIsNull">
+                    All Data are Required..Please Fill Them All.
+                  </div>
+
+                  <div class="mt-5 text-center">
                     <button (click)="Add(Apart.value,Floor.value,Street.value,Zone.value,City.value,Gover.value)"  class="btn btn-primary profile-button" type="button">Add </button>
+                  </div>
+
+                  <div class="mt-5 text-center" style="color: green;" *ngIf="added">
+                    Profile Edited Successfully.
                   </div>
             </div>
           </div>
         </div>
 
-        <div class="mt-5 text-center"><button  (click)="Edit(name.value,phone.value,email.value,dofb.value)" class="btn btn-primary profile-button" type="button">Edit Profile</button>
+        <div class="mt-5 text-center warning" *ngIf="isNull">
+          All Data are Required..Please Fill Them All.
+        </div>
+
+        <div class="mt-5 text-center warning" *ngIf="notValid">
+          The Data Is Not Valid.
+        </div>
+
+        <div class="mt-5 text-center"><button (click)="Edit(name.value,phone.value,email.value,dofb.value)" class="btn btn-primary profile-button" type="button">Edit Profile</button>
+        </div>
+
+        <div class="mt-5 text-center" style="color: green;" *ngIf="Edited">
+          Profile Edited Successfully.
         </div>
       </div>
     </div>
