@@ -20,9 +20,11 @@ const ProductSchema = {
         AvailableQuantity:{type:"number", minimum:1},
         IsDeleted: {type: "boolean"},
         Images:{type:"array" , "minItems": 0,"maxItems": 6
+
                 ,"items": {
                     // "type": "string" , maxLength:50//FIXME:nulls sent from front-end
                 }, 
+
             },
         ReleaseDate:{"type":"string" ,  
                         "format": "date-time" 
@@ -35,6 +37,7 @@ const ProductSchema = {
         Seller:{type:"object"}//TODO:ajv seller object
     },
     required:["Name", "Price", "AvailableQuantity" , "Color","Donate","Seller"],
+
     //additionalProperties:false
 }
 

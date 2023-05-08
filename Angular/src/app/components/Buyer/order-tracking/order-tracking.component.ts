@@ -32,7 +32,7 @@ export class OrderTrackingComponent implements OnInit {
       {
         next:(data:any)=>{
           this.Orders = data.data;
-          console.log(this.Orders);
+          console.log("orders",this.Orders);
         },
         error:(err)=>{
           console.error(err)}
@@ -47,7 +47,6 @@ export class OrderTrackingComponent implements OnInit {
   }
   //TODO: handle date
   formatDate(dateStr : any){
-    //console.log("dateStr" , dateStr)
     var date = new Date(dateStr.substr(0,10))
     //console.log(date);
     return date.toLocaleDateString("en-US");
@@ -61,7 +60,7 @@ export class OrderTrackingComponent implements OnInit {
     //product.Price
     return sum;
   }
-  rate(item:any, index:any , newRating:any,order:any){
+  rate(item:any, index:any , newRating:any,order:any,button:any){
     var SellerID = item.product.Seller.SellerID;
     console.log("index" , index)
     var _seller;
@@ -80,6 +79,10 @@ export class OrderTrackingComponent implements OnInit {
           this.ordersService.UpdateOrderRatings(order).subscribe({
             next:(data:any)=>{
               console.log("order update" ,data)
+              button.target.value="Thanks For Voting";
+              setTimeout(()=>{
+                button.target.value="Rate This Product";
+              },3000)
             },
             error:()=>{
 

@@ -63,8 +63,8 @@ export class PaymentComponent implements OnInit {
            console.log(this.CartProducts);
 
         },
-        error:(err)=>{
-          console.error(err)}
+        error:(err:any)=>{
+          console.log(err)}
       }
     );
     this.customerService.getCustumerById(this.userId).subscribe(
@@ -73,8 +73,8 @@ export class PaymentComponent implements OnInit {
          this.customer=data.data;
         console.log(this.customer);
         },
-        error:(err)=>{
-          console.error(err)}
+        error:(err:any)=>{
+          console.log(err)}
       }
     );
   }
@@ -84,10 +84,7 @@ export class PaymentComponent implements OnInit {
       this.ItemsPrice+=item.product.Price * item.quantity;
     }
   }
-  onSelectionAddressChange(value:any)
-  {
-    this.currentAddress=value;
-  }
+
   OrderNow(payMethod:any)
   {
     if(payMethod=="Stripe"){
@@ -98,31 +95,85 @@ export class PaymentComponent implements OnInit {
           "orderItems": this.CartProducts,
           "buyer": this.userId,
           "TotalPrice": this.ItemsPrice+this.ShippingPrice,
-          "Address":this.SelectedAddress,
+          "Address":this.currentAddress,
           "PaymentMethod":"Stripe"
         }
         console.log("order in pay comp" , order)
+        this.CartProducts.forEach((element:any) => {
+          this.UpdateProductInfo(element)
+        });
         this.AddNewOrder(order);
+
+
       }
       else{
         this.pay(this.ItemsPrice+this.ShippingPrice);
       }
     }
     else{
+
       let order = {
         //"ShippingDate":"12.10.2020 - 14.10.2020" ,
         "orderItems": this.CartProducts,
         "buyer": this.userId,
         "TotalPrice": this.ItemsPrice+this.ShippingPrice,
-        "Address":this.SelectedAddress,
+        "Address":this.currentAddress,
         "PaymentMethod":"Cash"
       }
+      console.log(this.currentAddress);
+      this.CartProducts.forEach((element:any) => {
+         this.UpdateProductInfo(element);
+      });
       this.AddNewOrder(order);
-      this.CheckCharity(this.CartProducts);
+
     }
 
-  }
 
+  }
+  ClearCart(){
+
+
+      this.customerService.ClearCart(this.userId).subscribe(
+        {
+          next:(data:any)=>{
+            console.log(data);
+            this.orderCompleted=true;
+            setTimeout(() => {
+              this.router.navigate(['']);
+            }, 5000);
+
+          },
+          error:(err:any)=>{
+            console.log(err);
+          }
+        }
+      );
+
+
+
+
+
+  }
+  UpdateProductInfo(UpProduct:any){
+    let product = {
+
+      "quantity":UpProduct.quantity
+      }
+
+      console.log(product);
+      this.productService.UpdateProductQuantity(product,UpProduct.product._id).subscribe({
+        next:(data:any)=>{
+        console.log("Product quantity Updated");
+        console.log(data.data);
+        },
+        error:(err:any)=>{
+          console.log(err)
+
+        }
+
+      })
+
+  }
   AddNewOrder(order:any)
   {
     this.orderService.AddOrder(order).subscribe(
@@ -130,11 +181,12 @@ export class PaymentComponent implements OnInit {
         next:()=>{
 
         console.log("Order Created");
-        this.orderCompleted=true;
-        this.router.navigate(['']);
+        this.CheckCharity(this.CartProducts);
+        this.ClearCart();
+
         },
-        error:(err)=>{
-          console.error(err)}
+        error:(err:any)=>{
+          console.log(err)}
       }
     );
   }
@@ -147,8 +199,8 @@ export class PaymentComponent implements OnInit {
             next:(data:any)=>{
               console.log(data);
               },
-              error:(err)=>{
-                console.error(err)}
+              error:(err:any)=>{
+                console.log(err)}
           });
         }
 

@@ -22,7 +22,7 @@ export class RegisterComponent {
            console.log(data);
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
+          console.error("eror");
           console.error(err)}
       }
     );

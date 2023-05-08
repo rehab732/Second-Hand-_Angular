@@ -36,6 +36,7 @@ const OrderSchema = {
                 // additionalProperties:false
             }},
     },
+
     required:["PaymentMethod"  
             , "TotalPrice" , "buyer",
             "orderItems"

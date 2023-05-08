@@ -162,8 +162,9 @@ let AddItemToCart = async (req,res)=>{
         let foundProduct =await ProductModel.findOne({_id:productID}).exec();
         if(!foundProduct) return res.status(401).json({message:"product not found"});
         
-        let cartProduct =await CustomerModel.findOne({["Cart.items.product"]:productID}).exec();
-        // console.log(cartProduct);
+
+        let cartProduct =await CustomerModel.findOne({_id:customerID,["Cart.items.product"]:productID}).exec();
+        //console.log(cartProduct.Cart.items);
         if(cartProduct) return res.status(401).json({message:"product already in cart"});
 
         found.Cart.items.push(body);
@@ -191,15 +192,15 @@ let RemoveItemFromCart = async (req,res)=>{
         if(!found) return res.status(401).json({message:"Invalid Customer id"});
     
         let isItemFound = false;
-              for(var i in found.Cart.items){
-                if(body.product== found.Cart.items[i].product)
-                {
-                    found.Cart.items.splice(i,1);
-                    isItemFound=true;
-                    break;
-                }
-              }
-        
+        for(var i in found.Cart.items){
+        if(body.product== found.Cart.items[i].product)
+        {
+            found.Cart.items.splice(i,1);
+            isItemFound=true;
+            break;
+        }
+        }
+              
         if(!isItemFound)
             return res.status(401).json({message:"Item Not Found",data:found});
         
@@ -209,6 +210,30 @@ let RemoveItemFromCart = async (req,res)=>{
         catch(err){
             return res.status(500).json({message:"Server Error",Error:err.message});
         }
+}
+
+let ClearCart = async (req,res)=>{
+    // {   
+    //         "product": "529590520"
+    //         "quantity": "5"           
+    // }
+
+    try{
+       
+        let customerID = new mongoose.Types.ObjectId(req.params.id);
+        let found = await CustomerModel.findOne({_id:customerID}).exec();
+        if(!found) return res.status(401).json({message:"Invalid Customer id"});
+       
+        if(found.Cart.items.length==0)
+            return res.status(401).json({message:"Cart is empty!",data:found});
+        
+        found.Cart.items=[]
+        await found.save();
+        return res.status(201).json({message:"Items removed From Cart Successfully",data:found});
+    }
+    catch(err){
+        return res.status(401).json({message:"Error",Error:err.message});
+    }
 }
 
 
@@ -250,6 +275,7 @@ let UpdateItemQuantityInCart = async (req,res)=>{
         return res.status(500).json({message:"Server Error",Error:err.message});
     }
 }
+
 
 
 //tested
@@ -369,6 +395,7 @@ module.exports = {
     GetCartItems,
     getAllCustomers,
     EditCustomerProfile,
+    ClearCart
 }
 
 
