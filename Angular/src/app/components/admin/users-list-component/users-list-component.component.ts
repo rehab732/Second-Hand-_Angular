@@ -11,6 +11,8 @@ export class UsersListComponentComponent implements OnInit {
 
   Users:any;
   ID:any;
+  UnaithorizedMsg :any ;
+
 
   constructor(private cutomerService:CustomerService , private router:Router) { }
 
@@ -21,7 +23,11 @@ export class UsersListComponentComponent implements OnInit {
         console.log(this.Users)
       },
       error:(err:any)=>{
-        console.log(err)
+        if(err.status == 401){
+          this.UnaithorizedMsg = err.error ;
+        }else{
+          console.log(err);
+        }
       }
     })
   }

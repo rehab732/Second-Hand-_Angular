@@ -26,7 +26,7 @@
             <td>
               <table class="table text-center table-bordered table-info">
                 <tbody>
-                  <tr *ngFor="let item of o.orderItems">
+                  <tr *ngFor="let item of o.orderItems;index as i">
                     <div class="b border border-0">
                       Name: {{(item.product.Name)}}
                     </div>
@@ -35,6 +35,17 @@
                     </div>
                     <div class="b border border-dark border-0">
                       price: {{item.product.Price}}
+                    </div>
+                    <div *ngIf="o.Status == 'Delivered'">
+                      <select #rating [value]="item.userRating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                      <input type="button" (click)="rate(item,i , rating.value , o)" value="Rate Seller" class="btn btn-outline-info mx-2">
+                      <!--  (click)=""  -->
                     </div>
                   </tr>
                 </tbody>

@@ -12,11 +12,11 @@ export class SellerService {
  URL = "http://localhost:7010/api/Products";
   constructor(private httpclient: HttpClient) { }
   AddProduct(product: any) {
-    return this.httpclient.post < any > (this.URL, product)
+    return this.httpclient.post < any > (this.URL, product, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}})
   }
   UpdateProduct(product: any ,id:any)
   {
-    return this.httpclient.put < any > (this.URL+'/'+id, product)
+    return this.httpclient.put < any > (this.URL+'/'+id, product, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}})
   }
 
 }

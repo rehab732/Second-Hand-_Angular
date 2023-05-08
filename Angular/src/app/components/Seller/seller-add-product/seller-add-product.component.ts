@@ -2,6 +2,8 @@ import { CategoryServiceService } from 'src/app/Services/category-service.servic
 import { Component, OnInit } from '@angular/core';
 import { SellerService } from 'src/app/Services/seller.service';
 import { CharityService } from 'src/app/Services/charity.service';
+import { CustomerService } from 'src/app/Services/Customers.service';
+import jwt from 'jwt-decode';
 
 
 @Component({
@@ -17,11 +19,13 @@ export class SellerAddProductComponent implements OnInit {
   productDescription="";
   productQuantity="";
   productColor="";
-
+  userCanAdd:boolean=true;
   productCharity="";
   categories :any;
   charities :any;
   isDonated = false;
+  userId:any;
+  userToken: string | null = null;
 
   images=new Array<string>(6);
   imageIndx=0;
@@ -31,7 +35,7 @@ export class SellerAddProductComponent implements OnInit {
   productAdded = "";
 
 
-  constructor(private sellerService: SellerService , private categoryService:CategoryServiceService,
+  constructor(private sellerService: SellerService,private customerService:CustomerService, private categoryService:CategoryServiceService,
     private charityService:CharityService)
    {
 
@@ -46,7 +50,6 @@ export class SellerAddProductComponent implements OnInit {
           this.categories = data.data;
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
           console.error(err)}
       }
     );
@@ -62,7 +65,6 @@ export class SellerAddProductComponent implements OnInit {
           this.charities = data.data;
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
           console.error(err)}
       }
     );
@@ -70,9 +72,29 @@ export class SellerAddProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.GetSeller();
     this.GetAllCategories();
     this.GetAllCharities();
     //this.images[this.imageIndx] = "cat.jpg";
+  }
+  GetSeller(){
+    this.userToken = localStorage.getItem("UserToken");
+    if(this.userToken){
+      this.userId = (jwt(this.userToken) as any).customerId;
+      this.customerService.getCustumerById(this.userId).subscribe(
+        {
+          next:(data:any)=>{
+            console.log(data);
+            this.userCanAdd=data["data"].CanSellStatus;
+            console.log("User can sell: ", this.userCanAdd);
+
+
+          },
+
+          error:(data:any)=>{ console.log(data);}
+        })
+
+    }
   }
 
   onFileSelected(file:any)
@@ -119,7 +141,7 @@ export class SellerAddProductComponent implements OnInit {
        "Category":this.productCategory,
        "Donate":this.isDonated,
        "Charity":this.productCharity,
-       "Seller":{"SellerID":"643f45fcbe67bc74a0ec1b44"}
+       "Seller":{"SellerID":this.userId}
   }
    // console.log(product);
     if(this.productName == "" || this.productColor == "" || this.productDescription ==""||
@@ -138,7 +160,6 @@ export class SellerAddProductComponent implements OnInit {
 
         },
         error:(err)=>{
-          console.error("errrrrrrrrrrrrror");
           console.error(err)}
       }
     );

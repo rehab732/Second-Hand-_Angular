@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { CharityService } from 'src/app/Services/charity.service';
 
 @Component({
@@ -11,10 +12,16 @@ export class CharityDetailsComponent implements OnInit {
 
   Id:any;
   Charity: any;
+  IsAdmin:any ;
+  token:any;
 
   constructor(activeRoute: ActivatedRoute
     , private charityService:CharityService, private router : Router) {
     this.Id = activeRoute.snapshot.params["id"];
+
+    this.token = localStorage.getItem("UserToken");
+    const tokenInfo = this.getDecodedAccessToken(this.token); // decode token
+    this.IsAdmin = tokenInfo.isAdmin; // get isAdmin from token payload
   }
 
   ngOnInit(): void {
@@ -29,7 +36,7 @@ export class CharityDetailsComponent implements OnInit {
       })
   }
   backToList(){
-    this.router.navigateByUrl("charity");
+    this.router.navigateByUrl("admindashboard");
   }
   delete(){
     if(confirm("Are you sure you want to delete this product?")){
@@ -43,6 +50,14 @@ export class CharityDetailsComponent implements OnInit {
             console.error(err)}
         })
       this.router.navigateByUrl("charity");
+    }
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
     }
   }
 }

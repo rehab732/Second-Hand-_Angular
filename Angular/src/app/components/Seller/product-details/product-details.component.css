@@ -1,0 +1,117 @@
+
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins',sans-serif;
+  box-sizing: border-box;
+}
+
+.container{
+  width: 100%;
+  min-height: 100vh;
+ /* background:#d0eaff;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.product{
+  width: 90%;
+  max-width: 750px;
+  display: flex;
+
+}
+
+.galllery{
+  flex-basis: 47%;
+  background: white;
+  transform: scale(1.08);
+  box-shadow: -10px 5px 10px 10px rgba(100, 17, 63, 1);
+  position: relative;
+}
+.galllery img{
+  width: 100%;
+  display: block;
+  padding-top: 100px;
+}
+
+.details{
+  flex-basis: 53%;
+  background:#fff;
+  padding: 40px;
+  padding-left: 60px;
+  box-shadow: -10px 5px 10px 10px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  color: #64113F;
+  font-size: 15px;
+}
+.details h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64113F;
+  font-size: 35px;
+  font-weight: bold;
+}
+.controls{
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+}
+.btn{
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: black;
+  margin: 10px;
+  cursor: pointer;
+}
+.btn.active{
+  background: #64113F;
+}
+.txt{
+  color: black;
+}
+i{
+  color: #ff9c1a;
+}
+p{
+  margin: 2px;
+}
+
+button {
+  border: none;
+  width: 164px;
+  height: 51px;
+  margin: auto;
+  margin-top: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #64113F;
+  font-size: 15px;
+  color: #fff;
+ }
+
+ .btn-icon {
+  display: flex;
+  align-items: center;
+}
+
+.btn-icon i {
+  margin-left: 7px;
+  color: white;
+}
+
+.btn-group button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.btn-group button + button {
+  margin-left: 10px;
+}

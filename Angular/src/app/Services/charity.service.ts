@@ -16,23 +16,26 @@ export class CharityService {
   GetCharityById(id:any) {
     console.log("Charity details services");
 
-    return this.myClient.get(this.URL + '/ById/'+id);
+    return this.myClient.get(this.URL + '/ById/'+id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   UpdateCharityByName(name:any , charity:any) {
     console.log("Charity update services");
 
-    return this.myClient.put(this.URL + '/'+name , charity);
+    return this.myClient.put(this.URL + '/'+name , charity, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   AddCharity(charity:any) {
     console.log("Charity add services");
-    return this.myClient.post(this.URL , charity);
+    return this.myClient.post(this.URL , charity, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   deleteCharity(Id:any){
     console.log("Charity add services");
-    return this.myClient.delete(this.URL + "/By/Id/" +Id);
+    return this.myClient.delete(this.URL + "/By/Id/" +Id, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   GetAllCharities() {
     return this.myClient.get<any> (this.URL);
 
+  }
+  AddProductToCharity(CharityName:any,DonatedItem:any){
+    return this.myClient.post(this.URL+"/"+CharityName,DonatedItem);
   }
 }
