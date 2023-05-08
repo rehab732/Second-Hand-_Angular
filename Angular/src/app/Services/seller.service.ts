@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import {URLs} from './ServiceUrl'
 import { HttpClient} from '@angular/common/http';
 //import { usermodel } from './usermodel';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class SellerService {
 
- URL = "http://localhost:7010/api/Products";
+ URL = URLs+"/Products";
   constructor(private httpclient: HttpClient) { }
   AddProduct(product: any) {
     return this.httpclient.post < any > (this.URL, product, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}})

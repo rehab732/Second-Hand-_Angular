@@ -72,14 +72,14 @@ export class OrderTrackingComponent implements OnInit {
           [_seller.Rating , _seller.NumOfRatings]
           = this.calculateRating(item , _seller.NumOfRatings , _seller.Rating , newRating)
 
-          console.log("newRating" , item.userRating)
-          console.log("orderItems" , order.orderItems[index]["userRating"])
+          //console.log("newRating" , item.userRating)
+          //console.log("orderItems" , order.orderItems[index]["userRating"])
           order.orderItems[index]["userRating"] = newRating
           //Done:makeUpdateOrderBody
           var orderDB = this.makeOrderBodyForBackend(order)
           this.ordersService.UpdateOrderRatings(orderDB).subscribe({
             next:(data:any)=>{
-              console.log("order update" ,data)
+              //console.log("order update" ,data)
               button.target.value="Thanks For Voting";
               setTimeout(()=>{
                 button.target.value="Rate This Product";
@@ -93,7 +93,8 @@ export class OrderTrackingComponent implements OnInit {
           this.updateCustomer(_seller , _seller._id)
         },
         error:(err)=>{
-          console.error(err)}
+          //console.error(err)
+        }
       })
 
     // console.log(_seller)
@@ -118,7 +119,7 @@ export class OrderTrackingComponent implements OnInit {
       next:()=>{
       },
       error:(err:any)=>{
-        console.log("update error" , err)
+        //console.log("update error" , err)
       }
     })
   }

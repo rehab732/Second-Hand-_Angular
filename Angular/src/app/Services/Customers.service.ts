@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import {URLs} from './ServiceUrl'
 //HttpClient [Get-Post-Delete-Put-Patch]
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class CustomerService {
   constructor(private readonly myClient: HttpClient, private router: Router) {}
 
-  private readonly URL = 'http://localhost:7010/api/Customers'; //API
+  private readonly URL =URLs+'/Customers'; //API
 
   token:any;
 

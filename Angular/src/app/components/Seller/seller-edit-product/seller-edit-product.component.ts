@@ -156,16 +156,16 @@ export class SellerEditProductComponent implements OnInit {
       "Charity":this.productCharity,
       "Seller":{"SellerID":this.userId}
       }
-   console.log(product);
+   //console.log(product);
 
 
    this.sellerService.UpdateProduct(product,this.productID).subscribe(
      {
        next:(data)=>{
-         console.log('success', data);
+         //console.log('success', data);
        },
        error:(err)=>{
-         console.error("errrrrrrrrrrrrror");
+         //console.error("error");
          console.error(err)}
      }
    );

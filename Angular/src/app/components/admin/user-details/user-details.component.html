@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container pt-5">
   <div *ngIf="User; else loadingBlock" class="alert alert-info">
     <h5>Name: {{User.Name}}</h5>
     <h5>Email: {{User.Email}}</h5>
     <h5>Phone: {{User.Phone}}</h5>
     <h5>Can Sell: {{User.CanSellStatus}}</h5>
-    <h5>number of items: {{User.Cart.items.length}}</h5>
+    <h5>number of items in cart: {{User.Cart.items.length}}</h5>
     <button *ngIf=" User.CanSellStatus" class="btn btn-outline-danger" (click)="ban(User)">Ban User</button>
     <button *ngIf="!User.CanSellStatus" class="btn btn-outline-success" (click)="removeBan(User)">Allow User</button>
 

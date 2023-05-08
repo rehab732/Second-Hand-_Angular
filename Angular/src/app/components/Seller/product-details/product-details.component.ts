@@ -32,7 +32,7 @@ export class ProductDetailsComponent implements OnInit {
     this.activeIndex = index;
   }
   ClickSeller(Seller:any){
-    console.log(Seller)
+    //console.log(Seller)
     this.router.navigate(['/store',Seller._id]);
 
   }
@@ -85,7 +85,7 @@ export class ProductDetailsComponent implements OnInit {
     var item={product:id, quantity:1};
     this.CustService.AddItemToCart(this.userId,item).subscribe({
       next:(data:any)=>{
-        console.log(data);
+        //console.log(data);
         this.buttonValue="Item Added !"
         let wait=3000;
         setTimeout(() => {
@@ -108,7 +108,7 @@ export class ProductDetailsComponent implements OnInit {
       this.prdService.DeleteProduct(this.prdId).subscribe({
         next:(data)=>{
           console.log(data);
-          this.router.navigate(["../../"]);
+         // this.router.navigate(["../../"]);
         },
         error:(err)=>{
           console.error(err)}
