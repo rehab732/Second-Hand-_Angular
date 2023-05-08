@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
       let wordsLower=words.map(word=>{
         return word.toLowerCase();
       })
-      console.log(wordsLower);
+      //console.log(wordsLower);
 
       this.CurrProducts=this.products.filter((item:any) => {
 
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
   }
   ClickCat(catname:any)
   {
-    console.log(catname);
+   // console.log(catname);
     this.CurrProducts=this.products.filter((pro:any) =>
     pro.Category==catname
 
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     var item={product:id, quantity:1};
     this.CustService.AddItemToCart(this.userId,item).subscribe({
       next:(data:any)=>{
-        console.log(data);
+        //console.log(data);
         let wait=3000;
         button.target.innerHTML="Item Added To Cart!"
         setTimeout(() => {
@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit {
       {
         next:(data:any)=>{
           this.Categories=data["data"];
-           console.log(this.Categories);
+           //console.log(this.Categories);
 
         },
         error:(err)=>{
@@ -123,14 +123,14 @@ export class HomeComponent implements OnInit {
     this.myService.GetAllProducts().subscribe(
       {
         next:(data:any)=>{
-          console.log(data);
+          //console.log(data);
 
           this.products=data['data'];
           this.products=this.products.filter((pro:any) =>{
             return pro.Seller.SellerID!=this.userId && pro.Status=="Approved"&& pro.AvailableQuantity>0});
           this.CurrProducts=this.products;
 
-          console.log(this.products)
+          //console.log(this.products)
         },
         error:(data)=>{ console.log(data);}
       }

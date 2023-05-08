@@ -88,8 +88,8 @@ export class PaymentComponent implements OnInit {
   OrderNow(payMethod:any)
   {
     if(payMethod=="Stripe"){
-       console.log(this.handler);
-      if(this.handler!=null){
+       console.log("handler ",this.payToken);
+      if(this.payToken){
         let order = {
           //"ShippingDate":"12.10.2020 - 14.10.2020" ,
           "orderItems": this.CartProducts,
@@ -99,10 +99,10 @@ export class PaymentComponent implements OnInit {
           "PaymentMethod":"Stripe"
         }
         console.log("order in pay comp" , order)
-        this.CartProducts.forEach((element:any) => {
-          this.UpdateProductInfo(element)
-        });
-        this.AddNewOrder(order);
+        // this.CartProducts.forEach((element:any) => {
+        //   this.UpdateProductInfo(element)
+        // });
+        // this.AddNewOrder(order);
 
 
       }
@@ -207,15 +207,17 @@ export class PaymentComponent implements OnInit {
     }
   }
   pay(amount: any) {
+
     this.handler = (<any>window).StripeCheckout.configure({
       key: env.stripe.publicKey,
       locale: 'auto',
       currency:"EGP",
-      token: function (token: any) {
+      token: (token: any)=> {
         // You can access the token ID with `token.id`.
         // Get the token ID to your server-side code for use.
-        console.log(token);
 
+        console.log(token);
+        this.payToken=token;
         //alert('Token Created!!');
       },
 

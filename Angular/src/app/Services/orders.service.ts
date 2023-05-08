@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import {URLs} from './ServiceUrl'
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +8,7 @@ export class OrdersService {
 
   constructor(private readonly myClient: HttpClient) {}
 
-  private readonly URL = 'http://localhost:7010/api/Orders'; //API
+  private readonly URL =URLs+'/Orders'; //API
 
   GetBuyerOrders(id:any) {
     console.log("Service : Buyer Orders");

@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
       console.log(obj);
       this.customerService.UpdateItemQuantityInCart(this.userId,obj).subscribe({
         next:(data:any)=>{
-          console.log(data);
+          //console.log(data);
           this.CalculatePrice();
         },
         error:(err)=>{
@@ -52,7 +52,7 @@ export class CartComponent implements OnInit {
       console.log(obj);
       this.customerService.UpdateItemQuantityInCart(this.userId,obj).subscribe({
         next:(data:any)=>{
-          console.log(data);
+          //console.log(data);
           this.CalculatePrice();
         },
         error:(err)=>{
@@ -67,7 +67,7 @@ export class CartComponent implements OnInit {
     this.customerService.RemoveItemFromCart(this.userId,id).subscribe(
       {
         next:(data:any)=>{
-          console.log(data);
+          //console.log(data);
           this.CartProducts=this.CartProducts.filter((item:any) => item.product._id !== id);
           this.CalculatePrice();
 
@@ -93,7 +93,7 @@ export class CartComponent implements OnInit {
         next:(data:any)=>{
           this.CartProducts=data["data"].items;
           this.CalculatePrice();
-           console.log(this.CartProducts);
+           //console.log(this.CartProducts);
 
         },
         error:(err)=>{
@@ -121,8 +121,7 @@ export class CartComponent implements OnInit {
   ShowOrderDetails()
   {
     this.router.navigate(['payment']);
-    //  this.checkout = true;
-    //  this.GetCustomer();
+
   }
 
 
@@ -138,7 +137,7 @@ export class CartComponent implements OnInit {
     }
     else{
       let order = {
-        //"ShippingDate":"12.10.2020 - 14.10.2020" ,
+
         "orderItems": this.CartProducts,
         "buyer": this.userId,
         "TotalPrice": this.ItemsPrice+this.ShippingPrice,

@@ -11,7 +11,6 @@ import { UpdateCharityComponent } from './components/charity/update-charity/upda
 import { AddCharityComponent } from './components/charity/add-charity/add-charity.component';
 import { CharityDetailsComponent } from './components/charity/charity-details/charity-details.component';
 import { SellerEditProductComponent } from './components/Seller/seller-edit-product/seller-edit-product.component';
-import { MakeOrderComponent } from './components/Order/make-order/make-order.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { EditprofileComponent } from './components/Seller/editprofile/editprofile.component';
 import { AdmindashboardComponent } from './components/admin/admindashboard/admindashboard.component';
@@ -31,7 +30,7 @@ class OnlyLoggedInUsersGuard implements CanActivate {
   constructor(private customerService: CustomerService, private router: Router) {};
 
   canActivate() {
-    console.log("OnlyLoggedInUsers");
+    //console.log("OnlyLoggedInUsers");
     if (this.customerService.IsloggedIn()) {
       return true;
     } else {
@@ -71,7 +70,6 @@ const routes: Routes = [
   },
   {path:"buyer/orders",component:OrderTrackingComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"payment", component: PaymentComponent, canActivate:[OnlyLoggedInUsersGuard]},
-  {path:"cart/order",component:MakeOrderComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"category-update/:name" , component:UpdateCategoryComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"category-add" , component:AddCategoryComponent, canActivate:[OnlyLoggedInUsersGuard]},
   {path:"**",component:HomeComponent},

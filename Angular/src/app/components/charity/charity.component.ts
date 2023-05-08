@@ -18,7 +18,7 @@ export class CharityComponent implements OnInit {
       {
         next:(data:any)=>{
           this.Charities = data.data;
-          console.log(this.Charities);
+          //console.log(this.Charities);
         },
         error:(err)=>{
           console.error(err)}
@@ -37,14 +37,14 @@ export class CharityComponent implements OnInit {
       this.charityService.deleteCharity(charity._id).subscribe(
         {
           next:(data:any)=>{
-            console.log(data);
+            //console.log(data);
             window.location.reload();
             // this.router.navigateByUrl("charity");
           },
           error:(err)=>{
             console.error(err)}
         })
-      console.log("deleted")
+      //console.log("deleted")
     }
   }
   details(charity:any){

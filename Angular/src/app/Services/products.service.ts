@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import { Injectable } from '@angular/core';
-
+import {URLs} from './ServiceUrl'
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,7 @@ export class ProductsService {
 
 //  private readonly URL="http://localhost:3000/products";
 
-private readonly URL = 'http://localhost:7010/api/Products'; //API
+private readonly URL = URLs+'/Products'; //API
   // getAllProducts()
   // {
   //   return this.myClient.get(this.URL);
