@@ -119,6 +119,7 @@ let updateOrderItemRating = async (req,res)=>{
         let orderId= req.params.id;
         let order = req.body;
         const valid=validateOrder(order);
+        console.log("orderToUpdate" , order , "up-valid" , valid)
         if(valid == false)//bad request
             return res.status(400).json({message:validateOrder.errors});
         let found = await OrderModel.findOne({_id:orderId}).exec();//From DB [Encrypted]

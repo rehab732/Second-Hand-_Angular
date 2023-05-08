@@ -98,7 +98,7 @@ let GetCartItems = async (req,res)=>{
 }
 
 
-let AddNewAddress = async (req,res)=>{//TODO:u ajv validate address
+let AddNewAddress = async (req,res)=>{
    
     // {
     //         "ApartmentNumber":25,
@@ -124,7 +124,7 @@ let AddNewAddress = async (req,res)=>{//TODO:u ajv validate address
 
         console.log("body");
         found.Addresses.push(body);
-        await found.save();//TODO:UNCOMMENT
+        await found.save();
         return res.status(201).json({message:"Address Added Successfully",data:found});
     }
     catch(err){

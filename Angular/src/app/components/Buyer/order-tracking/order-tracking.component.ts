@@ -32,7 +32,7 @@ export class OrderTrackingComponent implements OnInit {
       {
         next:(data:any)=>{
           this.Orders = data.data;
-          console.log("orders",this.Orders);
+          //console.log("orders",this.Orders);
         },
         error:(err)=>{
           console.error(err)}
@@ -45,7 +45,6 @@ export class OrderTrackingComponent implements OnInit {
       return null;
     }
   }
-  //TODO: handle date
   formatDate(dateStr : any){
     var date = new Date(dateStr.substr(0,10))
     //console.log(date);
@@ -61,8 +60,9 @@ export class OrderTrackingComponent implements OnInit {
     return sum;
   }
   rate(item:any, index:any , newRating:any,order:any,button:any){
+    newRating = Number(newRating)
     var SellerID = item.product.Seller.SellerID;
-    console.log("index" , index)
+    //console.log("index" , index)
     var _seller;
     this.customerService.getCustumerById(SellerID).subscribe(
       {
@@ -75,8 +75,9 @@ export class OrderTrackingComponent implements OnInit {
           console.log("newRating" , item.userRating)
           console.log("orderItems" , order.orderItems[index]["userRating"])
           order.orderItems[index]["userRating"] = newRating
-          //Done: update in order --> item.userRating
-          this.ordersService.UpdateOrderRatings(order).subscribe({
+          //Done:makeUpdateOrderBody
+          var orderDB = this.makeOrderBodyForBackend(order)
+          this.ordersService.UpdateOrderRatings(orderDB).subscribe({
             next:(data:any)=>{
               console.log("order update" ,data)
               button.target.value="Thanks For Voting";
@@ -84,8 +85,8 @@ export class OrderTrackingComponent implements OnInit {
                 button.target.value="Rate This Product";
               },3000)
             },
-            error:()=>{
-
+            error:(err)=>{
+              console.error("OrderTracking.TS" , err)
             }
           })
           //Done:Update customer
@@ -109,9 +110,10 @@ export class OrderTrackingComponent implements OnInit {
 
     alert("Rating saved successfully")
 
-    return [Rating , NumOfRatings++];
+    return [Rating , NumOfRatings+1];
   }
   updateCustomer(_seller:any , _id:any){
+    console.log("updateCustomer --> _seller" , _seller);
     this.customerService.updateCustomer(_seller , _id).subscribe({
       next:()=>{
       },
@@ -119,6 +121,31 @@ export class OrderTrackingComponent implements OnInit {
         console.log("update error" , err)
       }
     })
+  }
+  makeOrderBodyForBackend(order:any){//Done:Test This!
+    var orderItems=[];
+    for(var i=0; i<order.orderItems.length ; i++){
+      orderItems.push({
+        "product":order.orderItems[i].product._id,
+        "quantity":order.orderItems[i].quantity,
+        "userRating":Number(order.orderItems[i].userRating),
+        // "_id":Number(order.orderItems[i]._id),//FIXME:null _id even wz this line
+      })
+      //console.log({"_id":Number(order.orderItems[i]._id) , item:orderItems[i]})
+    }
+    //console.log("makeOrderBodyForBackend --> orderItems" , orderItems)
+    return{
+      "_id":order._id,
+      "orderItems":orderItems,
+      "TotalPrice":order.TotalPrice,
+      "buyer":order.buyer,
+      "Status":order.Status,
+      "Address":order.Address,
+      "PaymentMethod":order.PaymentMethod,
+      "RegistrationDate":order.RegistrationDate,
+      "ArrivalDate":order.ArrivalDate,
+      "ShippingDate":order.ShippingDate,
+    }
   }
   //item id , quantity,price
 }
