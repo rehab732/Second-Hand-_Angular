@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   Categories:any=[];
   CurrProducts:any=[];
   CurrPrice:Number=0;
+  NoOfPages=0;
+  pagesNumbers:any;
   val="Buy Now"
   //CustomerID:string="643f45fcbe67bc74a0ec1b44";
   userToken: string | null = null;
@@ -112,7 +114,7 @@ export class HomeComponent implements OnInit {
       {
         next:(data:any)=>{
           this.Categories=data["data"];
-           //console.log(this.Categories);
+          //console.log(this.Categories);
 
         },
         error:(err)=>{
@@ -120,15 +122,21 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.myService.GetAllProducts().subscribe(
+    this.myService.GetAllProducts(1).subscribe(
       {
         next:(data:any)=>{
-          //console.log(data);
+          console.log(data);
+
+          this.NoOfPages = Math.ceil(data.totalProducts/data.limit);
+          console.log(this.NoOfPages);
+          this.pagesNumbers = Array(this.NoOfPages).fill(0).map((x, i) => i+1);
+          console.log(this.pagesNumbers);
 
           this.products=data['data'];
           this.products=this.products.filter((pro:any) =>{
-            return pro.Seller.SellerID!=this.userId && pro.Status=="Approved"&& pro.AvailableQuantity>0});
+            return pro.Seller.SellerID!=this.userId && pro.Status=="Approved" && pro.AvailableQuantity>0});
           this.CurrProducts=this.products;
+          //console.log(this.CurrProducts);
 
           //console.log(this.products)
         },
@@ -136,6 +144,26 @@ export class HomeComponent implements OnInit {
       }
     )
 
+  }
+
+  getProductsPage(page:any){
+    console.log(page);
+    this.myService.GetAllProducts(page).subscribe(
+      {
+        next:(data:any)=>{
+          console.log(data);
+
+          this.products=data['data'];
+          this.products=this.products.filter((pro:any) =>{
+            return pro.Seller.SellerID!=this.userId && pro.Status=="Approved" && pro.AvailableQuantity>0});
+          this.CurrProducts=this.products;
+          //console.log(this.CurrProducts);
+
+          //console.log(this.products)
+        },
+        error:(data)=>{ console.log(data);}
+      }
+    )
   }
 
 }

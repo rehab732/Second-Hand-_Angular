@@ -21,8 +21,8 @@ private readonly URL = URLs+'/Products'; //API
     return this.myClient.get(this.URL+'/'+id);
 
   }
-  GetAllProducts() {
-    return this.myClient.get(this.URL);
+  GetAllProducts(p:any) {
+    return this.myClient.get(this.URL, {params: {page:p}});
   }
 
 }
