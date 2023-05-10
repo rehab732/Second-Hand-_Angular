@@ -116,9 +116,11 @@
                 </div>
               </div>
               <div class="col">
-                <input type="button" value="Add Product" (click)="AddProduct()"
+                <input *ngIf="!AddSuccess" type="button" value="Add Product" (click)="AddProduct()"
                   class="btn text-uppercase" />
+                <div *ngIf="AddSuccess">Product added successfully and is now pending for admin approval, please keep up with the request results in your store page</div>
               </div>
+
 
             </div>
           </div>

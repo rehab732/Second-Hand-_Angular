@@ -26,6 +26,7 @@ export class SellerAddProductComponent implements OnInit {
   isDonated = false;
   userId:any;
   userToken: string | null = null;
+  AddSuccess=false;
 
   images=new Array<string>(6);
   imageIndx=0;
@@ -143,9 +144,12 @@ export class SellerAddProductComponent implements OnInit {
       {
         next:(data)=>{
          // console.log('success', data);
+         this.AddSuccess=true;
         },
         error:(err)=>{
-          console.error(err)}
+          console.error(err);
+          this.AddSuccess=false;}
+
       }
     );
   }

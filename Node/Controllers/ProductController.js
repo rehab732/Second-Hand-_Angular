@@ -65,7 +65,7 @@ let GetProductBySellerId = async (req,res)=>{
         let found = await ProductModel.find({["Seller.SellerID"]:getProduct}).populate({
             path:"Seller.SellerID",
             strictPopulate: false 
-        
+            
         }).exec();
         if(!found) return res.status(401).json({message:"Invalid id"});
 

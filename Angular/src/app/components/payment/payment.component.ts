@@ -99,10 +99,10 @@ export class PaymentComponent implements OnInit {
           "PaymentMethod":"Stripe"
         }
         console.log("order in pay comp" , order)
-        // this.CartProducts.forEach((element:any) => {
-        //   this.UpdateProductInfo(element)
-        // });
-        // this.AddNewOrder(order);
+        this.CartProducts.forEach((element:any) => {
+          this.UpdateProductInfo(element)
+        });
+        this.AddNewOrder(order);
 
 
       }

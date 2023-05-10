@@ -29,7 +29,7 @@ export class SellerEditProductComponent implements OnInit {
   imageIndx=0;
   productID:any;
   Product:any;
-
+  AddSuccess=false;
 
   constructor(activeRoute: ActivatedRoute,private sellerService: SellerService ,
     private categoryService:CategoryServiceService, private charityService:CharityService ,
@@ -163,10 +163,14 @@ export class SellerEditProductComponent implements OnInit {
      {
        next:(data)=>{
          //console.log('success', data);
+         this.AddSuccess=true;
        },
        error:(err)=>{
          //console.error("error");
-         console.error(err)}
+         console.error(err)
+         this.AddSuccess=false;
+        }
+
      }
    );
  }
