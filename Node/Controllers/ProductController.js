@@ -112,9 +112,10 @@ let GetAllProducts = async (req, res) => {
     console.log(req.query);
     const skip = (page - 1) * limit;
     //DB
-    let productsAvailable = await ProductModel.find({ ["Seller.SellerID"]: { $ne: getProduct } }).exec();
+    //let productsAvailable = await ProductModel.find({ ["Seller.SellerID"]: { $ne: getProduct } }).exec();
+    
 
-    let allProducts = await productsAvailable.find().skip(skip).limit(limit);
+    let allProducts = await ProductModel.find().skip(skip).limit(limit);
     const totalProducts = await ProductModel.countDocuments();
     //await ProductModel.find().exec();//From DB
 
