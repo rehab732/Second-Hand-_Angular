@@ -2,6 +2,7 @@ const ProductModel = require("../Models/ProductModel");
 const ItemModel = require("../Models/ItemModel");
 const CustomerModel = require("../Models/CustomerModel");
 const ProductValidate = require("../utils/ProductSchema");
+var jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 let AddNewProduct = async (req, res) => {
@@ -111,18 +112,36 @@ let GetAllProducts = async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
     console.log(req.query);
     const skip = (page - 1) * limit;
+    let allProducts, totalProducts;
+
+    if(req.headers.authorizaion){
+        var Token = req.headers.authorizaion.split(" ")[1];
+        var decodePayload = jwt.verify(Token, process.env.JWTSecret);
+        getProduct = decodePayload.customerId;
+        console.log(getProduct);
+        allProducts = await ProductModel.find({ ["Seller.SellerID"]: { $ne: getProduct } }).skip(skip).limit(limit).exec();
+        //console.log(allProducts);
+        //let allProducts = await productsAvailable.skip(skip).limit(limit);
+        totalProducts = await ProductModel.find({Status:"Approved", ["Seller.SellerID"]: { $ne: getProduct } }).countDocuments();
+
+    }else{
+        allProducts = await ProductModel.find({Status:"Approved"}).skip(skip).limit(limit);
+        totalProducts = await ProductModel.countDocuments();
+    }
     //DB
-    let productsAvailable = await ProductModel.find({ ["Seller.SellerID"]: { $ne: getProduct } }).exec();
+    
+        //await ProductModel.find().exec();//From DB
+        
+        //console.log(allProducts.length);
+        
+        //console.log(totalProducts);
 
-    let allProducts = await productsAvailable.find().skip(skip).limit(limit);
-    const totalProducts = await ProductModel.countDocuments();
-    //await ProductModel.find().exec();//From DB
-
-
-
-    if (!allProducts || allProducts.length == 0) return res.status(401).json({ message: "No Products found" });
-    res.status(200).json({ message: "Products found", data: allProducts, page, limit, totalProducts });
-
+        if (!allProducts || allProducts.length == 0) return res.status(401).json({ message: "No Products found" });
+        res.status(200).json({ message: "Products found", data: allProducts, page, limit, totalProducts });
+    
+    /*}catch (err) {
+        return res.status(401).json({ message: "Error", data: err.message });
+    } */ 
 
 }
 
