@@ -26,8 +26,9 @@ export class SellerAddProductComponent implements OnInit {
   isDonated = false;
   userId:any;
   userToken: string | null = null;
+  AddSuccess=false;
 
-  images=new Array<string>(6);
+  images=new Array<string>();
   imageIndx=0;
 
   constructor(private sellerService: SellerService,private customerService:CustomerService, private categoryService:CategoryServiceService,
@@ -96,9 +97,9 @@ export class SellerAddProductComponent implements OnInit {
   {
     if(this.imageIndx< 6)
     {
-    this.images[this.imageIndx]=file.target.files[0].name; //= file.target.files[0].name;
-    // if(this.images[this.imageIndx] == null)this.images[this.imageIndx]=""
-    this.imageIndx++;
+      this.images.push(file.target.files[0].name); //= file.target.files[0].name;
+      // if(this.images[this.imageIndx] == null)this.images[this.imageIndx]=""
+      this.imageIndx++;
     }
   }
 
@@ -143,9 +144,12 @@ export class SellerAddProductComponent implements OnInit {
       {
         next:(data)=>{
          // console.log('success', data);
+         this.AddSuccess=true;
         },
         error:(err)=>{
-          console.error(err)}
+          console.error(err);
+          this.AddSuccess=false;}
+
       }
     );
   }

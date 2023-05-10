@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="product" *ngIf="Product">
-      <div  class="galllery">
-        <img style="height: 400px;" src="assets/img/{{currentImage}}" alt="" id="proimg">
+
+  <div class="container p-5">
+    <div class="row product " *ngIf="Product">
+      <div  class="col col-sm-6 col-md-12 col-lg-6  galllery">
+        <img src="assets/img/{{currentImage}}" alt="" id="proimg">
         <div class="controls">
           <a *ngFor="let img of prodImages;index as i"><span *ngIf="img" class="btn"[class.active]="activeIndex === i" (click)="changeImage(i)"></span></a>
         </div>
       </div>
-      <div class="details">
+      <div class="col col-sm-12 col-md-6 col-lg-6  details">
         <h1 class="pb-4">{{Product.Name}}</h1>
         <p><B class="txt">Price: </B>EGP {{Product.Price}}</p>
         <p><B class="txt">Category: </B>{{Product.Category}}</p>
@@ -30,12 +24,11 @@
           <i *ngIf="ratingPartial" class="fa fa-star-half" aria-hidden="true"></i>
         </p>
         <button  *ngIf="userId!=Product.Seller.SellerID._id && Product.AvailableQuantity>0" class="btn-icon" value="" #cartBtn (click)="AddItemToCart(Product._id)" >{{buttonValue}}<i class="fa-solid fa-shopping-cart"></i></button>
-        <div class="btn-group" *ngIf="userId==Product.Seller.SellerID._id">
+        <div class="btn-group m-2" *ngIf="userId==Product.Seller.SellerID._id">
           <button class="btn-icon" (click)="deleteProduct()">Delete<i class="fa-solid fa-trash"></i></button>
           <button class="btn-icon" (click)="EditProduct(Product._id)" >Edit<i class="fa-solid fa-pencil-alt"></i></button>
         </div>
       </div>
     </div>
   </div>
-</body>
-</html>
+

@@ -21,8 +21,11 @@ private readonly URL = URLs+'/Products'; //API
     return this.myClient.get(this.URL+'/'+id);
 
   }
-  GetAllProducts() {
-    return this.myClient.get(this.URL);
+  GetAllProducts(p:any) {
+    if(localStorage.getItem("UserToken"))
+      return this.myClient.get(this.URL, {params: {page:p}, headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
+    else
+      return this.myClient.get(this.URL, {params: {page:p}});
   }
 
 }

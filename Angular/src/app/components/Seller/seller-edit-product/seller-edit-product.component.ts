@@ -29,7 +29,7 @@ export class SellerEditProductComponent implements OnInit {
   imageIndx=0;
   productID:any;
   Product:any;
-
+  AddSuccess=false;
 
   constructor(activeRoute: ActivatedRoute,private sellerService: SellerService ,
     private categoryService:CategoryServiceService, private charityService:CharityService ,
@@ -88,8 +88,10 @@ export class SellerEditProductComponent implements OnInit {
       {
         next:(data)=>{
           this.Product = data;
-       //   console.log(this.Product);
+          //console.log(this.Product);
           this.FillControlls();
+
+          this.imageIndx = this.Product.data.Images.length;
         },
         error:(err)=>{
           console.error("error");
@@ -113,7 +115,7 @@ export class SellerEditProductComponent implements OnInit {
     this.productDescription = this.Product.data.Description;
     this.productPrice = this.Product.data.Price;
     this.productQuantity = this.Product.data.AvailableQuantity;
-    //this.Images = this.Product.data.Images[0];
+    this.images = this.Product.data.Images;
     this.productColor = this.Product.data.Color;
    // this.isDonated = this.Product.data.Donate;
 
@@ -163,10 +165,14 @@ export class SellerEditProductComponent implements OnInit {
      {
        next:(data)=>{
          //console.log('success', data);
+         this.AddSuccess=true;
        },
        error:(err)=>{
          //console.error("error");
-         console.error(err)}
+         console.error(err)
+         this.AddSuccess=false;
+        }
+
      }
    );
  }

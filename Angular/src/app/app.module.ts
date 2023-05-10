@@ -35,6 +35,7 @@ import { CustomerService } from './Services/Customers.service';
 import { RecievedOrdersTrackingComponent } from './components/Seller/recieved-orders-tracking/recieved-orders-tracking.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { RecievedOrdersTrackingComponent } from './components/Seller/recieved-or
     AddCategoryComponent,
     UpdateCategoryComponent,
     RecievedOrdersTrackingComponent,
+
   ],
   imports: [
     BrowserModule,

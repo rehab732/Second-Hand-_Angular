@@ -19,6 +19,9 @@ export class AdminComponentComponent implements OnInit {
     this.adminSevice.GetProducts().subscribe(
       {
         next:(data:any)=>{
+          if(!this.Products){
+            this.UnaithorizedMsg="There is no pending products";
+          }
           this.Products = data.data;
           console.log(this.Products);
         },

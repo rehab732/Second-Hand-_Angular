@@ -53,12 +53,12 @@ export class ProductDetailsComponent implements OnInit {
           this.currentImage=this.prodImages[0];
           this.productDate= this.Product.ReleaseDate.split("T")[0];
           let SellerRating=this.Product.Seller.SellerID.Rating;
-          console.log(SellerRating);
-         console.log(this.Product.Seller.SellerID._id, this.userId);
+          //console.log(SellerRating);
+          //console.log(this.Product.Seller.SellerID._id, this.userId);
           //get heighst value
           let rate=Math.ceil(SellerRating);
           //check if there will be half a star
-          console.log(rate-SellerRating)
+          //console.log(rate-SellerRating)
           //2.8 =>3
           if(rate-SellerRating<=0.2){
             this.rating=Array(rate).fill(1);
