@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem("UserToken");
     const tokenInfo = this.getDecodedAccessToken(this.token); // decode token
-    this.IsAdmin = tokenInfo.isAdmin; // get isAdmin from token payload
+    if(tokenInfo) this.IsAdmin = tokenInfo.isAdmin; // get isAdmin from token payload
 }
 
  getDecodedAccessToken(token: string): any {

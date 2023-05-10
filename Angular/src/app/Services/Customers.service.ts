@@ -16,7 +16,7 @@ export class CustomerService {
   IsloggedIn(): boolean {
     this.token = localStorage.getItem("UserToken");
     if(this.token)  return true;
-
+  //
     return false;
   }
 
@@ -30,7 +30,7 @@ export class CustomerService {
     return this.myClient.post(this.URL + '/AddAddress/'+customer_id, address, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
   }
   Customerlogin(customer: any) {
-    console.log(customer);
+    console.log(this.URL);
     return this.myClient.post(this.URL + '/login', customer);
   }
   AddItemToCart(customer_id: any,cartItem:any){

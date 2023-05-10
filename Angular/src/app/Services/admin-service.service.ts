@@ -26,8 +26,9 @@ export class AdminServiceService {
     try{
       console.log(`${this.prdURL}/${product._id}`);
       console.log(2);
-      return this.myClient.post(this.prdURL+"/"+product._id, product);
+      return this.myClient.put(this.prdURL+"/"+product._id, product, {headers: {Authorizaion: "Bearer " +localStorage.getItem("UserToken")}});
     }catch(error:any){
+      console.log(error);
       console.log(error.message);
       return error;
     }

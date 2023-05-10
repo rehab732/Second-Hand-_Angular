@@ -88,8 +88,10 @@ export class SellerEditProductComponent implements OnInit {
       {
         next:(data)=>{
           this.Product = data;
-       //   console.log(this.Product);
+          //console.log(this.Product);
           this.FillControlls();
+
+          this.imageIndx = this.Product.data.Images.length;
         },
         error:(err)=>{
           console.error("error");
@@ -113,7 +115,7 @@ export class SellerEditProductComponent implements OnInit {
     this.productDescription = this.Product.data.Description;
     this.productPrice = this.Product.data.Price;
     this.productQuantity = this.Product.data.AvailableQuantity;
-    //this.Images = this.Product.data.Images[0];
+    this.images = this.Product.data.Images;
     this.productColor = this.Product.data.Color;
    // this.isDonated = this.Product.data.Donate;
 
