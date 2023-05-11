@@ -23,7 +23,7 @@
           <i *ngFor="let star of rating" class="fa-solid fa-star"></i>
           <i *ngIf="ratingPartial" class="fa fa-star-half" aria-hidden="true"></i>
         </p>
-        <button  *ngIf="userId!=Product.Seller.SellerID._id && Product.AvailableQuantity>0" class="btn-icon" value="" #cartBtn (click)="AddItemToCart(Product._id)" >{{buttonValue}}<i class="fa-solid fa-shopping-cart"></i></button>
+        <button  *ngIf="userId!=Product.Seller.SellerID._id && Product.AvailableQuantity>0 && !isAdmin" class="btn-icon" value="" #cartBtn (click)="AddItemToCart(Product._id)" >{{buttonValue}}<i class="fa-solid fa-shopping-cart"></i></button>
         <div class="btn-group m-2" *ngIf="userId==Product.Seller.SellerID._id">
           <button class="btn-icon" (click)="deleteProduct()">Delete<i class="fa-solid fa-trash"></i></button>
           <button class="btn-icon" (click)="EditProduct(Product._id)" >Edit<i class="fa-solid fa-pencil-alt"></i></button>

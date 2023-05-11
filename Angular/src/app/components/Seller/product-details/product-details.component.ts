@@ -21,6 +21,7 @@ export class ProductDetailsComponent implements OnInit {
   userToken: string | null = null;
   buttonValue="Add to cart";
   productDate="";
+  isAdmin=false;
   constructor(private CustService:CustomerService,activeRoute: ActivatedRoute, private prdService:ProductService, private router : Router) {
     this.prdId = activeRoute.snapshot.params["id"];
   }
@@ -44,6 +45,7 @@ export class ProductDetailsComponent implements OnInit {
     if(this.userToken){
 
       this.userId = (jwt(this.userToken) as any).customerId;
+      this.isAdmin= (jwt(this.userToken) as any).isAdmin;
     }
     this.prdService.GetProductsDetails(this.prdId).subscribe(
       {
