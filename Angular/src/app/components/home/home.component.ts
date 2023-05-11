@@ -84,21 +84,29 @@ export class HomeComponent implements OnInit {
 
     var item={product:id, quantity:1};
     this.CustService.AddItemToCart(this.userId,item).subscribe({
+
       next:(data:any)=>{
         //console.log(data);
-        let wait=3000;
-        button.target.innerHTML="Item Added To Cart!"
-        setTimeout(() => {
-          button.target.innerHTML="Buy Now"
-        }, wait);
+        if(this.userId){
+          let wait=3000;
+          button.target.innerHTML="Item Added To Cart!"
+          setTimeout(() => {
+            button.target.innerHTML="Buy Now"
+          }, wait);
+       }
       },
       error:(err)=>{
         console.error(err);
-        button.target.innerHTML="Item already in cart !"
-        let wait=3000;
-        setTimeout(() => {
-          button.target.innerHTML="Buy Now"
-        }, wait);
+        if(this.userId){
+            button.target.innerHTML="Item already in cart !"
+            let wait=3000;
+            setTimeout(() => {
+              button.target.innerHTML="Buy Now"
+          }, wait);
+       }
+       else{
+          alert("Please Log-in First")
+       }
       }
     })
   }
